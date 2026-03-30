@@ -17,5 +17,19 @@ models:
         - name: montant_total_ht
           tests: 
             - not_null
-
-    
+    - name: stg_customers
+      columns: 
+        - name: customer_id
+          tests: 
+            - not_null
+            - unique
+        - name : email
+          tests: 
+            - not_null:
+                config:
+                    severity: warn  
+        - name : pays
+          tests: 
+            - accepted_values:
+                values: ['France','Belgique', 'Suisse', 'Allemagne', 'Luxembourg']
+        
