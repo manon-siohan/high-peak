@@ -1,0 +1,21 @@
+version: 2
+
+models:
+    - name: stg_orders
+      columns: 
+        - name: order_id
+          tests:
+            - unique
+            - not_null
+        - name: customer_id
+          tests:
+            - not_null
+        - name: statut
+          tests: 
+            - accepted_values:
+                values: ['confirmée', 'expédiée', 'livrée', 'annulée', 'remboursée']
+        - name: montant_total_ht
+          tests: 
+            - not_null
+
+    
