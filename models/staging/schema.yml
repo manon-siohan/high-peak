@@ -32,4 +32,28 @@ models:
           tests: 
             - accepted_values:
                 values: ['France','Belgique', 'Suisse', 'Allemagne', 'Luxembourg']
-        
+    - name: stg_products
+      columns: 
+        - name: product_id 
+          tests: 
+            - not_null
+            - unique 
+        - name: prix_vente_ht
+          tests: 
+            - not_null:
+                config:
+                  severity: warn
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+        - name: product_name
+          tests: 
+            - not_null
+        - name: categorie
+          tests:
+            - accepted_values:
+                values: ['Accessoires', 'Chaussures', 'Vêtements techniques', 'Equipements', 'Autre']
+        - name: ean13
+          tests: 
+            - unique:
+                config:
+                  severity: warn
