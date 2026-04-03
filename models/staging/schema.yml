@@ -57,3 +57,20 @@ models:
             - unique:
                 config:
                   severity: warn
+    - name: stg_products_variants
+      columns: 
+        - name: variant_id
+          tests: 
+            - not_null
+            - unique
+        - name: product_id
+          tests: 
+            - relationships:
+                to: ref('stg_products')
+                field: product_id
+        - name: sku
+          tests: 
+            - unique:
+                config:
+                  severity: warn
+            - not_null
