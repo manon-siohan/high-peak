@@ -143,4 +143,27 @@ models:
           #      field: promotion_id
           #      config:
           #        where: "promotion_id is not null" 
-            
+    - name: stg_stores
+      columns: 
+        - name: store_id
+          tests: 
+            - unique
+            - not_null 
+        - name: pays
+          tests: 
+            - accepted_values:
+                values: ['France', 'Allemagne', 'Suisse', 'Belgique', 'Luxembourg']
+        - name: type
+          tests: 
+            - accepted_values:
+                values: ['magasin', 'e-commerce']
+        - name: surface_m2
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">0" 
+                config: 
+                  severity: warn
+        - name: actif
+          tests: 
+            - accepted_values:
+                values: [true, false]   
