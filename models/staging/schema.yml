@@ -166,4 +166,28 @@ models:
         - name: actif
           tests: 
             - accepted_values:
-                values: [true, false]   
+                values: [true, false]
+    - name: stg_suppliers
+      columns: 
+        - name: supplier_id
+          tests: 
+            - unique
+            - not_null
+        - name: supplier_name
+        - name: pays
+        - name : delai_livraison_jours
+          tests: 
+            - not_null:
+                config: 
+                  severity: warn
+            - dbt_utils.expression_is_true:
+                expression: "> 0"
+        - name: langue_contact
+        - name: specialite
+        - name: actif
+        - name: siret_tva
+          tests: 
+            - unique: 
+                config: 
+                  severity: warn
+            - not_null
