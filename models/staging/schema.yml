@@ -99,3 +99,48 @@ models:
                 values: ['promotion saisonnière','réajustement', 'soldes','lancement']
                 config: 
                   severity: warn
+    - name: stg_order_items
+      columns: 
+        - name: order_item_id
+          tests: 
+            - unique
+            - not_null
+        - name: order_id
+          #tests: 
+          #  - relationships:
+          #      to: ref('stg_orders')
+          #      field: order_id
+        - name: product_id 
+          tests: 
+            - relationships:
+                to: ref('stg_products')
+                field: product_id
+        - name: variant_id 
+          tests: 
+            - relationships:
+                to: ref('stg_products_variants')
+                field: variant_id
+        - name: quantite
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+        - name: prix_unitaire_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+        - name: remise_pct
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+        - name: montant_ligne_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+        - name: promotion_id
+          #tests: 
+          #  - relationships: 
+          #      to: ref('stg_promotions')
+          #      field: promotion_id
+          #      config:
+          #        where: "promotion_id is not null" 
+            
