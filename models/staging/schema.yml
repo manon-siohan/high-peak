@@ -256,10 +256,10 @@ models:
             - unique
             - not_null
         - name: customer_id
-          #tests: 
-            #- relationships:
-                #to: ref('stg_customers')
-                #field: customer_id
+          tests: 
+            - relationships:
+                to: ref('stg_customers')
+                field: customer_id
         - name: type_address
           tests: 
             - accepted_values:
@@ -279,5 +279,29 @@ models:
                 values: ['France', 'Allemagne', 'Luxembourg', 'Suisse', 'Belgique']
         - name: active
           tests:
+            - accepted_values:
+                values: [true, false]
+    - name: stg_loyalty_accounts
+      columns: 
+        - name: loyalty_account_id 
+          tests: 
+            - unique
+            - not_null
+        - name: customer_id 
+          tests: 
+              - relationships:
+                  to: ref('stg_customers')
+                  field: customer_id
+        - name: points_solde
+          tests:
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+        - name: niveau
+          tests: 
+            - accepted_values:
+                values: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Autre']
+        - name: date_adhesion
+        - name: active
+          tests: 
             - accepted_values:
                 values: [true, false]
