@@ -191,3 +191,60 @@ models:
                 config: 
                   severity: warn
             - not_null
+    - name: stg_promotions
+      columns: 
+        - name: promotion_id
+          tests: 
+            - unique
+            - not_null
+        - name: code_promo
+        - name: libelle
+        - name: remise_pct
+          tests: 
+            - dbt_expectations.expect_column_values_to_be_between:
+                min_value: 0 
+                max_value: 100 
+                row_condition: "promotion_id is not null" 
+                strictly: false 
+        - name: categories_cibles
+        - name: date_debut
+        - name: date_fin
+        - name: active
+          tests: 
+            - accepted_values: 
+                values: [true, false]
+    - name: stg_returns
+      columns: 
+        - name: return_id
+          tests: 
+            - unique
+            - not_null
+        - name: order_id
+          tests: 
+            - relationships:
+                to: ref('stg_orders')
+                field: order_id
+        - name: order_item_id
+          tests: 
+            - relationships:
+                to: ref('stg_order_items')
+                field: order_item_id
+        - name: date_retour
+        - name: motif 
+          tests: 
+            - accepted_values:
+                values: ['Ne convient pas', 'Délai trop long', 'Défaut produit', 'Erreur commande', 'Taille incorrecte', 'Autre']
+        - name: quantite_retournee
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: "> 0"
+        - name: statut
+          tests: 
+            - accepted_values:
+                values: ['remboursé', 'reçu', 'refusé', 'en cours'] 
+        - name: remboursement_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: "> 0"
+                config: 
+                  severity: warn
