@@ -380,3 +380,18 @@ models:
           tests:
             - dbt_utils.expression_is_true:
                 expression: ">= 0"
+    - name: stg_products_categories
+      columns: 
+        - name: category_id
+          tests: 
+            - unique
+            - not_null
+        - name: categorie
+        - name: sous_categorie
+        - name: saison 
+          tests: 
+            - accepted_values:
+                values: ['Hiver', 'Printemps-Automne', 'Toutes saisons']
+                config:
+                  severity: warn
+      
