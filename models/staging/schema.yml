@@ -289,9 +289,9 @@ models:
             - not_null
         - name: customer_id 
           tests: 
-              - relationships:
-                  to: ref('stg_customers')
-                  field: customer_id
+            - relationships:
+                to: ref('stg_customers')
+                field: customer_id
         - name: points_solde
           tests:
             - dbt_utils.expression_is_true:
@@ -305,3 +305,35 @@ models:
           tests: 
             - accepted_values:
                 values: [true, false]
+    - name: stg_loyalty_transactions 
+      columns: 
+        - name: transaction_id
+          tests: 
+            - unique
+            - not_null 
+        - name: loyalty_account_id
+          tests: 
+            - relationships:
+                to: ref('stg_loyalty_accounts')
+                field: loyalty_account_id 
+                config: 
+                  severity: warn
+        - name: customer_id 
+          tests: 
+            - relationships:
+                to: ref('stg_customers')
+                field: customer_id
+        - name: type_transaction
+          tests:
+            - accepted_values:
+                values: ['Crédité', 'Débité', 'Expiré', 'Bonus', 'Autre']
+        - name: points
+        - name: date_transaction
+        - name: order_id
+          tests: 
+            - relationships: 
+                to: ref('stg_orders')
+                field: order_id
+                config: 
+                  where: "order_id is not null and order_id != ''"
+        - name: description_transaction
