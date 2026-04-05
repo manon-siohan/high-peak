@@ -337,3 +337,46 @@ models:
                 config: 
                   where: "order_id is not null and order_id != ''"
         - name: description_transaction
+    - name: stg_customers_segments
+      columns: 
+        - name: segment_id
+          tests: 
+            - unique
+            - not_null
+        - name: customer_id
+          tests: 
+            - relationships: 
+                to: ref('stg_customers')
+                field: customer_id
+        - name: r_score
+          tests:
+            - dbt_expectations.expect_column_values_to_be_between:
+                min_value: 1
+                max_value: 5
+                strictly: false
+        - name: f_score
+          tests:
+            - dbt_expectations.expect_column_values_to_be_between:
+                min_value: 1
+                max_value: 5
+                strictly: false
+        - name: m_score
+          tests:
+            - dbt_expectations.expect_column_values_to_be_between:
+                min_value: 1
+                max_value: 5
+                strictly: false
+        - name: rfm_score
+        - name: segment_label
+          tests: 
+            - accepted_values:
+                values: ['At Risk','Potential Loyalist','Loyal','Cannot Lose Them', 'Hibernating', 'Champions']
+        - name: date_calcul
+        - name: total_achats_ht
+          tests:
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
+        - name: nb_commandes
+          tests:
+            - dbt_utils.expression_is_true:
+                expression: ">= 0"
