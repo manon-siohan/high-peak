@@ -248,3 +248,36 @@ models:
                 expression: "> 0"
                 config: 
                   severity: warn
+
+    - name: stg_addresses
+      columns: 
+        - name: address_id
+          tests: 
+            - unique
+            - not_null
+        - name: customer_id
+          #tests: 
+            #- relationships:
+                #to: ref('stg_customers')
+                #field: customer_id
+        - name: type_address
+          tests: 
+            - accepted_values:
+                values: ['principale', 'livraison', 'facturation']
+        - name: rue 
+          tests: 
+            - not_null: 
+                config: 
+                  severity: warn
+        - name: ville
+          tests: 
+            - not_null
+        - name: code_postal
+        - name: pays
+          tests: 
+            - accepted_values:
+                values: ['France', 'Allemagne', 'Luxembourg', 'Suisse', 'Belgique']
+        - name: active
+          tests:
+            - accepted_values:
+                values: [true, false]
