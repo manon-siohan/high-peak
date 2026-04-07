@@ -1,0 +1,80 @@
+version: 2
+
+models:
+    - name: int_orders_enriched
+      columns: 
+        - name: order_id
+          tests: 
+             - unique
+             - not_null
+        - name: customer_id
+          tests: 
+            - not_null
+        - name: store_id
+          tests: 
+            - not_null
+        - name: canal
+          tests: 
+            - accepted_values: 
+                values: ['marketplace', 'online', 'magasin']
+        - name: statut
+          tests: 
+            - accepted_values:
+                values: ['confirmée', 'expédiée', 'livrée', 'annulée', 'remboursée']
+        - name: date_commande
+        - name: date_expedition
+        - name: date_livraison
+        - name: nb_lignes
+        - name: quantite_totale
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: montant_calcule_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: tva
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: montant_calcule_ttc
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: marge_brute_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: "<= montant_calcule_ht"
+                config: 
+                    severity: warn
+        - name: promotion_id
+        - name: code_promo
+        - name: remise_pct
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: delai_expedition_jours
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+                config: 
+                    severity: warn
+        - name: delai_livraison_jours
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+                config: 
+                    severity: warn
+        - name: is_online
+          tests: 
+            - accepted_values: 
+                values: [true, false]
+        - name: has_promotion
+          tests: 
+            - accepted_values: 
+                values: [true, false]
+        - name: is_returned 
+          tests: 
+            - accepted_values: 
+                values: [true, false]
+  
