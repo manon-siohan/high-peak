@@ -77,4 +77,55 @@ models:
           tests: 
             - accepted_values: 
                 values: [true, false]
-  
+    - name: int_customers_enriched
+      columns:
+        - name: customer_id
+          tests:
+            - unique
+            - not_null
+        - name: nom
+          tests:
+            - not_null
+        - name: prenom
+          tests:
+            - not_null
+        - name: email
+        - name: telephone
+        - name: rue
+        - name: ville
+        - name: pays
+          tests:
+            - accepted_values: 
+                values: ['France','Belgique', 'Suisse', 'Allemagne', 'Luxembourg']
+        - name: date_inscription
+        - name: date_naissance
+        - name: newsletter
+          tests: 
+            - accepted_values: 
+                values: [true, false]
+        - name: segment
+          tests:
+            - accepted_values:
+                values: ['Grand public', 'Professionnel', 'Club/Association', 'Sportif régulier']
+        - name: rfm_score
+        - name: segment_label
+          tests:
+            - accepted_values:
+                values: ['Loyal', 'At Risk', 'Potential Loyalist', 'Hibernating', 'Champions', 'Cannot Lose Them']
+        - name: total_achats_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: nb_commandes
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: points_solde
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: niveau
+          tests:
+            - accepted_values:
+                values: ['Bronze', 'Silver', 'Gold', 'Platinum']
+
