@@ -106,10 +106,10 @@ models:
             - unique
             - not_null
         - name: order_id
-          #tests: 
-          #  - relationships:
-          #      to: ref('stg_orders')
-          #      field: order_id
+          tests: 
+            - relationships:
+                to: ref('stg_orders')
+                field: order_id
         - name: product_id 
           tests: 
             - relationships:
@@ -137,12 +137,12 @@ models:
             - dbt_utils.expression_is_true:
                 expression: ">= 0"
         - name: promotion_id
-          #tests: 
-          #  - relationships: 
-          #      to: ref('stg_promotions')
-          #      field: promotion_id
-          #      config:
-          #        where: "promotion_id is not null" 
+          tests: 
+            - relationships: 
+                to: ref('stg_promotions')
+                field: promotion_id
+                config:
+                  where: "promotion_id is not null" 
     - name: stg_stores
       columns: 
         - name: store_id

@@ -129,3 +129,38 @@ models:
             - accepted_values:
                 values: ['Bronze', 'Silver', 'Gold', 'Platinum']
 
+    - name: int_product_current_price
+      columns: 
+        - name: product_id 
+          tests: 
+            - not_null
+            - unique
+        - name: valid_from 
+        - name: is_current
+          tests: 
+            - accepted_values:
+                values: [true, false]
+        - name: motif
+          tests: 
+            - accepted_values: 
+                values: ['promotion saisonnière','réajustement', 'soldes','lancement']
+                config: 
+                  severity: warn
+        - name: categorie
+          tests:
+            - accepted_values:
+                values: ['Accessoires', 'Chaussures', 'Vêtements techniques', 'Equipements', 'Autre']
+        - name: product_name
+        - name: prix_achat_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: prix_vente_ht
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: marge_unitaire_ht
+        - name: taux_marge_pct
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: "<= 100"
