@@ -18,6 +18,10 @@ returns as (
     SELECT * FROM {{ ref('stg_returns')}}
 ),
 
+stores as (
+    SELECT * FROM {{ ref('stg_stores')}}
+),
+
 items_aggregated as (
     SELECT
         oi.order_id
@@ -45,6 +49,10 @@ final as (
         , o.store_id
         , o.canal
         , o.statut
+        , s.store_name
+        , s.store_pays
+        , s.store_ville
+        , s.store_region
         , o.date_commande
         , o.date_expedition
         , o.date_livraison
@@ -66,6 +74,7 @@ final as (
     LEFT JOIN items_aggregated ia using (order_id)
     LEFT JOIN promotions promo using (promotion_id)
     LEFT JOIN returns_flagged rf using (order_id)
+    LEFT JOIN stores s using (store_id)
 )
 
 SELECT * FROM final

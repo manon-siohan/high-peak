@@ -149,7 +149,7 @@ models:
           tests: 
             - unique
             - not_null 
-        - name: pays
+        - name: store_pays
           tests: 
             - accepted_values:
                 values: ['France', 'Allemagne', 'Suisse', 'Belgique', 'Luxembourg']

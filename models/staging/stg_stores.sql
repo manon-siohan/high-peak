@@ -6,8 +6,8 @@ cleaned AS (
     SELECT 
         store_id
         , store_name
-        , ville
-        , region
+        , ville as store_ville
+        , region as store_region
         , CASE 
             WHEN LOWER(TRIM(pays)) IN ('france', 'fr', 'fra', 'fr.') THEN 'France'
             WHEN LOWER(TRIM(pays)) IN ('suisse', 'ch', 'che', 'switzerland') THEN 'Suisse'
@@ -15,7 +15,7 @@ cleaned AS (
             WHEN LOWER(TRIM(pays)) IN ('luxembourg', 'lu', 'lux') THEN 'Luxembourg'
             WHEN LOWER(TRIM(pays)) IN ('allemagne', 'de', 'deu', 'germany') THEN 'Allemagne'
             ELSE pays
-        END AS pays
+        END AS store_pays
         , type
         , CASE 
             WHEN try_cast(surface_m2 AS INTEGER) <= 0 THEN NULL
