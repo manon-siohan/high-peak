@@ -164,3 +164,32 @@ models:
           tests: 
             - dbt_utils.expression_is_true:
                 expression: "<= 100"
+
+    - name: int_loyalty_balance
+      columns: 
+        - name: loyalty_account_id
+          tests: 
+            - unique
+            - not_null
+        - name: customer_id
+          tests: 
+            - relationships:
+                to: ref('stg_customers')
+                field: customer_id
+        - name: solde_declare
+        - name: solde_recalcule
+          tests: 
+            - not_null
+        - name: ecart_solde
+          tests:
+            - dbt_utils.expression_is_true:
+                expression: "!= 0"
+                config:
+                  severity: warn
+        - name: niveau
+        - name: date_adhesion
+        - name: nb_transactions
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: derniere_transaction
