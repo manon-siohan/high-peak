@@ -149,7 +149,7 @@ models:
         - name: categorie
           tests:
             - accepted_values:
-                values: ['Accessoires', 'Chaussures', 'Vêtements techniques', 'Equipements', 'Autre']
+                values: ['Accessoires', 'Chaussures', 'Vêtements techniques', 'Équipement', 'Autre']
         - name: product_name
         - name: prix_achat_ht
           tests: 

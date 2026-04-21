@@ -9,7 +9,7 @@ cleaned AS(
         , product_name
         , category_id
         , CASE 
-            WHEN LOWER(TRIM(categorie)) IN ('équipement', 'équipements') THEN 'Equipements'
+            WHEN LOWER(TRIM(categorie)) IN ('équipement', 'équipements') THEN 'Équipement'
             WHEN LOWER(TRIM(categorie)) IN ('accessoires', 'accessoire') THEN 'Accessoires'
             WHEN LOWER(TRIM(categorie)) IN ('vêtements techniques', 'vetements techniques', 'vêtements tech.') THEN 'Vêtements techniques'
             WHEN LOWER(TRIM(categorie)) IN ('chaussures', 'chaussure') THEN 'Chaussures'

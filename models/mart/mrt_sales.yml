@@ -1,0 +1,156 @@
+version: 2
+
+models:
+    - name: mrt_sales
+      description: >
+        Table de faits principale avec granularité au niveau ligne de commande (order_item_id)
+        Une ligne = un article commandé enrichi de toutes les dimensions
+        Source of Truth pour analyses de CA, marge et perf produit
+      columns:
+      - name: order_item_id
+        description: Identifiant unique de la ligne de commande. Clé primaire
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        description: Identifiant de la commande parente.
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: Identifiant du client ayant passé la commande.
+        tests:
+          - not_null
+
+      - name: store_id
+        description: Identifiant du magasin ou canal de vente.
+
+      - name: store_name
+        description: Nom du magasin (ex. High Peak Strasbourg). Null pour les ventes online.
+
+      - name: store_ville
+        description: Ville du magasin.
+
+      - name: store_region
+        description: Région administrative du magasin (ex. Grand Est).
+
+      - name: store_pays
+        description: Pays du magasin, normalisé (France, Suisse, Belgique, Luxembourg, Allemagne).
+        tests:
+          - accepted_values:
+              values: ['France','Suisse','Belgique','Luxembourg','Allemagne']
+              config:
+                severity: warn
+
+      - name: canal
+        description: Canal de vente — magasin physique, online ou marketplace.
+        tests:
+          - accepted_values:
+              values: ['magasin','online','marketplace']
+
+      - name: statut
+        description: Statut normalisé de la commande.
+        tests:
+          - accepted_values:
+              values: ['confirmée','expédiée','livrée','annulée','remboursée']
+
+      - name: date_commande
+        description: Date à laquelle la commande a été passée.
+        tests:
+          - not_null
+
+      - name: date_expedition
+        description: Date d'expédition de la commande. Null si non encore expédiée ou annulée.
+
+      - name: date_livraison
+        description: Date de livraison effective. Null si non encore livrée.
+
+      - name: product_id
+        description: Identifiant du produit commandé.
+        tests:
+          - not_null
+
+      - name: product_name
+        description: Nom commercial du produit (ex. Veste hardshell AlpiStorm Pro).
+
+      - name: categorie
+        description: Catégorie normalisée du produit.
+        tests:
+          - accepted_values:
+              values: ['Vêtements techniques','Chaussures','Équipement','Accessoires','Autre']
+              config:
+                severity: warn
+
+      - name: sous_categorie
+        description: Sous-catégorie du produit (ex. Veste, Trail, Sac à dos).
+
+      - name: saison
+        description: Saison de commercialisation du produit (Hiver, Printemps-Automne, Toutes saisons).
+
+      - name: supplier_name
+        description: Nom du fournisseur principal du produit.
+
+      - name: sku
+        description: Code SKU de la variante commandée (produit + couleur + taille).
+
+      - name: quantite
+        description: Quantité d'articles commandés sur cette ligne.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: prix_unitaire_ht
+        description: Prix unitaire HT appliqué au moment de la commande, après remise éventuelle.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: remise_pct
+        description: Taux de remise appliqué sur cette ligne (en %). Null si aucune remise.
+
+      - name: code_promo
+        description: Code promotionnel utilisé sur la commande parente. Null si aucune promotion.
+
+      - name: has_promotion
+        description: Indicateur booléen — vrai si une promotion a été appliquée sur la commande.
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+      - name: is_returned
+        description: Indicateur booléen — vrai si la commande parente a fait l'objet d'un retour.
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+      - name: ca_ligne_ht
+        description: Chiffre d'affaires HT de la ligne (prix_unitaire_ht * quantite).
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: ca_ligne_ttc
+        description: Chiffre d'affaires TTC de la ligne (ca_ligne_ht * 1.20).
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: marge_ligne_ht
+        description: >
+          Marge brute HT de la ligne calculée comme
+          (prix_unitaire_ht - prix_achat_ht) * quantite.
+          Peut être négative si le produit est vendu en dessous du prix d'achat.
+
+      - name: taux_marge_ligne_pct
+        description: >
+          Taux de marge brute en pourcentage (marge_ligne_ht / ca_ligne_ht * 100).
+          Une valeur négative indique une vente à perte.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "<= 100"
+              config:
+                severity: warn
