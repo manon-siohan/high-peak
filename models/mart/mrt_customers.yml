@@ -1,0 +1,165 @@
+version: 2
+
+models:
+  - name: mrt_customers
+    description: >
+      Table de dimensions clients au grain une ligne par client.
+      Enrichie des métriques d'achat calculées depuis les commandes réelles,
+      du statut fidélité recalculé depuis les transactions de points,
+      et de la segmentation RFM. 
+
+    columns:
+      - name: customer_id
+        description: Identifiant unique du client. Clé primaire .
+        tests:
+          - unique
+          - not_null
+
+      - name: nom
+        description: Nom de famille du client.
+
+      - name: prenom
+        description: Prénom du client.
+
+      - name: email
+        description: Adresse email normalisée du client. Peut être NULL si invalide.
+
+      - name: telephone
+        description: Numéro de téléphone du client.
+
+      - name: rue
+        description: Rue de l'adresse principale. Peut être NULL si non renseignée.
+
+      - name: ville
+        description: Ville de l'adresse principale du client.
+
+      - name: pays
+        description: Pays du client, normalisé.
+        tests:
+          - accepted_values:
+              values: ['France','Suisse','Belgique','Luxembourg','Allemagne']
+              config:
+                severity: warn
+
+      - name: date_inscription
+        description: Date d'inscription du client
+        tests:
+          - not_null
+
+      - name: date_naissance
+        description: Date de naissance du client.
+
+      - name: newsletter
+        description: Indicateur d'abonnement à la newsletter (1 = abonné, 0 = non abonné).
+        tests:
+          - accepted_values:
+              values: [0, 1]
+
+      - name: nb_commandes_total
+        description: Nombre total de commandes passées par le client.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_depense
+        description: >
+          Montant total TTC dépensé par le client sur l'ensemble de ses commandes.
+          Calculé depuis les transactions réelle, pas depuis le segment RFM.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: derniere_commande_effectuee
+        description: Date de la dernière commande passée par le client.
+
+      - name: total_articles_achetes
+        description: Nombre total d'articles commandés par le client.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: total_commande_en_ligne
+        description: Nombre de commandes passées via le canal online.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_commande_en_promo
+        description: Nombre de commandes ayant bénéficié d'une promotion.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: panier_moyen
+        description: >
+          Montant moyen TTC par commande (total_depense / nb_commandes_total).
+          Vaut 0 pour les clients sans commande.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: statut_achat
+        description: >
+          Segmentation comportementale basée sur le nombre de commandes.
+          Inactif = 0 commande, Nouveau = 1 commande,
+          Régulier = 2 à 4 commandes, Fidèle = 5 commandes et plus.
+        tests:
+          - accepted_values:
+              values: ['Inactif','Nouveau','Régulier','Fidèle']
+
+      - name: solde_recalcule
+        description: >
+          Solde de points fidélité recalculé depuis les transactions réelles.
+          Plus fiable que le solde déclaré dans loyalty_accounts.
+
+      - name: niveau_loyaute
+        description: Niveau fidélité du client — Bronze, Silver, Gold ou Platinum.
+        tests:
+          - accepted_values:
+              values: ['Bronze','Silver','Gold','Platinum']
+              config:
+                severity: warn
+
+      - name: total_loyaute_transactions
+        description: Nombre total de transactions de points fidélité du client.
+
+      - name: derniere_activite_loyaute
+        description: Date de la dernière transaction de points fidélité.
+
+      - name: rfm_score
+        description: Score RFM composite (Récence * 100 + Fréquence * 10 + Montant).
+
+      - name: segment_label
+        description: Segment RFM du client — Champions, Loyal, At Risk, etc.
+        tests:
+          - accepted_values:
+              values: ['Champions','Loyal','Potential Loyalist','At Risk',
+                       'Cannot Lose Them','Hibernating','New Customer']
+              config:
+                severity: warn
+
+      - name: customer_segment
+        description: Segment commercial du client saisi à l'inscription.
+        tests:
+          - accepted_values:
+              values: ['Grand public','Sportif régulier','Professionnel','Club/Association']
+              config:
+                severity: warn
+
+      - name: total_achats_ht
+        description: Montant total HT des achats issu du calcul RFM. Indicatif uniquement.
+
+      - name: duree_inscription
+        description: Nombre de jours écoulés depuis l'inscription du client.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: duree_derniere_commande
+        description: Nombre de jours écoulés depuis la dernière commande. Indicateur de récence.
