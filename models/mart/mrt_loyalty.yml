@@ -1,0 +1,106 @@
+version: 2
+
+models:
+  - name: mrt_loyalty
+    description: >
+      Table de faits fidélité au grain une ligne par compte fidélité.
+      Agrège les métriques de comportement depuis les transactions de points
+      et le solde recalculé depuis int_loyalty_balance.
+
+    columns:
+      - name: loyalty_account_id
+        description: Identifiant unique du compte fidélité. Clé primaire
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: Identifiant du client propriétaire du compte fidélité.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('mart_customers')
+              field: customer_id
+
+      - name: solde_recalcule
+        description: >
+          Solde de points recalculé depuis les transactions réelles.
+          Plus fiable que le solde déclaré dans loyalty_accounts.
+        tests:
+          - not_null
+
+      - name: ecart_solde
+        description: >
+          Différence entre le solde déclaré et le solde recalculé.
+          Une valeur non nulle signale une anomalie de données.
+
+      - name: niveau
+        description: Niveau fidélité du compte — Bronze, Silver, Gold ou Platinum.
+        tests:
+          - accepted_values:
+              values: ['Bronze','Silver','Gold','Platinum']
+              config:
+                severity: warn
+
+      - name: date_adhesion
+        description: Date d'adhésion au programme fidélité.
+        tests:
+          - not_null
+
+      - name: nb_transactions
+        description: Nombre total de transactions de points sur le compte.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: derniere_transaction
+        description: Date de la dernière transaction de points enregistrée.
+
+      - name: total_points_gagnes
+        description: Somme des points crédités sur le compte.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_points_depenses
+        description: Somme des points débités sur le compte, en valeur absolue.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: total_points_expires
+        description: Somme des points expirés sur le compte, en valeur absolue.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: tx_utilisation_pct
+        description: >
+          Taux d'utilisation des points en pourcentage
+          (total_points_depenses / total_points_gagnes * 100).
+          Indicateur clé de l'engagement au programme fidélité.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: duree_derniere_transaction
+        description: Nombre de jours écoulés depuis la dernière transaction de points.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: is_actif
+        description: >
+          Indicateur booléen — vrai si le client a eu une transaction
+          de points dans les 180 derniers jours.
+        tests:
+          - accepted_values:
+              values: [true, false]

@@ -216,3 +216,22 @@ models:
           tests: 
             - accepted_values:
                 values: [true,false]
+    - name: int_loyalty_transactions
+      columns: 
+        - name:  loyalty_account_id
+          tests: 
+            - unique
+            - not_null
+        - name: total_points_gagnes
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: total_points_depenses
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+        - name: total_points_expires
+          tests: 
+            - dbt_utils.expression_is_true:
+                expression: ">=0"
+    
