@@ -1,0 +1,143 @@
+version: 2
+
+models:
+  - name: mart_products
+    description: >
+      Table de faits produits, granularité : une ligne par produit.
+      Agrège les métriques de vente, de retour et de stock pour chaque produit.
+
+    columns:
+      - name: product_id
+        description: Identifiant unique du produit. Clé primaire 
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: Nom commercial du produit.
+        tests:
+          - not_null
+
+      - name: categorie
+        description: Catégorie du produit.
+        tests:
+          - accepted_values:
+              values: ['Vêtements techniques','Chaussures','Équipement','Accessoires','Autre']
+              config:
+                severity: warn
+
+      - name: sous_categorie
+        description: Sous-catégorie du produit (ex. Veste, Trail, Sac à dos).
+
+      - name: saison
+        description: Saison de commercialisation (Hiver, Printemps-Automne, Toutes saisons).
+
+      - name: prix_vente_ht
+        description: Prix de vente HT courant du produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: prix_achat_ht
+        description: Prix d'achat HT fournisseur du produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: marge_unitaire_ht
+        description: Marge brute unitaire HT (prix_vente_ht - prix_achat_ht).
+
+      - name: supplier_name
+        description: Nom du fournisseur principal du produit.
+
+      - name: supplier_pays
+        description: Pays du fournisseur.
+
+      - name: nb_commandes
+        description: Nombre de commandes ayant inclus ce produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_quantite_vendue
+        description: Quantité totale vendue sur la période.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_ca_ht
+        description: Chiffre d'affaires total HT généré par le produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_marge_ht
+        description: Marge brute totale HT générée par le produit.
+
+      - name: tx_total_marge_pct
+        description: Taux de marge brute total en pourcentage.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "<= 100"
+              config:
+                severity: warn
+
+      - name: panier_moyen_produit
+        description: CA HT moyen par commande pour ce produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: nb_retours
+        description: Nombre total de retours enregistrés pour ce produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: quantite_retournee
+        description: Quantité totale retournée pour ce produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: tx_retour_pct
+        description: >
+          Taux de retour en pourcentage (quantite_retournee / total_quantite_vendue × 100).
+          Un taux élevé signale un problème qualité ou de conformité produit.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: stock_total
+        description: Stock total disponible toutes variantes confondues.
+
+      - name: nb_variantes_stock
+        description: Nombre de variantes ayant un stock disponible > 0.
+
+      - name: is_rupture
+        description: Indicateur booléen — vrai si aucune variante n'est disponible en stock.
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+      - name: is_top_seller
+        description: Indicateur booléen — vrai si le produit est dans le top 20% par CA.
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+      - name: is_flop
+        description: Indicateur booléen — vrai si le produit est dans le bottom 20% par CA.
+        tests:
+          - accepted_values:
+              values: [true, false]
