@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "high_peak_report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "db532d70-50f1-479e-bbf2-fafde2325245"
+  }
+}
