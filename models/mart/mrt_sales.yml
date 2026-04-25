@@ -91,6 +91,9 @@ models:
       - name: supplier_name
         description: Nom du fournisseur principal du produit.
 
+      - name: promotion_id
+        description: Identifiant de la promotion
+
       - name: sku
         description: Code SKU de la variante commandée (produit + couleur + taille).
 

@@ -86,6 +86,7 @@ SELECT
     , p.sous_categorie
     , p.saison
     , p.supplier_name
+    , oe.promotion_id
     , oi.sku
     , oi.quantite
     , oi.prix_unitaire_ht
