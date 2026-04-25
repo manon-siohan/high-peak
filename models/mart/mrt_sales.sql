@@ -94,6 +94,7 @@ SELECT
     , oe.code_promo
     , oe.has_promotion
     , oe.is_returned
+    , oe.is_online
     , oi.prix_unitaire_ht * oi.quantite AS ca_ligne_ht
     , (oi.prix_unitaire_ht * oi.quantite)* 1.20 AS ca_ligne_ttc
     , (oi.prix_unitaire_ht - p.prix_achat_ht)* oi.quantite AS marge_ligne_ht
