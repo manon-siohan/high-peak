@@ -1,5 +1,5 @@
-with source as (
-    select * from {{ ref('int_customers_enriched') }}
+WITH source AS (
+    SELECT * FROM {{ ref('int_customers_enriched') }}
 )
 
 select
@@ -14,21 +14,21 @@ select
    ,  date_naissance
    ,  date_inscription
    ,  newsletter
-   ,  segment                                         as segment_commercial
-   ,  segment_label                                   as segment_rfm
+   ,  segment                                         AS segment_commercial
+   ,  segment_label                                   AS segment_rfm
    ,  rfm_score
-   ,  niveau                                          as niveau_loyaute
+   ,  niveau                                          AS niveau_loyaute
     -- Statut achat (calculé depuis int)
-   ,  case
-        when nb_commandes is null
-          or nb_commandes = 0  then 'Inactif'
-        when nb_commandes = 1  then 'Nouveau'
-        when nb_commandes <= 4 then 'Régulier'
-        else 'Fidèle'
-    end                                             as statut_achat
+   ,  CASE
+        WHEN nb_commandes IS NULL
+          OR nb_commandes = 0  THEN 'Inactif'
+        WHEN nb_commandes = 1  THEN 'Nouveau'
+        WHEN nb_commandes <= 4 THEN 'Régulier'
+        ELSE 'Fidèle'
+    END                                             AS statut_achat
     -- Ancienneté
-   ,  datediff('day', date_inscription, current_date) as anciennete_jours
+   ,  datediff('day', date_inscription, current_date) AS anciennete_jours
    ,  date_inscription >= current_date - interval '90 days'
-                                                    as is_nouveau_client
+                                                    AS is_nouveau_client
 
-from source
+FROM source

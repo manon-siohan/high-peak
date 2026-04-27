@@ -1,40 +1,40 @@
-with date_spine as (
-    select
-        range::date as date_day
-    from range(
-        date '2021-01-01'
-        ,date '2025-12-31'
+WITH date_cal AS (
+    SELECT
+        RANGE:: date_day
+    FROM RANGE(
+        DATE '2021-01-01'
+        ,DATE '2025-12-31'
         ,interval '1 day'
     )
 ),
 
-final as (
-    select
+final AS (
+    SELECT
         -- Clé primaire format DDMMYYYY
-        cast(strftime(date_day, '%d%m%Y') as integer)   as date_id
-        , date_day                                         as date_jour
+        CAST(strftime(date_day, '%d%m%Y') AS INTEGER)   AS date_id
+        , date_day                                         AS date_jour
 
         -- Attributs temporels
-        , year(date_day)                                   as annee
-        , quarter(date_day)                                as trimestre
-        , 'T' || quarter(date_day)                         as trimestre_label
-        , month(date_day)                                  as mois
-        , strftime(date_day, '%B')                         as mois_label
-        , week(date_day)                                   as semaine
-        , dayofweek(date_day)                              as jour_semaine
-        , strftime(date_day, '%A')                         as jour_semaine_label
+        , YEAR(date_day)                                   AS annee
+        , QUARTER(date_day)                                AS trimestre
+        , 'T' || QUARTER(date_day)                         AS trimestre_label
+        , MONTH(date_day)                                  AS mois
+        , strftime(date_day, '%B')                         AS mois_label
+        , WEEK(date_day)                                   AS semaine
+        , dayofweek(date_day)                              AS jour_semaine
+        , strftime(date_day, '%A')                         AS jour_semaine_label
         -- Formats utiles Power BI
-        , strftime(date_day, '%Y-%m')                      as annee_mois
-        , annee || '-T' || quarter(date_day)               as annee_trimestre
+        , strftime(date_day, '%Y-%m')                      AS annee_mois
+        , annee || '-T' || QUARTER(date_day)               AS annee_trimestre
 
         -- Flags
-        , dayofweek(date_day) in (0, 6)                   as is_weekend
+        , dayofweek(date_day) IN (0, 6)                   AS is_weekend
 
         -- Mois en cours / passé (utile pour DAX)
-        , date_day = date_trunc('month', current_date)     as is_current_month
-        , year(date_day) = year(current_date)              as is_current_year
+        , date_day = DATE_TRUNC('month', current_date)     AS is_current_month
+        , YEAR(date_day) = YEAR(current_date)              AS is_current_year
 
-    from date_spine
+    FROM date_cal
 )
 
-select * from final
+SELECT * FROM final
