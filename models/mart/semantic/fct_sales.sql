@@ -1,15 +1,15 @@
-with sales as (
-    select * from {{ ref('mrt_sales') }}
+WITH sales AS (
+    SELECT * FROM {{ ref('mrt_sales') }}
 ),
 
-date_mapping as (
-    select
+date_mapping AS (
+    SELECT
         date_jour
         , date_id
-    from {{ ref('dim_date') }}
+    FROM {{ ref('dim_date') }}
 )
 
-select
+SELECT
     -- Clé primaire
     s.order_item_id -- grain = ligne de commande
 
@@ -35,9 +35,9 @@ select
     , s.is_online
     , s.statut
 
-from sales s
-left join date_mapping d
-    on s.date_commande = d.date_jour
+FROM sales s
+LEFT JOIN date_mapping d
+    ON s.date_commande = d.date_jour
 
-where s.quantite > 0
-  and s.ca_ligne_ht >= 0
+WHERE s.quantite > 0
+  AND s.ca_ligne_ht >= 0
