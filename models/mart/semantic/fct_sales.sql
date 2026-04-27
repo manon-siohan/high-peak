@@ -1,7 +1,6 @@
 WITH sales AS (
     SELECT * FROM {{ ref('mrt_sales') }}
 ),
-
 date_mapping AS (
     SELECT
         date_jour
@@ -29,11 +28,10 @@ SELECT
     , s.marge_ligne_ht
     , s.taux_marge_ligne_pct
 
+
     -- Flags utiles
     , s.has_promotion
     , s.is_returned
-    , s.is_online
-    , s.statut
 
 FROM sales s
 LEFT JOIN date_mapping d

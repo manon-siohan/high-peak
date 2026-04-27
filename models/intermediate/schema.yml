@@ -17,7 +17,7 @@ models:
           tests: 
             - accepted_values: 
                 values: ['marketplace', 'online', 'magasin']
-        - name: statut
+        - name: statut_livraison
           tests: 
             - accepted_values:
                 values: ['confirmée', 'expédiée', 'livrée', 'annulée', 'remboursée']

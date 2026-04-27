@@ -48,7 +48,7 @@ final as (
         , o.customer_id
         , o.store_id
         , o.canal
-        , o.statut
+        , o.statut                                                  as statut_livraison
         , s.store_name
         , s.store_pays
         , s.store_ville
