@@ -41,7 +41,7 @@ orders_enriched AS (
         , customer_id
         , store_id
         , canal
-        , statut
+        , statut_livraison
         , store_name
         , store_pays
         , store_ville
