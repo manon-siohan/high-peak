@@ -1,6 +1,20 @@
 WITH sales AS (
     SELECT * FROM {{ ref('mrt_sales') }}
 ),
+
+channels AS (
+    SELECT
+        channel_id
+        , canal
+    FROM {{ ref('dim_channel')}}
+),
+
+order_status AS (
+    SELECT
+        order_status_id 
+        , order_status_name
+    FROM {{ ref('dim_order_status')}}
+),
 date_mapping AS (
     SELECT
         date_jour
@@ -18,6 +32,8 @@ SELECT
     , s.product_id
     , s.store_id
     , s.promotion_id
+    , c.channel_id
+    , os.order_status_id
 
     -- Mesures
     , s.quantite
@@ -36,6 +52,9 @@ SELECT
 FROM sales s
 LEFT JOIN date_mapping d
     ON s.date_commande = d.date_jour
+LEFT JOIN channels c USING (canal)
+LEFT JOIN order_status os 
+    ON s.statut = os.order_status_name
 
 WHERE s.quantite > 0
   AND s.ca_ligne_ht >= 0

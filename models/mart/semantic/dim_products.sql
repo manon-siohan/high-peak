@@ -20,6 +20,9 @@ SELECT
   ,  v.product_id
   ,  v.sku
 
+    -- FK
+  , p.supplier_id
+
     -- Attributs produit
   ,  p.product_name
   ,  p.categorie
@@ -37,11 +40,6 @@ SELECT
   ,  p.prix_achat_ht
   ,  p.marge_unitaire_ht
   ,  p.taux_marge_pct
-
-    -- Fournisseur dénormalisé
-  ,  p.supplier_name
-  ,  p.supplier_pays
-  ,  p.delai_livraison_jours
 
     -- Catégorie enrichie
   ,  p.category_id

@@ -76,7 +76,7 @@ SELECT
     , oe.store_region
     , oe.store_pays
     , oe.canal
-    , oe.statut
+    , oe.statut_livraison
     , oe.date_commande
     , oe.date_expedition
     , oe.date_livraison
