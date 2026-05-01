@@ -1,17 +1,15 @@
 WITH date_cal AS (
     SELECT
-        RANGE:: date_day
-    FROM RANGE(
-        DATE '2021-01-01'
-        ,DATE '2025-12-31'
-        ,interval '1 day'
-    )
+        unnest(range(
+            date '2021-01-01'
+            , date '2025-12-31' 
+            , interval '1 day')) as date_day
 ),
 
 final AS (
     SELECT
         -- Clé primaire format DDMMYYYY
-        CAST(strftime(date_day, '%d%m%Y') AS INTEGER)   AS date_id
+        CAST(strftime(date_day, '%Y%m%d') AS INTEGER)   AS date_id
         , date_day                                         AS date_jour
 
         -- Attributs temporels

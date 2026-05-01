@@ -20,7 +20,7 @@ cleaned AS (
             WHEN LOWER(TRIM(statut)) IN ('annulée', 'annulé', 'annulee', 'annulé') THEN 'annulée'
             WHEN LOWER(TRIM(statut)) IN ('remboursée', 'remboursé', 'rembourse', 'remboursee') THEN 'remboursée'
             ELSE 'inconnu'
-        END AS statut 
+        END AS statut
 
         , try_cast(montant_total_ht AS DOUBLE) AS montant_total_ht
         , nullif(promotion_id, '')             AS promotion_id

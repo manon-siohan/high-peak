@@ -12,7 +12,7 @@ channels AS (
 order_status AS (
     SELECT
         order_status_id 
-        , order_status_name
+        , statut_livraison
     FROM {{ ref('dim_order_status')}}
 ),
 date_mapping AS (
@@ -54,7 +54,7 @@ LEFT JOIN date_mapping d
     ON s.date_commande = d.date_jour
 LEFT JOIN channels c USING (canal)
 LEFT JOIN order_status os 
-    ON s.statut = os.order_status_name
+    ON s.statut_livraison = os.statut_livraison
 
 WHERE s.quantite > 0
   AND s.ca_ligne_ht >= 0

@@ -1,0 +1,528 @@
+version: 2
+
+models:
+
+  # DIMENSIONS
+
+  - name: dim_date
+    description: >
+      Table de dates générée couvrant 2021-2025. Dimension temporelle partagée
+      par les trois tables de faits. 
+      Format date_id : YYYYMMDD 
+    columns:
+      - name: date_id
+        description: Clé primaire format YYYYMMDD.  FK dans les facts.
+        tests: [unique, not_null]
+      - name: date_jour
+        description: Date complète au format DATE.
+        tests: [unique, not_null]
+      - name: annee
+        description: Année (ex. 2024).
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 2021"
+      - name: trimestre
+        description: Numéro de trimestre (1-4).
+      - name: trimestre_label
+        description: Label trimestre (ex. T1, T2...).
+      - name: mois
+        description: Numéro du mois (1-12).
+      - name: mois_label
+        description: Nom du mois en français.
+      - name: semaine
+        description: Numéro de semaine ISO.
+      - name: annee_mois
+        description: Format YYYY-MM pour les agrégations mensuelles.
+      - name: annee_trimestre
+        description: Format YYYY-T1 pour les agrégations trimestrielles.
+      - name: is_weekend
+        description: Vrai si samedi ou dimanche.
+      - name: is_current_month
+        description: Vrai si le jour appartient au mois en cours.
+      - name: is_current_year
+        description: Vrai si le jour appartient à l'année en cours.
+
+  - name: dim_customers
+    description: >
+      Dimension clients au grain une ligne par customer_id.
+       Inclut la segmentation RFM et le statut fidélité.
+    columns:
+      - name: customer_id
+        description: Clé primaire client.
+        tests: [unique, not_null]
+      - name: prenom
+        description: Prénom du client.
+      - name: nom
+        description: Nom de famille du client.
+      - name: email
+        description: Email normalisé. Peut être NULL si invalide dans la source.
+      - name: ville
+        description: Ville de l'adresse principale.
+      - name: pays
+        description: Pays normalisé.
+        tests:
+          - accepted_values:
+              values: ['France','Suisse','Belgique','Luxembourg','Allemagne']
+              config:
+                severity: warn
+      - name: segment_commercial
+        description: Segment saisi à l'inscription (Grand public, Sportif régulier...).
+      - name: segment_rfm
+        description: Segment RFM calculé (Champions, Loyal, At Risk...).
+        tests:
+          - accepted_values:
+              values: ['Champions','Loyal','Potential Loyalist','At Risk',
+                       'Cannot Lose Them','Hibernating','New Customer']
+              config:
+                severity: warn
+      - name: rfm_score
+        description: Score RFM composite (R*100 + F*10 + M).
+      - name: niveau_loyaute
+        description: Niveau fidélité (Bronze, Silver, Gold, Platinum).
+        tests:
+          - accepted_values:
+              values: ['Bronze','Silver','Gold','Platinum']
+              config:
+                severity: warn
+      - name: statut_achat
+        description: Segmentation comportementale (Inactif, Nouveau, Régulier, Fidèle).
+        tests:
+          - accepted_values:
+              values: ['Inactif','Nouveau','Régulier','Fidèle']
+      - name: anciennete_jours
+        description: Nombre de jours depuis l'inscription.
+      - name: is_nouveau_client
+        description: Vrai si inscrit dans les 90 derniers jours.
+
+  - name: dim_products
+    description: >
+      Dimension produits au grain SKU (product + variant dénormalisé).
+    columns:
+      - name: product_variant_id
+        description: Clé primaire au grain variante (SKU).
+        tests: [unique, not_null]
+      - name: product_id
+        description: Identifiant produit parent.
+        tests: [not_null]
+      - name: supplier_id
+        description: FK vers dim_suppliers.
+      - name: sku
+        description: Code SKU unique de la variante.
+        tests: [not_null]
+      - name: product_name
+        description: Nom commercial du produit.
+      - name: categorie
+        description: Catégorie normalisée.
+        tests:
+          - accepted_values:
+              values: ['Vêtements techniques','Chaussures','Équipement','Accessoires','Autre']
+              config:
+                severity: warn
+      - name: sous_categorie
+        description: Sous-catégorie (ex. Veste, Trail, Sac à dos).
+      - name: saison
+        description: Saison de commercialisation.
+      - name: taille
+        description: Taille normalisée de la variante.
+      - name: couleur
+        description: Couleur normalisée de la variante.
+      - name: stock_disponible
+        description: Stock disponible pour cette variante. NULL si rupture injectée.
+      - name: prix_vente_ht
+        description: Prix de vente HT courant (depuis SCD2 résolue).
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+      - name: prix_achat_ht
+        description: Prix d'achat HT fournisseur.
+      - name: marge_unitaire_ht
+        description: Marge brute unitaire (prix_vente - prix_achat).
+      - name: supplier_name
+        description: Nom du fournisseur dénormalisé.
+      - name: supplier_pays
+        description: Pays du fournisseur dénormalisé.
+      - name: has_stock
+        description: Vrai si stock_disponible > 0.
+      - name: is_rupture
+        description: Vrai si stock_disponible est NULL ou 0.
+
+  - name: dim_stores
+    description: >
+      Dimension magasins incluant tous les magasins actifs et fermés.
+      Le flag is_active permet de filtrer dans Power BI selon le besoin.
+      Inclut la segmentation géographique France / International.
+    columns:
+      - name: store_id
+        description: Clé primaire magasin.
+        tests: [unique, not_null]
+      - name: store_name
+        description: Nom du magasin.
+      - name: store_ville
+        description: Ville du magasin.
+      - name: store_region
+        description: Région administrative.
+      - name: store_pays
+        description: Pays normalisé.
+        tests:
+          - accepted_values:
+              values: ['France','Suisse','Belgique','Luxembourg','Allemagne']
+              config:
+                severity: warn
+      - name: type_magasin
+        description: Type de point de vente (magasin / e-commerce).
+      - name: is_active
+        description: Vrai si le magasin est actuellement ouvert.
+      - name: is_online
+        description: Vrai si canal e-commerce.
+      - name: zone_geo
+        description: Regroupement géographique (France / International).
+
+  - name: dim_suppliers
+    description: >
+      Dimension fournisseurs — uniquement les fournisseurs actifs.
+      Reliée à dim_products via supplier_id pour les analyses de performance fournisseur.
+    columns:
+      - name: supplier_id
+        description: Clé primaire fournisseur.
+        tests: [unique, not_null]
+      - name: supplier_name
+        description: Nom du fournisseur.
+        tests: [not_null]
+      - name: supplier_pays
+        description: Pays d'origine du fournisseur.
+      - name: supplier_specialite
+        description: Spécialité produit du fournisseur.
+      - name: delai_livraison_jours
+        description: Délai de livraison moyen en jours.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+              config:
+                severity: warn
+
+  - name: dim_promo
+    description: >
+      Dimension promotions — uniquement les promos valides (0% < remise <= 100%).
+      Les anomalies de remise négative ou > 100% sont filtrées.
+    columns:
+      - name: promotion_id
+        description: Clé primaire promotion.
+        tests: [unique, not_null]
+      - name: code_promo
+        description: Code promotionnel utilisé en caisse ou online.
+      - name: remise_pct
+        description: Taux de remise en pourcentage.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0 and remise_pct <= 100"
+      - name: duree_jours
+        description: Durée de la promotion en jours.
+      - name: categorie_remise
+        description: Catégorie de remise (Forte remise / Remise modérée / Petite remise).
+        tests:
+          - accepted_values:
+              values: ['Forte remise','Remise modérée','Petite remise']
+
+  - name: dim_channel
+    description: >
+      Dimension canal de vente — valeurs distinctes extraites de mrt_sales.
+      Permet d'analyser la performance par canal (magasin / online / marketplace)
+      et par groupe (Retail / Digital).
+    columns:
+      - name: channel_id
+        description: Clé de substitution générée (surrogate key).
+        tests: [unique, not_null]
+      - name: canal
+        description: Valeur brute du canal normalisée.
+        tests:
+          - accepted_values:
+              values: ['magasin','online','marketplace']
+      - name: canal_group
+        description: Regroupement canal (Retail / Digital).
+        tests:
+          - accepted_values:
+              values: ['Retail','Digital']
+      - name: is_digital_canal
+        description: Vrai si online ou marketplace.
+
+  - name: dim_order_status
+    description: >
+      Dimension statuts de commande — valeurs distinctes extraites de mrt_sales.
+      Permet de filtrer et segmenter les analyses par statut dans Power BI.
+    columns:
+      - name: order_status_id
+        description: Clé de substitution générée (surrogate key).
+        tests: [unique, not_null]
+      - name: statut_livraison
+        description: Libellé du statut normalisé.
+        tests:
+          - accepted_values:
+              values: ['confirmée','expédiée','livrée','annulée','remboursée']
+      - name: order_status_group
+        description: Groupe de statut (Active / Closed issue).
+      - name: is_delivered
+        description: Vrai si statut = livrée.
+      - name: is_cancelled
+        description: Vrai si statut = annulée.
+
+  - name: dim_return_reason
+    description: >
+      Dimension motifs de retour avec catégorisation analytique.
+    columns:
+      - name: return_reason_id
+        description: Clé de substitution générée (surrogate key).
+        tests: [unique, not_null]
+      - name: motif_retour
+        description: Motif de retour normalisé.
+      - name: categorie_retour
+        description: Catégorie analytique du motif.
+      - name: is_experience_produit
+        description: Vrai si le retour est lié à l'expérience produit.
+      - name: is_probleme_operationnel
+        description: Vrai si le retour est lié à un problème opérationnel.
+      - name: is_responsabilite_entreprise
+        description: Vrai si High Peak est responsable du retour.
+
+  - name: dim_return_status
+    description: >
+      Dimension statuts de retour avec flags analytiques.
+    columns:
+      - name: return_status_id
+        description: Clé de substitution générée (surrogate key).
+        tests: [unique, not_null]
+      - name: statut_retour
+        description: Statut du retour normalisé.
+      - name: return_status_category
+        description: Catégorie de statut (Clôturé / En traitement / Refusé).
+      - name: is_refund
+        description: Vrai si le retour a été remboursé.
+      - name: is_pending
+        description: Vrai si le retour est en cours de traitement.
+      - name: is_rejected
+        description: Vrai si le retour a été refusé.
+
+  - name: dim_loyalty_transaction_type
+    description: >
+      Dimension types de transactions fidélité avec catégorisation.
+      Permet d'analyser séparément les gains, dépenses et expirations de points.
+    columns:
+      - name: loyalty_transaction_type_id
+        description: Clé de substitution générée (surrogate key).
+        tests: [unique, not_null]
+      - name: type_transaction
+        description: Type de transaction normalisé.
+        tests:
+          - accepted_values:
+              values: ['Crédité','Débité','Expiré','Bonus']
+      - name: transaction_category
+        description: Catégorie (Gain / Dépense / Expiration / Promotion).
+      - name: is_earning
+        description: Vrai si la transaction crédite des points.
+      - name: is_spending
+        description: Vrai si la transaction débite des points.
+      - name: is_expiration
+        description: Vrai si les points ont expiré.
+
+  # TABLES DE FAITS
+ 
+  - name: fct_sales
+    description: >
+      Table de faits principale au grain ligne de commande (order_item_id).
+      Contient uniquement des mesures pures et des clés étrangères vers les dimensions.
+      Les commandes avec quantité nulle ou CA négatif sont exclues.
+    columns:
+      - name: order_item_id
+        description: Clé primaire au grain ligne de commande.
+        tests: [unique, not_null]
+      - name: date_id
+        description: FK vers dim_date (format YYYYMMDD).
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_id
+      - name: customer_id
+        description: FK vers dim_customers.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+              config:
+                severity: warn
+      - name: product_id
+        description: FK vers dim_products.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+              config:
+                severity: warn
+      - name: store_id
+        description: FK vers dim_stores.
+        tests:
+          - relationships:
+              to: ref('dim_stores')
+              field: store_id
+              config:
+                severity: warn
+      - name: promotion_id
+        description: FK vers dim_promo. NULL si aucune promotion.
+        tests:
+          - relationships:
+              to: ref('dim_promo')
+              field: promotion_id
+              config:
+                where: "promotion_id is not null"
+                severity: warn
+      - name: channel_id
+        description: FK vers dim_channel.
+        tests:
+          - relationships:
+              to: ref('dim_channel')
+              field: channel_id
+      - name: order_status_id
+        description: FK vers dim_order_status.
+        tests:
+          - relationships:
+              to: ref('dim_order_status')
+              field: order_status_id
+      - name: quantite
+        description: Quantité commandée sur cette ligne.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: prix_unitaire_ht
+        description: Prix unitaire HT appliqué après remise éventuelle.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: ca_ligne_ht
+        description: CA HT de la ligne (prix_unitaire_ht * quantite).
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: ca_ligne_ttc
+        description: CA TTC de la ligne (ca_ligne_ht * 1.20).
+      - name: marge_ligne_ht
+        description: Marge brute HT. Peut être négative (vente à perte).
+      - name: taux_marge_ligne_pct
+        description: Taux de marge en %. Warn si > 100%.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "<= 100"
+              config:
+                severity: warn
+      - name: has_promotion
+        description: Vrai si une promo a été appliquée sur la commande.
+      - name: is_returned
+        description: Vrai si la commande parente a un retour enregistré.
+
+  - name: fct_returns
+    description: >
+      Table de faits retours au grain retour individuel (return_id).
+      Reliée à fct_sales via order_item_id pour les analyses croisées ventes/retours.
+      Les retours refusés et les quantités nulles sont exclus.
+    columns:
+      - name: return_id
+        description: Clé primaire retour.
+        tests: [unique, not_null]
+      - name: return_date_id
+        description: FK vers dim_date (date du retour).
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_id
+              config:
+                severity: warn
+      - name: customer_id
+        description: FK vers dim_customers.
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+              config:
+                severity: warn
+      - name: product_id
+        description: FK vers dim_products.
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+              config:
+                severity: warn
+      - name: store_id
+        description: FK vers dim_stores.
+        tests:
+          - relationships:
+              to: ref('dim_stores')
+              field: store_id
+              config:
+                severity: warn
+      - name: return_reason_id
+        description: FK vers dim_return_reason.
+        tests:
+          - relationships:
+              to: ref('dim_return_reason')
+              field: return_reason_id
+      - name: return_status_id
+        description: FK vers dim_return_status.
+        tests:
+          - relationships:
+              to: ref('dim_return_status')
+              field: return_status_id
+      - name: quantite_retournee
+        description: Quantité retournée sur cette ligne.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: remboursement_ht
+        description: Montant remboursé HT.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: delai_retour_jours
+        description: Nombre de jours entre la commande et le retour.
+
+  - name: fct_loyalty_transactions
+    description: >
+      Table de faits transactions fidélité au grain transaction (transaction_id).
+      Chaque ligne est un mouvement de points — gain, dépense, bonus ou expiration.
+    columns:
+      - name: transaction_id
+        description: Clé primaire transaction fidélité.
+        tests: [unique, not_null]
+      - name: transaction_date_id
+        description: FK vers dim_date (date de la transaction).
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_id
+              config:
+                severity: warn
+      - name: customer_id
+        description: FK vers dim_customers.
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+              config:
+                severity: warn
+      - name: loyalty_transaction_type_id
+        description: FK vers dim_loyalty_transaction_type.
+        tests:
+          - relationships:
+              to: ref('dim_loyalty_transaction_type')
+              field: loyalty_transaction_type_id
+      - name: points
+        description: Nombre de points de la transaction. Positif = gain, négatif = dépense.
+        tests: [not_null]

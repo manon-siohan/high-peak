@@ -47,6 +47,7 @@ SELECT
     , c.prix_vente_ht
     , c.prix_vente_ht - p.prix_achat_ht                                         AS marge_unitaire_ht
     , (c.prix_vente_ht - p.prix_achat_ht) / nullif(c.prix_vente_ht, 0) * 100    AS taux_marge_pct
+    , s.supplier_id
     , s.supplier_name
     , s.supplier_pays
     , s.delai_livraison_jours
