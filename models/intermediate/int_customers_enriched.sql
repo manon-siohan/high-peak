@@ -13,27 +13,39 @@ WITH main_address_ranked AS (
 ), 
 
 main_address AS (
-    SELECT * FROM main_address_ranked
+    SELECT
+        customer_id
+        , rue
+        , ville
+        , code_postal
+        , pays
+    FROM main_address_ranked
     WHERE rn = 1
 ),
 
 customer_segments_ranked AS (
 	SELECT
-		customer_id
-		, try_cast(rfm_score AS INTEGER) AS rfm_score
-		, segment_label 
-		, total_achats_ht 
-		, nb_commandes
-		, row_number() over(
-			partition by customer_id
-			order by date_calcul DESC) AS rn
-	FROM {{ref("stg_customers_segments")}}
+        customer_id
+        , try_cast(rfm_score_clean AS INTEGER) AS rfm_score
+        , cast(segment_label AS VARCHAR) AS segment_label
+        , try_cast(total_achats_ht AS DOUBLE) AS total_achats_ht
+        , try_cast(nb_commandes AS INTEGER) AS nb_commandes
+        , row_number() over(
+            partition by customer_id
+            order by date_calcul DESC
+        ) AS rn
+    FROM {{ ref('stg_customers_segments') }}
 ),
 
 customer_segments AS (
-	SELECT *
-	FROM customer_segments_ranked
-	WHERE rn = 1
+    SELECT
+        customer_id
+        , rfm_score
+        , segment_label
+        , total_achats_ht
+        , nb_commandes
+    FROM customer_segments_ranked
+    WHERE rn = 1
 ),
 
 loyalty_accounts_ranked AS (
@@ -66,7 +78,7 @@ SELECT
 	, c.date_naissance 
 	, try_cast(c.newsletter AS BOOL) AS newsletter
 	, c.segment
-	, cs.rfm_score
+	, cs.rfm_score AS rfm_score
 	, cs.segment_label 
 	, cs.total_achats_ht
 	, cs.nb_commandes
@@ -74,7 +86,7 @@ SELECT
 	, la.niveau
 	
 
-FROM high_peak.dev_staging.stg_customers c 
+FROM {{ref ('stg_customers')}} c 
 LEFT JOIN main_address ma ON c.customer_id = ma.customer_id
 LEFT JOIN customer_segments cs ON c.customer_id = cs.customer_id
 LEFT JOIN loyalty_accounts la ON c.customer_id = la.customer_id

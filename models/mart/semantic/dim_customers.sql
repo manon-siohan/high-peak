@@ -1,5 +1,22 @@
 WITH source AS (
-    SELECT * FROM {{ ref('int_customers_enriched') }}
+    SELECT 
+        customer_id
+        , prenom
+        , nom
+        , email
+        , telephone
+        , rue
+        , ville
+        , pays
+        , date_naissance
+        , date_inscription
+        , newsletter
+        , segment
+        , rfm_score
+        , segment_label
+        , niveau
+        , nb_commandes
+    FROM {{ ref('int_customers_enriched') }}
 )
 
 select
@@ -16,7 +33,7 @@ select
    ,  newsletter
    ,  segment                                         AS segment_commercial
    ,  segment_label                                   AS segment_rfm
-   ,  try_cast(rfm_score as integer)                  AS rfm_score
+   ,  rfm_score
    ,  niveau                                          AS niveau_loyaute
     -- Statut achat (calculé depuis int)
    ,  CASE
