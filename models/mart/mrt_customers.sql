@@ -67,8 +67,8 @@ SELECT
     , cl.derniere_activite_loyaute
 
     -- segments et RFM
-    , ce.rfm_score
-    , ce.segment_label
+    , try_cast(ce.rfm_score as INTEGER) AS rfm_score
+    , ce.segment_label 
     , ce.segment AS customer_segment 
     , ce.total_achats_ht
 

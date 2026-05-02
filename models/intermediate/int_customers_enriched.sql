@@ -20,7 +20,7 @@ main_address AS (
 customer_segments_ranked AS (
 	SELECT
 		customer_id
-		, rfm_score
+		, try_cast(rfm_score AS INTEGER) AS rfm_score
 		, segment_label 
 		, total_achats_ht 
 		, nb_commandes

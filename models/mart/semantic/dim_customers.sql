@@ -16,7 +16,7 @@ select
    ,  newsletter
    ,  segment                                         AS segment_commercial
    ,  segment_label                                   AS segment_rfm
-   ,  rfm_score
+   ,  try_cast(rfm_score as integer)                  AS rfm_score
    ,  niveau                                          AS niveau_loyaute
     -- Statut achat (calculé depuis int)
    ,  CASE
