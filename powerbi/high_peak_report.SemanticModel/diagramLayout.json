@@ -7,7 +7,190 @@
         "x": 0,
         "y": 0
       },
-      "nodes": [],
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 62
+          },
+          "nodeIndex": "dim_channel",
+          "nodeLineageTag": "4c53c418-0e69-4bcb-9862-0ff9714e167d",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 0
+          },
+          "nodeIndex": "dim_customers",
+          "nodeLineageTag": "0c5ce89f-44e1-420f-9fc3-12c107dfc556",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 0
+          },
+          "nodeIndex": "dim_date",
+          "nodeLineageTag": "66df2030-cceb-4f4d-a26d-9f467e345ae9",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 38
+          },
+          "nodeIndex": "dim_loyalty_transaction_type",
+          "nodeLineageTag": "c9b1a7c5-bc32-48af-a14d-60354d9752ad",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 50
+          },
+          "nodeIndex": "dim_order_status",
+          "nodeLineageTag": "5a2b1543-f906-499b-9898-1607dccc5d11",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1420,
+            "y": 0
+          },
+          "nodeIndex": "dim_products",
+          "nodeLineageTag": "55313641-0c5b-4cec-9955-ead853987638",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1704,
+            "y": 2
+          },
+          "nodeIndex": "dim_promo",
+          "nodeLineageTag": "84d3d557-19be-4123-b542-7690b7abc566",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1988,
+            "y": 38
+          },
+          "nodeIndex": "dim_return_reason",
+          "nodeLineageTag": "f44f3b18-b553-4d21-a027-d0739d31ce90",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2272,
+            "y": 38
+          },
+          "nodeIndex": "dim_return_status",
+          "nodeLineageTag": "8b49ea19-66d6-499a-99a1-171ccc540df2",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2556,
+            "y": 0
+          },
+          "nodeIndex": "dim_stores",
+          "nodeLineageTag": "02cf5664-a486-4670-898b-bf2a1e692e76",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2840,
+            "y": 38
+          },
+          "nodeIndex": "dim_suppliers",
+          "nodeLineageTag": "df5c292b-a8e9-4ca7-839c-f8c3275e835c",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3124,
+            "y": 26
+          },
+          "nodeIndex": "fct_loyalty_transactions",
+          "nodeLineageTag": "2ad4a03d-5761-4ee5-a855-5fe7f9c14c88",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3408,
+            "y": 0
+          },
+          "nodeIndex": "fct_returns",
+          "nodeLineageTag": "8a8ff10c-5029-4a29-a39b-3f9ff2a5e7e7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3692,
+            "y": 0
+          },
+          "nodeIndex": "fct_sales",
+          "nodeLineageTag": "34871be4-9c24-4718-a8f1-86788c280eb8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
       "name": "Toutes les tables",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,

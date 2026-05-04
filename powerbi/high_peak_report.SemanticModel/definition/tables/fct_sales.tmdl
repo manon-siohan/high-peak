@@ -1,0 +1,155 @@
+table fct_sales
+	lineageTag: 34871be4-9c24-4718-a8f1-86788c280eb8
+
+	column order_item_id
+		dataType: string
+		lineageTag: e33450da-a45b-4cee-962e-d4de89e6a36a
+		summarizeBy: none
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0394f576-41f3-4534-a484-8adb4c5e3365
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 081ca9ce-cc19-4e06-aa33-6c2e3ebff7d5
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 3379bd5f-8e48-484f-805e-5d5122dd0924
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		lineageTag: b11c330d-c46a-4a62-89d9-2fbf20a4391f
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column promotion_id
+		dataType: string
+		lineageTag: 2e4c93ee-3052-4211-b779-d33f08d4d768
+		summarizeBy: none
+		sourceColumn: promotion_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_id
+		dataType: string
+		lineageTag: 4aaf8c1f-3172-46c5-8c6a-a7d649b54c82
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_id
+		dataType: string
+		lineageTag: ca59797f-9c9e-4772-bc6d-d94c679f4702
+		summarizeBy: none
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantite
+		dataType: int64
+		formatString: 0
+		lineageTag: 39525aa9-2b8f-47a1-b150-34e992a85506
+		summarizeBy: sum
+		sourceColumn: quantite
+
+		annotation SummarizationSetBy = Automatic
+
+	column prix_unitaire_ht
+		dataType: string
+		lineageTag: 47317454-9659-4479-b6ae-091fa43f49e7
+		summarizeBy: none
+		sourceColumn: prix_unitaire_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column remise_pct
+		dataType: string
+		lineageTag: d6b33d16-01e1-4e02-b044-0686528ac115
+		summarizeBy: none
+		sourceColumn: remise_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column ca_ligne_ht
+		dataType: string
+		lineageTag: fd6bbf68-214d-4552-99e5-e51f58c15300
+		summarizeBy: none
+		sourceColumn: ca_ligne_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column ca_ligne_ttc
+		dataType: string
+		lineageTag: 3428bc05-1ae1-4c83-8f81-ca1dff8837e7
+		summarizeBy: none
+		sourceColumn: ca_ligne_ttc
+
+		annotation SummarizationSetBy = Automatic
+
+	column marge_ligne_ht
+		dataType: string
+		lineageTag: d729fdbd-bf28-4d89-b42d-e4e44b2951d5
+		summarizeBy: none
+		sourceColumn: marge_ligne_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column taux_marge_ligne_pct
+		dataType: string
+		lineageTag: ac6cd20b-feb2-4b92-b518-603c2a0b2ca6
+		summarizeBy: none
+		sourceColumn: taux_marge_ligne_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_promotion
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 08449e3d-2994-483b-8c06-60acf718313b
+		summarizeBy: none
+		sourceColumn: has_promotion
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_returned
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5862bf38-c264-41d2-96f0-7b53f9e4c771
+		summarizeBy: none
+		sourceColumn: is_returned
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_sales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\fct_sales.csv"),[Delimiter=",", Columns=17, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"order_item_id", type text}, {"date_id", Int64.Type}, {"customer_id", type text}, {"product_id", type text}, {"store_id", type text}, {"promotion_id", type text}, {"channel_id", type text}, {"order_status_id", type text}, {"quantite", Int64.Type}, {"prix_unitaire_ht", type text}, {"remise_pct", type text}, {"ca_ligne_ht", type text}, {"ca_ligne_ttc", type text}, {"marge_ligne_ht", type text}, {"taux_marge_ligne_pct", type text}, {"has_promotion", type logical}, {"is_returned", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

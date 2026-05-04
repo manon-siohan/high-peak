@@ -1,0 +1,57 @@
+table dim_order_status
+	lineageTag: 5a2b1543-f906-499b-9898-1607dccc5d11
+
+	column order_status_id
+		dataType: string
+		lineageTag: 090352da-ec51-442c-bdf7-9a4bd57d48ef
+		summarizeBy: none
+		sourceColumn: order_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column statut_livraison
+		dataType: string
+		lineageTag: 194e37f2-8530-4573-a28c-d91835aab8b9
+		summarizeBy: none
+		sourceColumn: statut_livraison
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status_group
+		dataType: string
+		lineageTag: 0950eb56-82c4-40cd-bd55-2f8bcb250d3f
+		summarizeBy: none
+		sourceColumn: order_status_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_delivered
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 983cd751-9d39-42ae-aa07-10a0c09b23b3
+		summarizeBy: none
+		sourceColumn: is_delivered
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_cancelled
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a7b77ae7-631c-4b1e-b2e1-34d207b36888
+		summarizeBy: none
+		sourceColumn: is_cancelled
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_order_status = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_order_status.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"order_status_id", type text}, {"statut_livraison", type text}, {"order_status_group", type text}, {"is_delivered", type logical}, {"is_cancelled", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

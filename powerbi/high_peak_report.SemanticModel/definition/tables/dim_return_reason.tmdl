@@ -1,0 +1,66 @@
+table dim_return_reason
+	lineageTag: f44f3b18-b553-4d21-a027-d0739d31ce90
+
+	column return_reason_id
+		dataType: string
+		lineageTag: 97811911-b560-4fea-a6ac-13887257d3a3
+		summarizeBy: none
+		sourceColumn: return_reason_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column motif_retour
+		dataType: string
+		lineageTag: 77e05bd8-683e-4b48-a52a-68ccfb811901
+		summarizeBy: none
+		sourceColumn: motif_retour
+
+		annotation SummarizationSetBy = Automatic
+
+	column categorie_retour
+		dataType: string
+		lineageTag: fc823735-eb53-4d43-8a44-bd149ede0d03
+		summarizeBy: none
+		sourceColumn: categorie_retour
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_experience_produit
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cc4a1436-5716-4360-bca3-d820c732126c
+		summarizeBy: none
+		sourceColumn: is_experience_produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_probleme_operationnel
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 61f55c6d-2c0f-4caa-a6d9-316b4bf8d878
+		summarizeBy: none
+		sourceColumn: is_probleme_operationnel
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_responsabilite_entreprise
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 767666a1-09fb-4972-83e4-80639a75567a
+		summarizeBy: none
+		sourceColumn: is_responsabilite_entreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_return_reason = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_return_reason.csv"),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"return_reason_id", type text}, {"motif_retour", type text}, {"categorie_retour", type text}, {"is_experience_produit", type logical}, {"is_probleme_operationnel", type logical}, {"is_responsabilite_entreprise", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

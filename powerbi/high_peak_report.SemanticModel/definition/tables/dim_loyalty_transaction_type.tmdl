@@ -1,0 +1,66 @@
+table dim_loyalty_transaction_type
+	lineageTag: c9b1a7c5-bc32-48af-a14d-60354d9752ad
+
+	column loyalty_transaction_type_id
+		dataType: string
+		lineageTag: 633ca9cb-c93f-4d39-a4a7-57597ef79b67
+		summarizeBy: none
+		sourceColumn: loyalty_transaction_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_transaction
+		dataType: string
+		lineageTag: c9114954-8fe9-4752-ab54-397954e9e66b
+		summarizeBy: none
+		sourceColumn: type_transaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_category
+		dataType: string
+		lineageTag: 1fb5f4ba-fcbb-42ba-bcb1-6747367a3ab1
+		summarizeBy: none
+		sourceColumn: transaction_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_earning
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fac9dcc7-5111-44b0-a610-a9ed851b9e30
+		summarizeBy: none
+		sourceColumn: is_earning
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_spending
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2ea33126-22b2-4756-8e4d-ad2f29839d4e
+		summarizeBy: none
+		sourceColumn: is_spending
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_expiration
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ea95347d-d3fd-44a3-9780-0220c63bd59c
+		summarizeBy: none
+		sourceColumn: is_expiration
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_loyalty_transaction_type = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_loyalty_transaction_type.csv"),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"loyalty_transaction_type_id", type text}, {"type_transaction", type text}, {"transaction_category", type text}, {"is_earning", type logical}, {"is_spending", type logical}, {"is_expiration", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

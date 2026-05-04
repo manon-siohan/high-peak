@@ -1,0 +1,113 @@
+table fct_returns
+	lineageTag: 8a8ff10c-5029-4a29-a39b-3f9ff2a5e7e7
+
+	column return_id
+		dataType: string
+		lineageTag: ff71f4da-0aed-4fef-8c37-45aa9172f81e
+		summarizeBy: none
+		sourceColumn: return_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 9b5b8389-be8d-4111-ac36-b4dffba825ff
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_item_id
+		dataType: string
+		lineageTag: 7ff92502-371a-4f43-9cc7-df540ade975d
+		summarizeBy: none
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column return_date_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7271525c-3a2e-4691-9552-00432363d5ec
+		summarizeBy: sum
+		sourceColumn: return_date_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 46c48f07-11b1-4f2b-bbd6-dcdfd4f6b564
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 46f786d4-aa8d-420e-8425-74a29b5be04f
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		lineageTag: e0ff8708-e2d8-4b0f-8765-0483ed64657b
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column promotion_id
+		dataType: string
+		lineageTag: 41cf6006-1c93-4813-ace7-f023c71c2e9d
+		summarizeBy: none
+		sourceColumn: promotion_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column return_reason_id
+		dataType: string
+		lineageTag: 772f1da4-6ba5-47d6-b491-a60766595278
+		summarizeBy: none
+		sourceColumn: return_reason_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column return_status_id
+		dataType: string
+		lineageTag: 5313a0f3-a902-4bd1-b259-a264a06bfcd2
+		summarizeBy: none
+		sourceColumn: return_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantite_retournee
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e3ca557-2076-457c-94a7-a19f078daa5d
+		summarizeBy: sum
+		sourceColumn: quantite_retournee
+
+		annotation SummarizationSetBy = Automatic
+
+	column remboursement_ht
+		dataType: string
+		lineageTag: b37babb6-77f6-4bc0-bf67-38fed25e23fa
+		summarizeBy: none
+		sourceColumn: remboursement_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_returns = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\fct_returns.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"return_id", type text}, {"order_id", type text}, {"order_item_id", type text}, {"return_date_id", Int64.Type}, {"customer_id", type text}, {"product_id", type text}, {"store_id", type text}, {"promotion_id", type text}, {"return_reason_id", type text}, {"return_status_id", type text}, {"quantite_retournee", Int64.Type}, {"remboursement_ht", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

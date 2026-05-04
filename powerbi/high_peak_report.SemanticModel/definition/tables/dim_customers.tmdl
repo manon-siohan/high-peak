@@ -1,0 +1,180 @@
+table dim_customers
+	lineageTag: 0c5ce89f-44e1-420f-9fc3-12c107dfc556
+
+	column customer_id
+		dataType: string
+		lineageTag: 520ef00f-1416-4b5c-a113-af254c3bb425
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column prenom
+		dataType: string
+		lineageTag: 92407c36-3a09-460e-97e7-42ee9b5bbad8
+		summarizeBy: none
+		sourceColumn: prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom
+		dataType: string
+		lineageTag: ff45598d-e5f5-4d4b-9c73-ef7396515d94
+		summarizeBy: none
+		sourceColumn: nom
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 81877bab-93d6-46f8-ad54-6677a1681665
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column telephone
+		dataType: int64
+		formatString: 0
+		lineageTag: da0f7c48-ec1b-4bbe-a8ea-892a6761ecf6
+		summarizeBy: sum
+		sourceColumn: telephone
+
+		annotation SummarizationSetBy = Automatic
+
+	column rue
+		dataType: string
+		lineageTag: 0999535e-ceee-4c78-ade0-54e1ba7d9976
+		summarizeBy: none
+		sourceColumn: rue
+
+		annotation SummarizationSetBy = Automatic
+
+	column ville
+		dataType: string
+		lineageTag: 283e5f81-8e40-410d-9c2b-a1fb0a8b668b
+		summarizeBy: none
+		sourceColumn: ville
+
+		annotation SummarizationSetBy = Automatic
+
+	column pays
+		dataType: string
+		lineageTag: 7fe572e3-0a67-49ce-b41a-4f4cc1b9d2f8
+		summarizeBy: none
+		sourceColumn: pays
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_naissance
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fd64fb19-c8b3-4a31-b7ab-f9902f0bd251
+		summarizeBy: none
+		sourceColumn: date_naissance
+
+		variation Variation
+			isDefault
+			relationship: 4660638b-ac36-4f8e-a22f-f70b1379dba3
+			defaultHierarchy: LocalDateTable_142fcefe-6144-476b-ae1b-d8b7c5154ef7.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column date_inscription
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3cdea534-27ed-4e34-9fe0-d1bd0e7327e9
+		summarizeBy: none
+		sourceColumn: date_inscription
+
+		variation Variation
+			isDefault
+			relationship: feb46389-22f0-4990-856c-ee1ebdd8db12
+			defaultHierarchy: LocalDateTable_3f3cb82d-8795-4b25-aa13-0ccb24711fec.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column newsletter
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e8c25a54-64d5-4d5b-b1fd-0f0fb40e3b8b
+		summarizeBy: none
+		sourceColumn: newsletter
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_commercial
+		dataType: string
+		lineageTag: 71469571-1b43-429f-909b-601823c3b831
+		summarizeBy: none
+		sourceColumn: segment_commercial
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_rfm
+		dataType: string
+		lineageTag: 44d19d88-ac68-460c-9b3a-5c870f06bcb2
+		summarizeBy: none
+		sourceColumn: segment_rfm
+
+		annotation SummarizationSetBy = Automatic
+
+	column rfm_score
+		dataType: int64
+		formatString: 0
+		lineageTag: abaa204d-6406-429d-a478-85fee0e36cdb
+		summarizeBy: sum
+		sourceColumn: rfm_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column niveau_loyaute
+		dataType: string
+		lineageTag: 4cdc0a47-4c3b-43b6-88b0-804170d740f6
+		summarizeBy: none
+		sourceColumn: niveau_loyaute
+
+		annotation SummarizationSetBy = Automatic
+
+	column statut_achat
+		dataType: string
+		lineageTag: 73b73023-f347-42e2-be37-311ab3f070eb
+		summarizeBy: none
+		sourceColumn: statut_achat
+
+		annotation SummarizationSetBy = Automatic
+
+	column anciennete_jours
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c5e11cf-2c20-4b95-848a-9d0677d05e6d
+		summarizeBy: sum
+		sourceColumn: anciennete_jours
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_nouveau_client
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0dbdc1a0-2cf2-46c5-b4f3-db6d8105d70b
+		summarizeBy: none
+		sourceColumn: is_nouveau_client
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_customers.csv"),[Delimiter=",", Columns=18, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"customer_id", type text}, {"prenom", type text}, {"nom", type text}, {"email", type text}, {"telephone", Int64.Type}, {"rue", type text}, {"ville", type text}, {"pays", type text}, {"date_naissance", type date}, {"date_inscription", type date}, {"newsletter", type logical}, {"segment_commercial", type text}, {"segment_rfm", type text}, {"rfm_score", Int64.Type}, {"niveau_loyaute", type text}, {"statut_achat", type text}, {"anciennete_jours", Int64.Type}, {"is_nouveau_client", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

@@ -34,7 +34,7 @@ models:
       +schema: intermediate
       +materialized: view
     mart:
-      +schema: marts
+      +schema: mart
       +materialized: table
 
       semantic:

@@ -1,0 +1,104 @@
+table dim_promo
+	lineageTag: 84d3d557-19be-4123-b542-7690b7abc566
+
+	column promotion_id
+		dataType: string
+		lineageTag: 11fbc057-10c7-4430-85c7-db72fb175b4d
+		summarizeBy: none
+		sourceColumn: promotion_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_promo
+		dataType: string
+		lineageTag: 81470687-6dc7-4e3c-8b25-d92ae2843533
+		summarizeBy: none
+		sourceColumn: code_promo
+
+		annotation SummarizationSetBy = Automatic
+
+	column libelle
+		dataType: string
+		lineageTag: 0ed1f651-6710-4dc6-82b8-95904b2cf87d
+		summarizeBy: none
+		sourceColumn: libelle
+
+		annotation SummarizationSetBy = Automatic
+
+	column remise_pct
+		dataType: string
+		lineageTag: 7094b128-52d0-4fa8-b680-04e1293e1e3d
+		summarizeBy: none
+		sourceColumn: remise_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column categories_cibles
+		dataType: string
+		lineageTag: a659674a-dd1c-49ab-bdf8-bdfd9cf06e8a
+		summarizeBy: none
+		sourceColumn: categories_cibles
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_debut
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d9a15409-a454-450f-a56b-4aa9d1d17365
+		summarizeBy: none
+		sourceColumn: date_debut
+
+		variation Variation
+			isDefault
+			relationship: dc37ce3a-d88e-4829-a621-43389db8e61c
+			defaultHierarchy: LocalDateTable_f9fe8a25-9306-4ded-aea8-ee7c30f1c9e2.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column date_fin
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c213bccc-0904-4749-a530-586151a132bb
+		summarizeBy: none
+		sourceColumn: date_fin
+
+		variation Variation
+			isDefault
+			relationship: 60b91cbe-04e5-4fcc-803c-0f8173982025
+			defaultHierarchy: LocalDateTable_08f52f35-3fb9-45ec-adef-3d75841d3247.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column duree_jours
+		dataType: int64
+		formatString: 0
+		lineageTag: a98dfd21-a883-4146-8354-45424cbf2e23
+		summarizeBy: sum
+		sourceColumn: duree_jours
+
+		annotation SummarizationSetBy = Automatic
+
+	column categorie_remise
+		dataType: string
+		lineageTag: a5fd61f6-68fe-4739-920c-6a73ac73153a
+		summarizeBy: none
+		sourceColumn: categorie_remise
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_promo = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_promo.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"promotion_id", type text}, {"code_promo", type text}, {"libelle", type text}, {"remise_pct", type text}, {"categories_cibles", type text}, {"date_debut", type date}, {"date_fin", type date}, {"duree_jours", Int64.Type}, {"categorie_remise", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

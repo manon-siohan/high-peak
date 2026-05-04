@@ -1,0 +1,139 @@
+table dim_stores
+	lineageTag: 02cf5664-a486-4670-898b-bf2a1e692e76
+
+	column store_id
+		dataType: string
+		lineageTag: 6e9b54f7-6fe7-4b09-9ffe-7bffa7afcc73
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_name
+		dataType: string
+		lineageTag: 1e67a21d-4968-42fc-b366-988f18bb56d0
+		summarizeBy: none
+		sourceColumn: store_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_ville
+		dataType: string
+		lineageTag: 23e511ae-0589-4d16-acb4-54fdaecc5eea
+		summarizeBy: none
+		sourceColumn: store_ville
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_region
+		dataType: string
+		lineageTag: 1d24f046-e9d4-4b44-b86a-4c6229e4a7fa
+		summarizeBy: none
+		sourceColumn: store_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_pays
+		dataType: string
+		lineageTag: a2331fd9-7f08-4fbd-9602-9487892b2f66
+		summarizeBy: none
+		sourceColumn: store_pays
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_magasin
+		dataType: string
+		lineageTag: c855d0fe-54f8-4b4c-abd9-7ae57b1c14b0
+		summarizeBy: none
+		sourceColumn: type_magasin
+
+		annotation SummarizationSetBy = Automatic
+
+	column surface_m2
+		dataType: int64
+		formatString: 0
+		lineageTag: 576818e2-7724-4a9a-b46c-1ab365c3b0f7
+		summarizeBy: sum
+		sourceColumn: surface_m2
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_ouverture
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 763487e3-05a3-4130-94ce-3962e246c121
+		summarizeBy: none
+		sourceColumn: date_ouverture
+
+		variation Variation
+			isDefault
+			relationship: aeb637d1-530d-4534-9cdf-a22f6284006b
+			defaultHierarchy: LocalDateTable_7233d1c5-7fc7-4fde-875f-98b7e9771deb.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column date_fermeture
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 79273123-fa90-42c0-88d1-d0bdaf5d3e7a
+		summarizeBy: none
+		sourceColumn: date_fermeture
+
+		variation Variation
+			isDefault
+			relationship: 9e40939f-f744-46c2-972e-b98f52db28e2
+			defaultHierarchy: LocalDateTable_0d9cf10d-f838-499c-87ea-1ae7aebe85a0.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column actif
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 62cc0c8e-1f81-48b3-af78-4fff43d06d20
+		summarizeBy: none
+		sourceColumn: actif
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8fa26fd0-a04b-403d-b1de-ecba38ca6218
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_online
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e860712c-885b-4c51-8842-65f56f21d4af
+		summarizeBy: none
+		sourceColumn: is_online
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone_geo
+		dataType: string
+		lineageTag: b9b416aa-aaab-4525-851e-7bcff1639b13
+		summarizeBy: none
+		sourceColumn: zone_geo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_stores = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_stores.csv"),[Delimiter=",", Columns=13, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"store_id", type text}, {"store_name", type text}, {"store_ville", type text}, {"store_region", type text}, {"store_pays", type text}, {"type_magasin", type text}, {"surface_m2", Int64.Type}, {"date_ouverture", type date}, {"date_fermeture", type date}, {"actif", type logical}, {"is_active", type logical}, {"is_online", type logical}, {"zone_geo", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

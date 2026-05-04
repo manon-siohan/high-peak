@@ -1,0 +1,171 @@
+table dim_products
+	lineageTag: 55313641-0c5b-4cec-9955-ead853987638
+
+	column product_variant_id
+		dataType: string
+		lineageTag: db2afd65-dbab-49df-ad8d-f3adcc892ac1
+		summarizeBy: none
+		sourceColumn: product_variant_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 094f43c8-2666-499d-af99-73eb3f2df92d
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: fe0c0af3-1422-4f97-bb72-a5470635d502
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_id
+		dataType: string
+		lineageTag: fe062b2f-aa51-4f4c-8ddd-523502d57777
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 8b5369cf-cf66-4a46-adef-4db675b938dd
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column categorie
+		dataType: string
+		lineageTag: 7f96d0ae-458e-4f25-9c29-9e6e58a5f7ed
+		summarizeBy: none
+		sourceColumn: categorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column sous_categorie
+		dataType: string
+		lineageTag: bd55dab1-f32b-4a54-81ab-90a494b493da
+		summarizeBy: none
+		sourceColumn: sous_categorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column saison
+		dataType: string
+		lineageTag: ee6c8649-afc5-48a3-b4c1-fd1b8b1d3964
+		summarizeBy: none
+		sourceColumn: saison
+
+		annotation SummarizationSetBy = Automatic
+
+	column taille
+		dataType: string
+		lineageTag: 9e4945d2-0fb2-40ab-b644-2bc189b80b17
+		summarizeBy: none
+		sourceColumn: taille
+
+		annotation SummarizationSetBy = Automatic
+
+	column couleur
+		dataType: string
+		lineageTag: 3cccf50a-1d23-4d3f-9a14-c3567f46c8ac
+		summarizeBy: none
+		sourceColumn: couleur
+
+		annotation SummarizationSetBy = Automatic
+
+	column stock_disponible
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e19fbd5-c92e-4d77-bde3-3712cddd4990
+		summarizeBy: sum
+		sourceColumn: stock_disponible
+
+		annotation SummarizationSetBy = Automatic
+
+	column variant_actif
+		dataType: int64
+		formatString: 0
+		lineageTag: 4878a974-1b79-4ce0-838c-464e9f5d6681
+		summarizeBy: sum
+		sourceColumn: variant_actif
+
+		annotation SummarizationSetBy = Automatic
+
+	column prix_vente_ht
+		dataType: string
+		lineageTag: 39ba57b1-2b15-45a9-bfbd-4aeec62df338
+		summarizeBy: none
+		sourceColumn: prix_vente_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column prix_achat_ht
+		dataType: string
+		lineageTag: 89acb627-6af5-4bbf-8897-e81acba67888
+		summarizeBy: none
+		sourceColumn: prix_achat_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column marge_unitaire_ht
+		dataType: string
+		lineageTag: b824a5f6-bab7-480b-ae72-fa747de8956f
+		summarizeBy: none
+		sourceColumn: marge_unitaire_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column taux_marge_pct
+		dataType: string
+		lineageTag: f8689868-8ecf-40c8-ad3c-3ae3948f9743
+		summarizeBy: none
+		sourceColumn: taux_marge_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_id
+		dataType: string
+		lineageTag: b9c5b8d5-a2fa-4c80-8f63-1a60953a840c
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_stock
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ee75f8ff-db71-4cc1-be20-f26e3d674a86
+		summarizeBy: none
+		sourceColumn: has_stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_rupture
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f6b43049-d80b-48e5-b989-a880046c1795
+		summarizeBy: none
+		sourceColumn: is_rupture
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_products = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_products.csv"),[Delimiter=",", Columns=19, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"product_variant_id", type text}, {"product_id", type text}, {"sku", type text}, {"supplier_id", type text}, {"product_name", type text}, {"categorie", type text}, {"sous_categorie", type text}, {"saison", type text}, {"taille", type text}, {"couleur", type text}, {"stock_disponible", Int64.Type}, {"variant_actif", Int64.Type}, {"prix_vente_ht", type text}, {"prix_achat_ht", type text}, {"marge_unitaire_ht", type text}, {"taux_marge_pct", type text}, {"category_id", type text}, {"has_stock", type logical}, {"is_rupture", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

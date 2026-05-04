@@ -1,0 +1,65 @@
+table dim_suppliers
+	lineageTag: df5c292b-a8e9-4ca7-839c-f8c3275e835c
+
+	column supplier_id
+		dataType: string
+		lineageTag: 5d825046-1989-4f04-bcbc-d68e7e0afcd0
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_name
+		dataType: string
+		lineageTag: d92a0bab-0eeb-42e4-a9bc-364f658f0552
+		summarizeBy: none
+		sourceColumn: supplier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_pays
+		dataType: string
+		lineageTag: 6137823f-2344-4cd9-a77c-4a8730b72dee
+		summarizeBy: none
+		sourceColumn: supplier_pays
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_specialite
+		dataType: string
+		lineageTag: eece9187-152b-478d-aa4d-0b3e9f045efe
+		summarizeBy: none
+		sourceColumn: supplier_specialite
+
+		annotation SummarizationSetBy = Automatic
+
+	column delai_livraison_jours
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a31771a-44fd-4c2c-9ccc-73f4f0990d94
+		summarizeBy: none
+		sourceColumn: delai_livraison_jours
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_actif
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5574afbb-afd3-4a69-a6e1-fb0dc0f2806b
+		summarizeBy: none
+		sourceColumn: supplier_actif
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_suppliers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_suppliers.csv"),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"supplier_id", type text}, {"supplier_name", type text}, {"supplier_pays", type text}, {"supplier_specialite", type text}, {"delai_livraison_jours", Int64.Type}, {"supplier_actif", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

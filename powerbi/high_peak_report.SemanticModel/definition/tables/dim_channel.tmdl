@@ -1,0 +1,48 @@
+table dim_channel
+	lineageTag: 4c53c418-0e69-4bcb-9862-0ff9714e167d
+
+	column channel_id
+		dataType: string
+		lineageTag: 67dda8eb-6e45-49af-85c1-588d68645722
+		summarizeBy: none
+		sourceColumn: channel_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal
+		dataType: string
+		lineageTag: dd26adb8-5bba-46e2-98dd-e23bc44fa8d8
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal_group
+		dataType: string
+		lineageTag: e3d8981f-df66-401f-a2fe-8f0c0b078167
+		summarizeBy: none
+		sourceColumn: canal_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_digital_canal
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f25cbef2-0ef9-4d58-a504-09f6bc4104ab
+		summarizeBy: none
+		sourceColumn: is_digital_canal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_channel = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_channel.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"channel_id", type text}, {"canal", type text}, {"canal_group", type text}, {"is_digital_canal", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

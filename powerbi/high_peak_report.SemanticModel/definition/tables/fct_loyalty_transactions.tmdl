@@ -1,0 +1,73 @@
+table fct_loyalty_transactions
+	lineageTag: 2ad4a03d-5761-4ee5-a855-5fe7f9c14c88
+
+	column transaction_id
+		dataType: string
+		lineageTag: 3e1b1136-6551-4c62-b055-b55b367a591a
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column loyalty_account_id
+		dataType: string
+		lineageTag: 7aa1f22b-c9c5-4d3c-9a41-ca0e8bae66e0
+		summarizeBy: none
+		sourceColumn: loyalty_account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 70991bd7-77a3-4907-9bfb-82d5354fbb8a
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_date_id
+		dataType: int64
+		formatString: 0
+		lineageTag: cf02b9be-16f8-42fb-bf13-e38f22d575c3
+		summarizeBy: sum
+		sourceColumn: transaction_date_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: cda43af7-2f00-410f-8f72-16c902b26a26
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column loyalty_transaction_type_id
+		dataType: string
+		lineageTag: 7c3a0948-2de5-474a-8497-e7ab70c45e9e
+		summarizeBy: none
+		sourceColumn: loyalty_transaction_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: d7943d9e-adc9-478d-a525-8042bbf75cac
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_loyalty_transactions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\fct_loyalty_transactions.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"transaction_id", type text}, {"loyalty_account_id", type text}, {"order_id", type text}, {"transaction_date_id", Int64.Type}, {"customer_id", type text}, {"loyalty_transaction_type_id", type text}, {"points", Int64.Type}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+

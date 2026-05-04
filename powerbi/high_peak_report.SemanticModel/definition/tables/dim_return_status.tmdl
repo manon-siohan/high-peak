@@ -1,0 +1,66 @@
+table dim_return_status
+	lineageTag: 8b49ea19-66d6-499a-99a1-171ccc540df2
+
+	column return_status_id
+		dataType: string
+		lineageTag: ff09aa41-237d-4b26-8e6d-984a417a6e97
+		summarizeBy: none
+		sourceColumn: return_status_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column statut_retour
+		dataType: string
+		lineageTag: ffe66c97-e13a-4d5a-a15d-0136f70ef786
+		summarizeBy: none
+		sourceColumn: statut_retour
+
+		annotation SummarizationSetBy = Automatic
+
+	column return_status_category
+		dataType: string
+		lineageTag: f6e0b06a-ac73-4666-9d2a-c9eb9c25f46f
+		summarizeBy: none
+		sourceColumn: return_status_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_refund
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5ba128ba-2c48-41d6-acc4-c268a6582d82
+		summarizeBy: none
+		sourceColumn: is_refund
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_pending
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ce078442-c1ee-4d76-9a1a-88624abb4767
+		summarizeBy: none
+		sourceColumn: is_pending
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_rejected
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 09f29393-5057-41ab-a095-89758fb9566a
+		summarizeBy: none
+		sourceColumn: is_rejected
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_return_status = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_return_status.csv"),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"return_status_id", type text}, {"statut_retour", type text}, {"return_status_category", type text}, {"is_refund", type logical}, {"is_pending", type logical}, {"is_rejected", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+
