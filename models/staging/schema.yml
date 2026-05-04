@@ -348,25 +348,25 @@ models:
             - relationships: 
                 to: ref('stg_customers')
                 field: customer_id
-        - name: r_score_clean
+        - name: r_score
           tests:
             - dbt_expectations.expect_column_values_to_be_between:
                 min_value: 1
                 max_value: 5
                 strictly: false
-        - name: f_score_clean
+        - name: f_score
           tests:
             - dbt_expectations.expect_column_values_to_be_between:
                 min_value: 1
                 max_value: 5
                 strictly: false
-        - name: m_score_clean
+        - name: m_score
           tests:
             - dbt_expectations.expect_column_values_to_be_between:
                 min_value: 1
                 max_value: 5
                 strictly: false
-        - name: rfm_score_clean
+        - name: rfm_score
         - name: segment_label
           tests: 
             - accepted_values:

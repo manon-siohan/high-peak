@@ -25,16 +25,16 @@ main_address AS (
 
 customer_segments_ranked AS (
 	SELECT
-        customer_id
-        , try_cast(rfm_score_clean AS INTEGER) AS rfm_score
-        , cast(segment_label AS VARCHAR) AS segment_label
-        , try_cast(total_achats_ht AS DOUBLE) AS total_achats_ht
-        , try_cast(nb_commandes AS INTEGER) AS nb_commandes
+        cs.customer_id
+        , try_cast(cs.rfm_score AS INTEGER) AS rfm_score
+        , cast(cs.segment_label AS VARCHAR) AS segment_label
+        , try_cast(cs.total_achats_ht AS DOUBLE) AS total_achats_ht
+        , try_cast(cs.nb_commandes AS INTEGER) AS nb_commandes
         , row_number() over(
-            partition by customer_id
-            order by date_calcul DESC
+            partition by cs.customer_id
+            order by cs.date_calcul DESC
         ) AS rn
-    FROM {{ ref('stg_customers_segments') }}
+    FROM {{ ref('stg_customers_segments') }} cs
 ),
 
 customer_segments AS (
@@ -78,7 +78,7 @@ SELECT
 	, c.date_naissance 
 	, try_cast(c.newsletter AS BOOL) AS newsletter
 	, c.segment
-	, cs.rfm_score AS rfm_score
+	, cs.rfm_score
 	, cs.segment_label 
 	, cs.total_achats_ht
 	, cs.nb_commandes

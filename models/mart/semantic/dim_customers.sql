@@ -1,5 +1,5 @@
 WITH source AS (
-    SELECT 
+    SELECT
         customer_id
         , prenom
         , nom
@@ -11,41 +11,32 @@ WITH source AS (
         , date_naissance
         , date_inscription
         , newsletter
-        , segment
-        , rfm_score
+        , customer_segment
         , segment_label
-        , niveau
-        , nb_commandes
-    FROM {{ ref('int_customers_enriched') }}
+        , try_cast(rfm_score AS INTEGER) AS rfm_score
+        , niveau_loyaute
+        , statut_achat
+        , duree_inscription
+    FROM {{ ref('mrt_customers') }}
 )
 
-select
+SELECT
     customer_id
-   ,  prenom
-   ,  nom
-   ,  email
-   ,  telephone
-   ,  rue
-   ,  ville
-   ,  pays
-   ,  date_naissance
-   ,  date_inscription
-   ,  newsletter
-   ,  segment                                         AS segment_commercial
-   ,  segment_label                                   AS segment_rfm
-   ,  rfm_score
-   ,  niveau                                          AS niveau_loyaute
-    -- Statut achat (calculé depuis int)
-   ,  CASE
-        WHEN nb_commandes IS NULL
-          OR nb_commandes = 0  THEN 'Inactif'
-        WHEN nb_commandes = 1  THEN 'Nouveau'
-        WHEN nb_commandes <= 4 THEN 'Régulier'
-        ELSE 'Fidèle'
-    END                                             AS statut_achat
-    -- Ancienneté
-   ,  datediff('day', date_inscription, current_date) AS anciennete_jours
-   ,  date_inscription >= current_date - interval '90 days'
-                                                    AS is_nouveau_client
-
+    , prenom
+    , nom
+    , email
+    , telephone
+    , rue
+    , ville
+    , pays
+    , date_naissance
+    , date_inscription
+    , newsletter
+    , customer_segment AS segment_commercial
+    , segment_label AS segment_rfm
+    , rfm_score
+    , niveau_loyaute
+    , statut_achat
+    , duree_inscription AS anciennete_jours
+    , date_inscription >= current_date - interval '90 days' AS is_nouveau_client
 FROM source
