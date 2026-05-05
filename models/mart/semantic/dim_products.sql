@@ -43,8 +43,6 @@ SELECT
 
     -- Supplier attributes
   , supplier_id
-  , supplier_name
-  , supplier_pays
 
     -- Current price attributes
   , prix_vente_ht

@@ -38,10 +38,6 @@ relationship 9e40939f-f744-46c2-972e-b98f52db28e2
 	fromColumn: dim_stores.date_fermeture
 	toColumn: LocalDateTable_0d9cf10d-f838-499c-87ea-1ae7aebe85a0.Date
 
-relationship AutoDetected_bdbbea9d-9ee9-4185-92e4-98300a4baa7d
-	fromColumn: dim_products.supplier_id
-	toColumn: dim_suppliers.supplier_id
-
 relationship AutoDetected_17073a7c-5aad-4add-b587-1121b52e4ce5
 	fromColumn: fct_loyalty_transactions.customer_id
 	toColumn: dim_customers.customer_id
@@ -83,4 +79,20 @@ relationship AutoDetected_a255d42f-21c7-4a95-aa45-7286c84aea7c
 	fromCardinality: one
 	fromColumn: fct_returns.order_item_id
 	toColumn: fct_sales.order_item_id
+
+relationship 3f995980-9d88-6b96-b815-42dcdbdd5f53
+	fromColumn: fct_sales.promotion_id
+	toColumn: dim_promo.promotion_id
+
+relationship AutoDetected_e98cdb79-3220-4848-b720-0538476f3a63
+	fromColumn: fct_sales.variant_id
+	toColumn: dim_product_variants.variant_id
+
+relationship AutoDetected_e3eb4eff-9b5f-4157-b8a2-d69456dead19
+	fromColumn: dim_products.supplier_id
+	toColumn: dim_suppliers.supplier_id
+
+relationship AutoDetected_6f96c865-9d86-4b58-9fb2-de02904e31dd
+	fromColumn: fct_sales.product_id
+	toColumn: dim_products.product_id
 

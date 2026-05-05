@@ -30,6 +30,7 @@ SELECT
     , d.date_id
     , s.customer_id
     , s.product_id
+    , s.variant_id
     , s.store_id
     , s.promotion_id
     , c.channel_id

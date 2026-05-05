@@ -1,0 +1,91 @@
+table dim_product_variants
+	lineageTag: 27df9e72-d928-4713-8874-565467c4568b
+
+	column variant_id
+		dataType: string
+		lineageTag: b841274f-7ddf-41cc-8bb4-1a6e3d5f19fb
+		summarizeBy: none
+		sourceColumn: variant_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 6cfd1d96-e75c-4d0e-a7a8-10164566e7c6
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: 4196baa4-4025-43b8-9c28-deac355ccaca
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column taille
+		dataType: string
+		lineageTag: 09d285b3-33e2-4f4f-8881-0a1a37970a03
+		summarizeBy: none
+		sourceColumn: taille
+
+		annotation SummarizationSetBy = Automatic
+
+	column couleur
+		dataType: string
+		lineageTag: 243ca55d-220e-42b3-b041-f6562752311e
+		summarizeBy: none
+		sourceColumn: couleur
+
+		annotation SummarizationSetBy = Automatic
+
+	column stock_disponible
+		dataType: int64
+		formatString: 0
+		lineageTag: b0f621cf-258a-47b0-b603-ea0d65e1c477
+		summarizeBy: none
+		sourceColumn: stock_disponible
+
+		annotation SummarizationSetBy = Automatic
+
+	column variant_actif
+		dataType: int64
+		formatString: 0
+		lineageTag: e73032a0-c1bf-4b64-85bf-e34ac74e5980
+		summarizeBy: none
+		sourceColumn: variant_actif
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_stock
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a8c7689b-2611-4961-8eb8-f224e731827c
+		summarizeBy: none
+		sourceColumn: has_stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_rupture
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 738dbf36-0cf3-4291-8e30-9d83c929c96c
+		summarizeBy: none
+		sourceColumn: is_rupture
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product_variants = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_product_variants.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"variant_id", type text}, {"product_id", type text}, {"sku", type text}, {"taille", type text}, {"couleur", type text}, {"stock_disponible", Int64.Type}, {"variant_actif", Int64.Type}, {"has_stock", type logical}, {"is_rupture", type logical}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+
