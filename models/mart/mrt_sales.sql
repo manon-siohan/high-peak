@@ -69,6 +69,7 @@ orders_enriched AS (
 SELECT
     oi.order_item_id
     , oi.order_id
+    , oi.variant_id
     , oe.customer_id
     , oe.store_id
     , oe.store_name

@@ -94,55 +94,29 @@ models:
       - name: is_nouveau_client
         description: Vrai si inscrit dans les 90 derniers jours.
 
-  - name: dim_products
+  - name: dim_product_variants
     description: >
       Dimension produits au grain SKU (product + variant dénormalisé).
     columns:
-      - name: product_variant_id
+      - name: variant_id
         description: Clé primaire au grain variante (SKU).
         tests: [unique, not_null]
       - name: product_id
         description: Identifiant produit parent.
         tests: [not_null]
-      - name: supplier_id
-        description: FK vers dim_suppliers.
       - name: sku
         description: Code SKU unique de la variante.
         tests: [not_null]
       - name: product_name
         description: Nom commercial du produit.
-      - name: categorie
-        description: Catégorie normalisée.
-        tests:
-          - accepted_values:
-              values: ['Vêtements techniques','Chaussures','Équipement','Accessoires','Autre']
-              config:
-                severity: warn
-      - name: sous_categorie
-        description: Sous-catégorie (ex. Veste, Trail, Sac à dos).
-      - name: saison
-        description: Saison de commercialisation.
       - name: taille
         description: Taille normalisée de la variante.
       - name: couleur
         description: Couleur normalisée de la variante.
       - name: stock_disponible
         description: Stock disponible pour cette variante. NULL si rupture injectée.
-      - name: prix_vente_ht
-        description: Prix de vente HT courant (depuis SCD2 résolue).
-        tests:
-          - dbt_utils.expression_is_true:
-              expression: ">= 0"
-              config:
-                severity: warn
-      - name: prix_achat_ht
-        description: Prix d'achat HT fournisseur.
-      - name: marge_unitaire_ht
-        description: Marge brute unitaire (prix_vente - prix_achat).
-      - name: supplier_name
-        description: Nom du fournisseur dénormalisé.
-      - name: supplier_pays
-        description: Pays du fournisseur dénormalisé.
+      - name: variant_actif
+        description: Etat d'activité de la variante.
       - name: has_stock
         description: Vrai si stock_disponible > 0.
       - name: is_rupture
@@ -182,7 +156,7 @@ models:
   - name: dim_suppliers
     description: >
       Dimension fournisseurs — uniquement les fournisseurs actifs.
-      Reliée à dim_products via supplier_id pour les analyses de performance fournisseur.
+      Reliée à dim_product_variants via supplier_id pour les analyses de performance fournisseur.
     columns:
       - name: supplier_id
         description: Clé primaire fournisseur.
@@ -353,11 +327,11 @@ models:
               config:
                 severity: warn
       - name: product_id
-        description: FK vers dim_products.
+        description: FK vers dim_product_variants
         tests:
           - not_null
           - relationships:
-              to: ref('dim_products')
+              to: ref('dim_product_variants')
               field: product_id
               config:
                 severity: warn
@@ -451,10 +425,10 @@ models:
               config:
                 severity: warn
       - name: product_id
-        description: FK vers dim_products.
+        description: FK vers dim_product_variants.
         tests:
           - relationships:
-              to: ref('dim_products')
+              to: ref('dim_product_variants')
               field: product_id
               config:
                 severity: warn
@@ -526,3 +500,75 @@ models:
       - name: points
         description: Nombre de points de la transaction. Positif = gain, négatif = dépense.
         tests: [not_null]
+
+  - name: dim_products
+    description: >
+      Dimension produit au grain une ligne par produit.
+      Contient les attributs descriptifs du produit, son fournisseur
+      et ses prix courants.
+
+    columns:
+      - name: product_id
+        description: Identifiant unique du produit. Clé primaire.
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: Nom commercial du produit.
+        tests:
+          - not_null
+
+      - name: category_id
+        description: Identifiant de la catégorie produit.
+
+      - name: categorie
+        description: Catégorie normalisée du produit.
+        tests:
+          - accepted_values:
+              values: ['Vêtements techniques', 'Chaussures', 'Équipement', 'Accessoires', 'Autre']
+              config:
+                severity: warn
+
+      - name: sous_categorie
+        description: Sous-catégorie du produit.
+
+      - name: saison
+        description: Saison commerciale du produit.
+
+      - name: supplier_id
+        description: Identifiant du fournisseur principal.
+
+      - name: supplier_name
+        description: Nom du fournisseur principal.
+
+      - name: supplier_pays
+        description: Pays du fournisseur principal.
+
+      - name: prix_vente_ht
+        description: Prix de vente HT courant.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: prix_achat_ht
+        description: Prix d'achat HT courant.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                severity: warn
+
+      - name: marge_unitaire_ht
+        description: Marge unitaire HT courante.
+
+      - name: taux_marge_pct
+        description: Taux de marge courant en pourcentage.
+
+      - name: has_negative_margin
+        description: Indique si le produit a une marge unitaire négative.
+        tests:
+          - accepted_values:
+              values: [true, false]

@@ -1,3 +1,9 @@
+{{
+  config(
+    materialized = 'table',
+    )
+}}
+
 WITH source AS(
     SELECT * FROM {{ source('raw','raw_price_history')}}
 ), 
