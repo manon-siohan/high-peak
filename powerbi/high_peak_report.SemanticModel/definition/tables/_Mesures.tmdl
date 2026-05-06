@@ -1,0 +1,39 @@
+table _Mesures
+	lineageTag: 1ff1866c-d7ac-439f-a4be-272e2aa26811
+
+	measure 'CA HT' =
+			
+			SUM(fct_sales[ca_ligne_ht])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		lineageTag: b0a4aa43-ac81-41f4-8672-4ee8a626ae59
+
+	measure 'CA TTC' =
+			
+			SUM(fct_sales[ca_ligne_ttc])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		lineageTag: ae106215-3887-4bdb-b5c9-9c60ed5d745d
+
+	measure 'Marge HT' =
+			
+			SUM(fct_sales[marge_ligne_ht])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		lineageTag: db39ce4c-a5ff-44f6-a9cb-d4d7cb23b7ff
+
+	measure 'Taux de Marge' =
+			
+			DIVIDE([Marge HT], [CA HT])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 28e38fea-4d16-4f9e-b31f-608ef9c41124
+
+	partition _Mesures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Colonne 1" = _t]),
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"Colonne 1", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"Colonne 1"})
+				in
+				    #"Colonnes supprimées"
+
+	annotation PBI_ResultType = Table
+

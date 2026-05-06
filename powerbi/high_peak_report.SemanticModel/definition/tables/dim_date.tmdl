@@ -1,5 +1,6 @@
 table dim_date
 	lineageTag: 66df2030-cceb-4f4d-a26d-9f467e345ae9
+	dataCategory: Time
 
 	column date_id
 		dataType: int64
@@ -12,15 +13,11 @@ table dim_date
 
 	column date_jour
 		dataType: dateTime
+		isKey
 		formatString: General Date
 		lineageTag: 122d4bf6-9401-4a13-8ca8-e5427712e8b9
 		summarizeBy: none
 		sourceColumn: date_jour
-
-		variation Variation
-			isDefault
-			relationship: ef7b8aaf-f655-4224-9a57-1055b7db5706
-			defaultHierarchy: LocalDateTable_507d3d5c-03ee-45c3-b3d0-a4a91d1c4dde.'Hiérarchie de dates'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -99,11 +96,6 @@ table dim_date
 		lineageTag: fde79361-369b-460d-9e7e-ec04b2901322
 		summarizeBy: none
 		sourceColumn: annee_mois
-
-		variation Variation
-			isDefault
-			relationship: dbf448aa-c16c-4e83-a299-e170efa9fe17
-			defaultHierarchy: LocalDateTable_750a2bd1-f5a6-4c33-b826-56241142934a.'Hiérarchie de dates'
 
 		annotation SummarizationSetBy = Automatic
 

@@ -29,7 +29,7 @@ table fct_loyalty_transactions
 		dataType: int64
 		formatString: 0
 		lineageTag: cf02b9be-16f8-42fb-bf13-e38f22d575c3
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: transaction_date_id
 
 		annotation SummarizationSetBy = Automatic

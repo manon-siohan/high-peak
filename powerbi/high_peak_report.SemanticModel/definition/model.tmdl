@@ -10,7 +10,7 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["dim_channel","dim_customers","dim_date","dim_loyalty_transaction_type","dim_order_status","dim_promo","dim_return_reason","dim_return_status","dim_stores","dim_suppliers","fct_loyalty_transactions","fct_returns","fct_sales","dim_product_variants","dim_products"]
+annotation PBI_QueryOrder = ["dim_channel","dim_customers","dim_date","dim_loyalty_transaction_type","dim_order_status","dim_promo","dim_return_reason","dim_return_status","dim_stores","dim_suppliers","fct_loyalty_transactions","fct_returns","fct_sales","dim_product_variants","dim_products","_Mesures"]
 
 ref table dim_channel
 ref table dim_customers
@@ -18,8 +18,6 @@ ref table DateTableTemplate_e079f7d2-fe49-401a-9928-001a4d2b7506
 ref table LocalDateTable_142fcefe-6144-476b-ae1b-d8b7c5154ef7
 ref table LocalDateTable_3f3cb82d-8795-4b25-aa13-0ccb24711fec
 ref table dim_date
-ref table LocalDateTable_507d3d5c-03ee-45c3-b3d0-a4a91d1c4dde
-ref table LocalDateTable_750a2bd1-f5a6-4c33-b826-56241142934a
 ref table dim_loyalty_transaction_type
 ref table dim_order_status
 ref table dim_promo
@@ -36,6 +34,7 @@ ref table fct_returns
 ref table fct_sales
 ref table dim_product_variants
 ref table dim_products
+ref table _Mesures
 
 ref cultureInfo fr-FR
 

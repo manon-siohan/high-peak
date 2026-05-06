@@ -8,16 +8,6 @@ relationship feb46389-22f0-4990-856c-ee1ebdd8db12
 	fromColumn: dim_customers.date_inscription
 	toColumn: LocalDateTable_3f3cb82d-8795-4b25-aa13-0ccb24711fec.Date
 
-relationship ef7b8aaf-f655-4224-9a57-1055b7db5706
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dim_date.date_jour
-	toColumn: LocalDateTable_507d3d5c-03ee-45c3-b3d0-a4a91d1c4dde.Date
-
-relationship dbf448aa-c16c-4e83-a299-e170efa9fe17
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dim_date.annee_mois
-	toColumn: LocalDateTable_750a2bd1-f5a6-4c33-b826-56241142934a.Date
-
 relationship dc37ce3a-d88e-4829-a621-43389db8e61c
 	joinOnDateBehavior: datePartOnly
 	fromColumn: dim_promo.date_debut
@@ -74,12 +64,6 @@ relationship AutoDetected_9607d715-4561-4afc-84ca-a64cb77b018b
 	fromColumn: fct_sales.store_id
 	toColumn: dim_stores.store_id
 
-relationship AutoDetected_a255d42f-21c7-4a95-aa45-7286c84aea7c
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: fct_returns.order_item_id
-	toColumn: fct_sales.order_item_id
-
 relationship 3f995980-9d88-6b96-b815-42dcdbdd5f53
 	fromColumn: fct_sales.promotion_id
 	toColumn: dim_promo.promotion_id
@@ -95,4 +79,16 @@ relationship AutoDetected_e3eb4eff-9b5f-4157-b8a2-d69456dead19
 relationship AutoDetected_6f96c865-9d86-4b58-9fb2-de02904e31dd
 	fromColumn: fct_sales.product_id
 	toColumn: dim_products.product_id
+
+relationship 31c63a30-2649-4abb-ffde-391a1a47d81c
+	fromColumn: fct_returns.return_date_id
+	toColumn: dim_date.date_id
+
+relationship 67e5e704-cfaf-a55f-a3d3-43688b16a937
+	fromColumn: fct_returns.product_id
+	toColumn: dim_products.product_id
+
+relationship 1696d9ea-cc4a-68af-a6e1-9506750264fa
+	fromColumn: fct_loyalty_transactions.transaction_date_id
+	toColumn: dim_date.date_id
 

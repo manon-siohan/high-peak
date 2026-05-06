@@ -29,7 +29,7 @@ table fct_returns
 		dataType: int64
 		formatString: 0
 		lineageTag: 7271525c-3a2e-4691-9552-00432363d5ec
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: return_date_id
 
 		annotation SummarizationSetBy = Automatic
