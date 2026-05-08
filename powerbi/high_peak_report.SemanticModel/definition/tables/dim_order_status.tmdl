@@ -3,9 +3,12 @@ table dim_order_status
 
 	column order_status_id
 		dataType: string
+		isHidden
 		lineageTag: 090352da-ec51-442c-bdf7-9a4bd57d48ef
 		summarizeBy: none
 		sourceColumn: order_status_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

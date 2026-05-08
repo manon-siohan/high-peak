@@ -3,82 +3,112 @@ table fct_returns
 
 	column return_id
 		dataType: string
+		isHidden
 		lineageTag: ff71f4da-0aed-4fef-8c37-45aa9172f81e
 		summarizeBy: none
 		sourceColumn: return_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column order_id
 		dataType: string
+		isHidden
 		lineageTag: 9b5b8389-be8d-4111-ac36-b4dffba825ff
 		summarizeBy: none
 		sourceColumn: order_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column order_item_id
 		dataType: string
+		isHidden
 		lineageTag: 7ff92502-371a-4f43-9cc7-df540ade975d
 		summarizeBy: none
 		sourceColumn: order_item_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column return_date_id
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 7271525c-3a2e-4691-9552-00432363d5ec
 		summarizeBy: none
 		sourceColumn: return_date_id
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column customer_id
 		dataType: string
+		isHidden
 		lineageTag: 46c48f07-11b1-4f2b-bbd6-dcdfd4f6b564
 		summarizeBy: none
 		sourceColumn: customer_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column product_id
 		dataType: string
+		isHidden
 		lineageTag: 46f786d4-aa8d-420e-8425-74a29b5be04f
 		summarizeBy: none
 		sourceColumn: product_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column store_id
 		dataType: string
+		isHidden
 		lineageTag: e0ff8708-e2d8-4b0f-8765-0483ed64657b
 		summarizeBy: none
 		sourceColumn: store_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column promotion_id
 		dataType: string
+		isHidden
 		lineageTag: 41cf6006-1c93-4813-ace7-f023c71c2e9d
 		summarizeBy: none
 		sourceColumn: promotion_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column return_reason_id
 		dataType: string
+		isHidden
 		lineageTag: 772f1da4-6ba5-47d6-b491-a60766595278
 		summarizeBy: none
 		sourceColumn: return_reason_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column return_status_id
 		dataType: string
+		isHidden
 		lineageTag: 5313a0f3-a902-4bd1-b259-a264a06bfcd2
 		summarizeBy: none
 		sourceColumn: return_status_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

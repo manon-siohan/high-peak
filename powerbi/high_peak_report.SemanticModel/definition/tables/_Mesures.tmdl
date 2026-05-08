@@ -5,25 +5,344 @@ table _Mesures
 			
 			SUM(fct_sales[ca_ligne_ht])
 		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
 		lineageTag: b0a4aa43-ac81-41f4-8672-4ee8a626ae59
 
 	measure 'CA TTC' =
 			
 			SUM(fct_sales[ca_ligne_ttc])
 		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
 		lineageTag: ae106215-3887-4bdb-b5c9-9c60ed5d745d
 
 	measure 'Marge HT' =
 			
 			SUM(fct_sales[marge_ligne_ht])
 		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Marges
 		lineageTag: db39ce4c-a5ff-44f6-a9cb-d4d7cb23b7ff
 
 	measure 'Taux de Marge' =
 			
 			DIVIDE([Marge HT], [CA HT])
 		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Marges
 		lineageTag: 28e38fea-4d16-4f9e-b31f-608ef9c41124
+
+	measure 'Nb commandes' =
+			
+			DISTINCTCOUNT(fct_sales[order_id])
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: 767ebd69-8443-4cbd-b0b9-b3567b06350a
+
+	measure 'Quantité vendue' =
+			
+			SUM(fct_sales[quantite])
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: 89675026-8372-44cd-83f6-fe3f9e52c473
+
+	measure 'Panier moyen' =
+			
+			DIVIDE([CA HT],[Nb commandes])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Commandes
+		lineageTag: 4a09f947-113d-425b-9ab4-fe76edafaeee
+
+	measure 'Nb Clients' =
+			
+			DISTINCTCOUNT(fct_sales[customer_id])
+		formatString: 0
+		displayFolder: Clients
+		lineageTag: 3ea42372-63e9-4f02-a0da-eb6028a4f515
+
+	measure 'CA moy par client' =
+			
+			DIVIDE([CA HT],[Nb Clients])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: 1e77ca87-29dc-40e5-94f8-dd32e7b85b9d
+
+	measure 'Commandes par Client' =
+			
+			DIVIDE([Nb commandes], [Nb Clients])
+		formatString: 0.00
+		displayFolder: Commandes
+		lineageTag: 4d0fc852-3b4b-4a6f-a77d-800083702c61
+
+	measure 'CA Promo HT' =
+			
+			CALCULATE(
+			    [CA HT]
+			    , NOT ISBLANK(fct_sales[promotion_id])
+			    )
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: 0e32c455-5c69-4920-aa46-7ff0998f7260
+
+	measure 'Nb commandes promo' = ```
+			
+			CALCULATE( 
+			    [Nb commandes]
+			    , NOT ISBLANK(fct_sales[promotion_id])
+			)
+			```
+		formatString: 0
+		displayFolder: Promo
+		lineageTag: b98abb92-99f1-40e3-97d9-72b8084a181e
+
+	measure 'Part CA Promo' =
+			
+			DIVIDE([CA Promo HT], [CA HT])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Promo
+		lineageTag: adf9fdac-ee0d-4793-ab2d-82400143a727
+
+	measure 'Taux commandes Promo' =
+			
+			DIVIDE([Nb commandes promo], [Nb commandes])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Promo
+		lineageTag: 9457f03e-f0bd-41a6-80e4-195f98cc874f
+
+	measure 'Quantité retournée' =
+			
+			SUM(fct_returns[quantite_retournee])
+		formatString: 0
+		displayFolder: Retours
+		lineageTag: beae24fe-cee5-4b9c-9240-c6e3a4907d29
+
+	measure 'Montant remboursé HT' =
+			
+			SUM(fct_returns[remboursement_ht])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Retours
+		lineageTag: 9b33a04c-834f-46fa-b395-1da70be8232e
+
+	measure 'Nb retours' =
+			
+			DISTINCTCOUNT(fct_returns[return_id])
+		formatString: 0
+		displayFolder: Retours
+		lineageTag: 3c69b174-ee50-406c-a113-3b1e7dcc6948
+
+	measure 'Taux de retour quantité' =
+			
+			DIVIDE([Quantité retournée],[Quantité vendue])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Retours
+		lineageTag: b28d74ba-6891-4e6a-8e13-7b4f55f8cfcc
+
+	measure 'Taux de remboursement CA' =
+			
+			DIVIDE([Montant remboursé HT],[CA HT])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Retours
+		lineageTag: f5552092-b316-4c71-932a-3aec3914358b
+
+	measure 'CA HT N-1' =
+			
+			CALCULATE(
+			    [CA HT]
+			    , SAMEPERIODLASTYEAR(dim_date[date_jour])
+			)
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: 37fdde77-0a68-41e9-9f40-e289859926dd
+
+	measure 'Variation CA N-1' =
+			
+			[CA HT] - [CA HT N-1]
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: bc6e376a-28b5-4636-bf52-f8db34602434
+
+	measure 'Variation CA N-1 %' =
+			
+			DIVIDE([Variation CA N-1], [CA HT N-1])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: CA & Revenus
+		lineageTag: 9773b2fe-ff8a-4580-bb2a-21867cbf750e
+
+	measure 'Marge HT N-1' =
+			
+			CALCULATE(
+			    [Marge HT]
+			    , SAMEPERIODLASTYEAR(dim_date[date_jour]
+			    ))
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Marges
+		lineageTag: 9c1cb8e5-909f-4f7a-b2b4-1be5678196a5
+
+	measure 'Variation Marge N-1 %' =
+			
+			DIVIDE([Marge HT]-[Marge HT N-1], [Marge HT N-1])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Marges
+		lineageTag: 4ef8d0b8-20ec-4183-9074-2698f177de5c
+
+	measure 'Nb produits vendus' =
+			
+			DISTINCTCOUNT(fct_sales[product_id])
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: c06fb55d-4479-4e92-81c3-6732e29bef92
+
+	measure 'CA moyen par produit' =
+			
+			DIVIDE([CA HT],[Nb produits vendus])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: 9aaddfaf-cc47-4e75-bcee-47359d6fb31e
+
+	measure 'Marge moyenne par produit' =
+			
+			DIVIDE([Marge HT],[Nb produits vendus])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Marges
+		lineageTag: 4ba5deb1-457d-4329-80f9-6afc9e2bb88b
+
+	measure 'Quantité moyenne par commande' =
+			
+			DIVIDE([Quantité vendue], [Nb commandes])
+		formatString: 0.00
+		displayFolder: Commandes
+		lineageTag: c478df3b-cfe3-4ae1-ab7c-e314bd009504
+
+	measure 'Points fidélité' =
+			
+			SUM(fct_loyalty_transactions[points])
+		formatString: 0
+		displayFolder: Fidélité
+		lineageTag: 9159d4d6-4f6f-4cb6-b72d-12f44a7ee50d
+
+	measure 'Nb transactions fidelité' =
+			
+			DISTINCTCOUNT(fct_loyalty_transactions[transaction_id])
+		formatString: 0
+		displayFolder: Fidélité
+		lineageTag: 12b09dc5-42d0-4bdd-9f85-59a2fea61c29
+
+	measure 'Points par transaction' =
+			
+			DIVIDE([Points fidélité],[Nb transactions fidelité])
+		formatString: 0.0
+		displayFolder: Fidélité
+		lineageTag: 0a6f296b-7633-4672-ac34-41a34239b6ae
+
+	measure 'Clients fidelité actif' =
+			
+			DISTINCTCOUNT(fct_loyalty_transactions[customer_id])
+		formatString: 0
+		displayFolder: Clients
+		lineageTag: 2c24c877-d905-4467-a2ad-b188693ce7d2
+
+	measure 'Taux de fidelité actifs' =
+			
+			DIVIDE([Clients fidelité actif],DISTINCTCOUNT(dim_customers[customer_id]))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Fidélité
+		lineageTag: 79145a5d-2fd0-425f-a86c-54a6bb9658e8
+
+	measure 'Stock dispo' =
+			
+			SUM(dim_product_variants[stock_disponible])
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: c065a6af-34b8-4043-b045-b88f52cecfa8
+
+	measure 'CA YTD' = TOTALYTD([CA HT], dim_date[date_jour])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: 838f29db-eb57-4e5f-8624-bcd05d6bc8e1
+
+	measure 'Marge YTD' = TOTALYTD([Marge HT], dim_date[date_jour])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Marges
+		lineageTag: 133ab95d-253b-4435-a4be-1cc2e68bca15
+
+	measure 'Taux retour commande' =
+			
+			DIVIDE(DISTINCTCOUNT(fct_returns[order_id]),[Nb commandes])
+		displayFolder: Retours
+		lineageTag: fae7b5d9-102e-4387-8236-02e238573c10
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Points émis' =
+			
+			CALCULATE(
+			    SUM(fct_loyalty_transactions[points])
+			    , dim_loyalty_transaction_type[is_earning] = TRUE
+			    )
+		formatString: 0
+		displayFolder: Fidélité
+		lineageTag: bf64df9d-bc42-45c9-a8c2-cafd06990fef
+
+	measure 'Points dépensés' =
+			
+			CALCULATE(
+			    SUM(fct_loyalty_transactions[points])
+			    , dim_loyalty_transaction_type[is_spending] = TRUE
+			    )
+		formatString: 0
+		displayFolder: Fidélité
+		lineageTag: 15ab9c25-dc59-4bb3-936e-f8a06fb2fff3
+
+	measure 'Taux utilisation de points' =
+			
+			DIVIDE([Points dépensés],[Points émis])
+		displayFolder: Fidélité
+		lineageTag: 0583aea9-d6e2-43f2-8418-9392128d8900
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Score RFM moyen' =
+			
+			AVERAGE(dim_customers[rfm_score])
+		displayFolder: Clients
+		lineageTag: bc2306cc-4e11-4939-ab1d-7f3b78532504
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'LTV Moyen' =
+			
+			DIVIDE(
+			    SUMX(dim_customers,
+			        CALCULATE([CA HT])
+			    ),
+			    [Nb Clients]
+			)
+		displayFolder: Clients
+		lineageTag: b3ac33f9-1706-4c94-b725-6f04b84af632
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Top produit' = ```
+			
+			RANKX(ALL(dim_products[product_name]),[CA HT], 
+			, DESC
+			, Dense
+			)
+			```
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: 1627ba7f-411c-40ba-be9a-1ecdb224c572
+
+	measure 'Flop Produit' = ```
+			
+			    RANKX(
+			        ALL(dim_products[product_name]),
+			        [CA HT],
+			        ,
+			        ASC,
+			        DENSE
+			    )
+			```
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: cee05421-a842-46b1-b453-7df94402e412
 
 	partition _Mesures = m
 		mode: import

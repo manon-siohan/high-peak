@@ -28,6 +28,7 @@ SELECT
 
     -- Clés étrangères (FK vers dimensions)
     , d.date_id
+    , s.order_id
     , s.customer_id
     , s.product_id
     , s.variant_id
@@ -49,6 +50,12 @@ SELECT
     -- Flags utiles
     , s.has_promotion
     , s.is_returned
+    , s.is_online
+
+    -- Délais
+    , s.delai_expedition_jours
+    , s.delai_livraison_jours
+        
 
 FROM sales s
 LEFT JOIN date_mapping d

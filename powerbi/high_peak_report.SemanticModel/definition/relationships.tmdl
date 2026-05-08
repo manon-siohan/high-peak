@@ -92,3 +92,7 @@ relationship 1696d9ea-cc4a-68af-a6e1-9506750264fa
 	fromColumn: fct_loyalty_transactions.transaction_date_id
 	toColumn: dim_date.date_id
 
+relationship 7abcc5c5-bd29-667e-7966-166d0ad40a8f
+	fromColumn: fct_returns.customer_id
+	toColumn: dim_customers.customer_id
+

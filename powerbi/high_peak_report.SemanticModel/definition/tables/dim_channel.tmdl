@@ -3,9 +3,12 @@ table dim_channel
 
 	column channel_id
 		dataType: string
+		isHidden
 		lineageTag: 67dda8eb-6e45-49af-85c1-588d68645722
 		summarizeBy: none
 		sourceColumn: channel_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

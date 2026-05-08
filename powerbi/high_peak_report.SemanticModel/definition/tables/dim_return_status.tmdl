@@ -3,9 +3,12 @@ table dim_return_status
 
 	column return_status_id
 		dataType: string
+		isHidden
 		lineageTag: ff09aa41-237d-4b26-8e6d-984a417a6e97
 		summarizeBy: none
 		sourceColumn: return_status_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

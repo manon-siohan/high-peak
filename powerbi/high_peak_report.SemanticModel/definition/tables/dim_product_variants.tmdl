@@ -3,17 +3,23 @@ table dim_product_variants
 
 	column variant_id
 		dataType: string
+		isHidden
 		lineageTag: b841274f-7ddf-41cc-8bb4-1a6e3d5f19fb
 		summarizeBy: none
 		sourceColumn: variant_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column product_id
 		dataType: string
+		isHidden
 		lineageTag: 6cfd1d96-e75c-4d0e-a7a8-10164566e7c6
 		summarizeBy: none
 		sourceColumn: product_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
-        "y": 1525.3968253968253
+        "x": 98.482353418288028,
+        "y": 1745.2550366066905
       },
       "nodes": [
         {
@@ -19,12 +19,12 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 14
+          "zIndex": 12
         },
         {
           "location": {
-            "x": 1351.9024645123186,
-            "y": 2185.9954586979884
+            "x": 1352.0585925372986,
+            "y": 2251.6993358772752
           },
           "nodeIndex": "dim_customers",
           "nodeLineageTag": "0c5ce89f-44e1-420f-9fc3-12c107dfc556",
@@ -32,12 +32,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 14
         },
         {
           "location": {
-            "x": 1061.2047675690117,
-            "y": 2468.459374734201
+            "x": 1071.8735159426778,
+            "y": 2622.2194580024811
           },
           "nodeIndex": "dim_date",
           "nodeLineageTag": "66df2030-cceb-4f4d-a26d-9f467e345ae9",
@@ -45,12 +45,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 15
+          "zIndex": 13
         },
         {
           "location": {
-            "x": 1642.0166693483548,
-            "y": 2555.2620919907376
+            "x": 1727.3304359603283,
+            "y": 2353.4259039355456
           },
           "nodeIndex": "dim_loyalty_transaction_type",
           "nodeLineageTag": "c9b1a7c5-bc32-48af-a14d-60354d9752ad",
@@ -97,7 +97,7 @@
             "height": 224,
             "width": 234
           },
-          "zIndex": 13
+          "zIndex": 11
         },
         {
           "location": {
@@ -114,8 +114,8 @@
         },
         {
           "location": {
-            "x": 1315.3986804275103,
-            "y": 1480.0277915859565
+            "x": 772.54153757036738,
+            "y": 2291.1389026970674
           },
           "nodeIndex": "dim_stores",
           "nodeLineageTag": "02cf5664-a486-4670-898b-bf2a1e692e76",
@@ -140,8 +140,8 @@
         },
         {
           "location": {
-            "x": 1355.8921601742579,
-            "y": 2561.3587581210668
+            "x": 1447.669417525286,
+            "y": 2655.81621323426
           },
           "nodeIndex": "fct_loyalty_transactions",
           "nodeLineageTag": "2ad4a03d-5761-4ee5-a855-5fe7f9c14c88",
@@ -149,12 +149,12 @@
             "height": 248,
             "width": 234
           },
-          "zIndex": 10
+          "zIndex": 16
         },
         {
           "location": {
-            "x": 738.48443071674615,
-            "y": 2359.2160287878246
+            "x": 686.29581065982632,
+            "y": 2630.2644148805848
           },
           "nodeIndex": "fct_returns",
           "nodeLineageTag": "8a8ff10c-5029-4a29-a39b-3f9ff2a5e7e7",
@@ -162,7 +162,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 11
+          "zIndex": 10
         },
         {
           "location": {
@@ -175,7 +175,7 @@
             "height": 536.55882607708349,
             "width": 234
           },
-          "zIndex": 12
+          "zIndex": 15
         },
         {
           "location": {
@@ -188,7 +188,7 @@
             "height": 296,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 2
         },
         {
           "location": {
@@ -201,24 +201,24 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 100.12169768058311,
-            "y": 1970.0292444840379
+            "x": 98.482353418288028,
+            "y": 1745.4390805496116
           },
           "nodeIndex": "_Mesures",
           "nodeLineageTag": "1ff1866c-d7ac-439f-a4be-272e2aa26811",
           "size": {
-            "height": 104,
+            "height": 991.85148330388756,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         }
       ],
       "name": "Toutes les tables",
-      "zoomValue": 63,
+      "zoomValue": 58.5014784993909,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

@@ -7,38 +7,52 @@ table dim_customers
 		summarizeBy: none
 		sourceColumn: customer_id
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column prenom
 		dataType: string
+		isHidden
 		lineageTag: 92407c36-3a09-460e-97e7-42ee9b5bbad8
 		summarizeBy: none
 		sourceColumn: prenom
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column nom
 		dataType: string
+		isHidden
 		lineageTag: ff45598d-e5f5-4d4b-9c73-ef7396515d94
 		summarizeBy: none
 		sourceColumn: nom
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column email
 		dataType: string
+		isHidden
 		lineageTag: 81877bab-93d6-46f8-ad54-6677a1681665
 		summarizeBy: none
 		sourceColumn: email
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column telephone
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: da0f7c48-ec1b-4bbe-a8ea-892a6761ecf6
 		summarizeBy: sum
 		sourceColumn: telephone
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -53,6 +67,7 @@ table dim_customers
 	column ville
 		dataType: string
 		lineageTag: 283e5f81-8e40-410d-9c2b-a1fb0a8b668b
+		dataCategory: City
 		summarizeBy: none
 		sourceColumn: ville
 
@@ -61,6 +76,7 @@ table dim_customers
 	column pays
 		dataType: string
 		lineageTag: 7fe572e3-0a67-49ce-b41a-4f4cc1b9d2f8
+		dataCategory: Country
 		summarizeBy: none
 		sourceColumn: pays
 
@@ -68,7 +84,7 @@ table dim_customers
 
 	column date_naissance
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: fd64fb19-c8b3-4a31-b7ab-f9902f0bd251
 		summarizeBy: none
 		sourceColumn: date_naissance
@@ -84,7 +100,7 @@ table dim_customers
 
 	column date_inscription
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: 3cdea534-27ed-4e34-9fe0-d1bd0e7327e9
 		summarizeBy: none
 		sourceColumn: date_inscription

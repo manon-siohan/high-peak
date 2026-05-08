@@ -3,9 +3,12 @@ table dim_stores
 
 	column store_id
 		dataType: string
+		isHidden
 		lineageTag: 6e9b54f7-6fe7-4b09-9ffe-7bffa7afcc73
 		summarizeBy: none
 		sourceColumn: store_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -20,6 +23,7 @@ table dim_stores
 	column store_ville
 		dataType: string
 		lineageTag: 23e511ae-0589-4d16-acb4-54fdaecc5eea
+		dataCategory: City
 		summarizeBy: none
 		sourceColumn: store_ville
 
@@ -28,6 +32,7 @@ table dim_stores
 	column store_region
 		dataType: string
 		lineageTag: 1d24f046-e9d4-4b44-b86a-4c6229e4a7fa
+		dataCategory: County
 		summarizeBy: none
 		sourceColumn: store_region
 
@@ -36,6 +41,7 @@ table dim_stores
 	column store_pays
 		dataType: string
 		lineageTag: a2331fd9-7f08-4fbd-9602-9487892b2f66
+		dataCategory: Country
 		summarizeBy: none
 		sourceColumn: store_pays
 
@@ -60,7 +66,7 @@ table dim_stores
 
 	column date_ouverture
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: 763487e3-05a3-4130-94ce-3962e246c121
 		summarizeBy: none
 		sourceColumn: date_ouverture
@@ -76,7 +82,7 @@ table dim_stores
 
 	column date_fermeture
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: 79273123-fa90-42c0-88d1-d0bdaf5d3e7a
 		summarizeBy: none
 		sourceColumn: date_fermeture

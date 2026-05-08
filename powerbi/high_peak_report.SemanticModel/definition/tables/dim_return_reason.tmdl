@@ -3,9 +3,12 @@ table dim_return_reason
 
 	column return_reason_id
 		dataType: string
+		isHidden
 		lineageTag: 97811911-b560-4fea-a6ac-13887257d3a3
 		summarizeBy: none
 		sourceColumn: return_reason_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

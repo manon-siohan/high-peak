@@ -3,9 +3,12 @@ table dim_products
 
 	column product_id
 		dataType: string
+		isHidden
 		lineageTag: 591e2f4a-792a-46b6-9ee5-3b94ec534c59
 		summarizeBy: none
 		sourceColumn: product_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -19,9 +22,12 @@ table dim_products
 
 	column category_id
 		dataType: string
+		isHidden
 		lineageTag: 1d76199d-7d34-46dc-9fa8-c1addece0f8a
 		summarizeBy: none
 		sourceColumn: category_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -51,40 +57,47 @@ table dim_products
 
 	column supplier_id
 		dataType: string
+		isHidden
 		lineageTag: 473aa7ab-9de0-43c0-a95d-98538ef2fd64
 		summarizeBy: none
 		sourceColumn: supplier_id
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column prix_vente_ht
-		dataType: string
+		dataType: decimal
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
 		lineageTag: 2cf8c805-918d-4567-8e70-93b5f6087ade
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: prix_vente_ht
 
 		annotation SummarizationSetBy = Automatic
 
 	column prix_achat_ht
-		dataType: string
+		dataType: decimal
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
 		lineageTag: 062d73b9-0680-47a6-aa6b-241b45a19160
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: prix_achat_ht
 
 		annotation SummarizationSetBy = Automatic
 
 	column marge_unitaire_ht
-		dataType: string
+		dataType: decimal
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
 		lineageTag: c45864a9-c5dd-4ee4-9a3a-ceb36a7d3b1c
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: marge_unitaire_ht
 
 		annotation SummarizationSetBy = Automatic
 
 	column taux_marge_pct
-		dataType: string
+		dataType: decimal
+		formatString: #,0.0
 		lineageTag: b4457393-881e-409a-a5e4-28cca30247b6
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: taux_marge_pct
 
 		annotation SummarizationSetBy = Automatic
@@ -104,9 +117,15 @@ table dim_products
 				let
 				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_products.csv"),[Delimiter=",", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"product_id", type text}, {"product_name", type text}, {"category_id", type text}, {"categorie", type text}, {"sous_categorie", type text}, {"saison", type text}, {"supplier_id", type text}, {"prix_vente_ht", type text}, {"prix_achat_ht", type text}, {"marge_unitaire_ht", type text}, {"taux_marge_pct", type text}, {"has_negative_margin", type logical}})
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"product_id", type text}, {"product_name", type text}, {"category_id", type text}, {"categorie", type text}, {"sous_categorie", type text}, {"saison", type text}, {"supplier_id", type text}, {"prix_vente_ht", type text}, {"prix_achat_ht", type text}, {"marge_unitaire_ht", type text}, {"taux_marge_pct", type text}, {"has_negative_margin", type logical}}),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Type modifié",".",",",Replacer.ReplaceText,{"prix_vente_ht"}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Valeur remplacée",{{"prix_vente_ht", Currency.Type}}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Type modifié1",".",",",Replacer.ReplaceText,{"prix_achat_ht", "marge_unitaire_ht", "taux_marge_pct"}),
+				    #"Type modifié2" = Table.TransformColumnTypes(#"Valeur remplacée1",{{"prix_achat_ht", Currency.Type}, {"marge_unitaire_ht", Currency.Type}, {"taux_marge_pct", Currency.Type}})
 				in
-				    #"Type modifié"
+				    #"Type modifié2"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

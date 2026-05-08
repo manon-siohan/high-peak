@@ -3,9 +3,12 @@ table dim_suppliers
 
 	column supplier_id
 		dataType: string
+		isHidden
 		lineageTag: 5d825046-1989-4f04-bcbc-d68e7e0afcd0
 		summarizeBy: none
 		sourceColumn: supplier_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

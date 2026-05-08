@@ -4,22 +4,31 @@ table dim_date
 
 	column date_id
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 99120268-bb05-40df-b0fb-1278ed698fd4
 		summarizeBy: none
 		sourceColumn: date_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column date_jour
 		dataType: dateTime
 		isKey
-		formatString: General Date
+		formatString: dd/mm/yyyy
 		lineageTag: 122d4bf6-9401-4a13-8ca8-e5427712e8b9
 		summarizeBy: none
 		sourceColumn: date_jour
 
+		changedProperty = DataType
+
 		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column annee
 		dataType: int64
@@ -44,6 +53,9 @@ table dim_date
 		lineageTag: da6eb94c-a1b0-4c97-a677-86fa4bb4780c
 		summarizeBy: none
 		sourceColumn: trimestre_label
+		sortByColumn: trimestre
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -61,6 +73,9 @@ table dim_date
 		lineageTag: eec275f6-615c-46e2-a510-4a0db4bb3c48
 		summarizeBy: none
 		sourceColumn: mois_label
+		sortByColumn: mois
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -79,6 +94,9 @@ table dim_date
 		lineageTag: 41a6a44f-e18c-4d4a-961b-df6ad8d8493b
 		summarizeBy: sum
 		sourceColumn: jour_semaine
+		sortByColumn: jour_semaine_tri
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -87,25 +105,33 @@ table dim_date
 		lineageTag: 032792b1-9899-49f2-a8ee-1ac03dc93526
 		summarizeBy: none
 		sourceColumn: jour_semaine_label
+		sortByColumn: jour_semaine
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
 	column annee_mois
-		dataType: dateTime
-		formatString: Long Date
+		dataType: string
 		lineageTag: fde79361-369b-460d-9e7e-ec04b2901322
 		summarizeBy: none
 		sourceColumn: annee_mois
+		sortByColumn: annee_mois_tri
+
+		changedProperty = DataType
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
 
 	column annee_trimestre
 		dataType: string
 		lineageTag: b343f111-99f7-46ed-b2ab-4383edc42e99
 		summarizeBy: none
 		sourceColumn: annee_trimestre
+		sortByColumn: annee_trimestre_tri
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -133,6 +159,33 @@ table dim_date
 		lineageTag: a44c2dff-7280-453b-829d-b6fbf9438792
 		summarizeBy: none
 		sourceColumn: is_current_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_mois_tri =
+			
+			YEAR(dim_date[date_jour]) * 100 + MONTH(dim_date[date_jour])
+		formatString: 0
+		lineageTag: 10e06b55-7883-4851-af7e-400c8d44311b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_trimestre_tri =
+			
+			YEAR(dim_date[date_jour]) * 10 + QUARTER(dim_date[date_jour])
+		formatString: 0
+		lineageTag: adff04e3-7ac7-41c7-8e12-d0681a2a15fd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column jour_semaine_tri =
+			
+			WEEKDAY(dim_date[date_jour], 2)
+		formatString: 0
+		lineageTag: 182a0f02-5490-4381-bdd5-44a6d2474cc3
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 

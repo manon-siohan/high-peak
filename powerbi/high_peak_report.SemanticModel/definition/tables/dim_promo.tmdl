@@ -3,9 +3,12 @@ table dim_promo
 
 	column promotion_id
 		dataType: string
+		isHidden
 		lineageTag: 11fbc057-10c7-4430-85c7-db72fb175b4d
 		summarizeBy: none
 		sourceColumn: promotion_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

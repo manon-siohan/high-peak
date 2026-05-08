@@ -3,9 +3,12 @@ table dim_loyalty_transaction_type
 
 	column loyalty_transaction_type_id
 		dataType: string
+		isHidden
 		lineageTag: 633ca9cb-c93f-4d39-a4a7-57597ef79b67
 		summarizeBy: none
 		sourceColumn: loyalty_transaction_type_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
