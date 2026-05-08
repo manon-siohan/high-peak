@@ -344,6 +344,64 @@ table _Mesures
 		displayFolder: Commandes
 		lineageTag: cee05421-a842-46b1-b453-7df94402e412
 
+	measure 'Var CA Label N-1' =
+			
+			VAR v = [Variation CA N-1 %]
+			VAR signe =
+			    IF ( v >= 0, "↗ +", "↘ " )
+			RETURN
+			IF (
+			    ISBLANK ( v ),
+			    "--",
+			    signe & FORMAT ( v, "0.0%" ) & " vs N-1"
+			)
+		displayFolder: CA & Revenus
+		lineageTag: 78bb5456-8ea4-454d-807f-8141e4b2d7a7
+
+	measure 'Couleur Var CA' =
+			
+			VAR v = [Variation CA N-1 %]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.05, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.05, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: CA & Revenus
+		lineageTag: b9af5a48-d0f1-4bf9-bb94-d8cb5ca655ec
+
+	measure 'Var Margin Label N-1' =
+			
+			VAR v = [Variation Marge N-1 %]
+			VAR signe =
+			    IF ( v >= 0, "↗ +", "↘ " )
+			RETURN
+			IF (
+			    ISBLANK ( v ),
+			    "--",
+			    signe & FORMAT ( v, "0.0%" ) & " vs N-1"
+			)
+		displayFolder: Marges
+		lineageTag: 1a5aa717-4d21-4ab5-8c5b-dbc0a10e7bf6
+
+	measure 'Couleur Var Margin' =
+			
+			VAR v = [Variation Marge N-1 %]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.05, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.05, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: Marges
+		lineageTag: 7a409f12-cbcd-4fe9-b3bf-28b784a499a5
+
 	partition _Mesures = m
 		mode: import
 		source =

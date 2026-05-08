@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "cf5f36c0d5849f558bfa",
+  "position": {
+    "x": 198.38274932614556,
+    "y": 24.150943396226413,
+    "z": 1000,
+    "height": 72.452830188679243,
+    "width": 449.38005390835576,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Où en est High Peak ?",
+                    "textStyle": {
+                      "fontFamily": "Constantia",
+                      "fontSize": "32pt",
+                      "color": "#0d2b1a"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

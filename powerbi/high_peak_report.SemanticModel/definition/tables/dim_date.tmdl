@@ -189,6 +189,29 @@ table dim_date
 
 		annotation SummarizationSetBy = Automatic
 
+	hierarchy 'annee Hiérarchie'
+		lineageTag: cb8f327e-a2a9-4d4c-8415-33e9f27efd1d
+
+		level annee
+			lineageTag: 5a71666b-f3bd-41fb-87ab-d7a5f4cbed90
+			column: annee
+
+		level annee_trimestre
+			lineageTag: f836a039-bddd-47c7-8fc4-ab5901113ce3
+			column: annee_trimestre
+
+		level annee_mois
+			lineageTag: 5f84e7dd-9d89-4d43-af8e-1a4a25b49649
+			column: annee_mois
+
+		level trimestre_label
+			lineageTag: 3353bdb4-cfbc-4cd3-84f6-a0c4a692353c
+			column: trimestre_label
+
+		level mois_label
+			lineageTag: cad9d91f-282e-4da0-8384-c5a5d06a432c
+			column: mois_label
+
 	partition dim_date = m
 		mode: import
 		source =
