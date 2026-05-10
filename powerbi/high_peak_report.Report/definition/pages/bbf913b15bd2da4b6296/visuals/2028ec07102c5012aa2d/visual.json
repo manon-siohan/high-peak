@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "2028ec07102c5012aa2d",
   "position": {
-    "x": 183.26199261992619,
-    "y": 111.46863468634686,
+    "x": 186.30727762803232,
+    "y": 96.603773584905653,
     "z": 2000,
-    "height": 152.08856088560884,
-    "width": 1063.6752767527676,
+    "height": 152.66846361185983,
+    "width": 1064.3665768194069,
     "tabOrder": 2000
   },
   "visual": {
@@ -89,7 +89,8 @@
                 }
               },
               "queryRef": "Min(dim_customers.customer_id)",
-              "nativeQueryRef": "Nombre de customer_id"
+              "nativeQueryRef": "Nombre de customer_id",
+              "format": "0.00"
             }
           ]
         }
@@ -975,6 +976,27 @@
           "selector": {
             "id": "default"
           }
+        },
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Min(dim_customers.customer_id)"
+          }
         }
       ],
       "border": [
@@ -1059,5 +1081,84 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f0d84b1fb754fb2179a9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "CA HT"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1257de4fb2d7c2b4e523",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Marge HT"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a115c1a58af25832fa30",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Taux de Marge"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "85e38c048b2d0fa11cf4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Nb commandes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6975fb070e2be92a2c48",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_customers"
+                  }
+                },
+                "Property": "customer_id"
+              }
+            },
+            "Function": 2
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

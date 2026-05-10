@@ -369,5 +369,56 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d4cb608566aadacad8d3",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_date"
+                  }
+                },
+                "Hierarchy": "annee Hiérarchie"
+              }
+            },
+            "Level": "mois_label"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7bb81c4fd93e7d7da9a7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "CA HT"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5b5b0ba8a7d7f5d813c7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "CA HT N-1"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
