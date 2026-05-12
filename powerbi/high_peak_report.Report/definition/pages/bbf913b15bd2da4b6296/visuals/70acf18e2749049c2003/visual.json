@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "b6ec9c2d2432db2d9048",
+  "name": "70acf18e2749049c2003",
   "position": {
-    "x": 198.419452887538,
+    "x": 619.57446808510645,
     "y": 484.37689969604867,
-    "z": 7000,
+    "z": 8000,
     "height": 176.048632218845,
-    "width": 414.34650455927056,
-    "tabOrder": 7000
+    "width": 405.59270516717328,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_products"
+                      "Entity": "dim_customers"
                     }
                   },
-                  "Property": "categorie"
+                  "Property": "segment_rfm"
                 }
               },
-              "queryRef": "dim_products.categorie",
-              "nativeQueryRef": "categorie",
+              "queryRef": "dim_customers.segment_rfm",
+              "nativeQueryRef": "segment_rfm",
               "active": true
             }
           ]
@@ -36,18 +36,22 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_customers"
+                        }
+                      },
+                      "Property": "customer_id"
                     }
                   },
-                  "Property": "CA HT"
+                  "Function": 2
                 }
               },
-              "queryRef": "_Mesures.CA HT",
-              "nativeQueryRef": "CA HT",
-              "format": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\""
+              "queryRef": "Count(dim_customers.customer_id)",
+              "nativeQueryRef": "Nombre de customer_id"
             }
           ]
         }
@@ -56,13 +60,18 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Aggregation": {
                 "Expression": {
-                  "SourceRef": {
-                    "Entity": "_Mesures"
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "dim_customers"
+                      }
+                    },
+                    "Property": "customer_id"
                   }
                 },
-                "Property": "CA HT"
+                "Function": 2
               }
             },
             "direction": "Descending"
@@ -72,17 +81,9 @@
       }
     },
     "objects": {
-      "legend": [
+      "general": [
         {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
+          "properties": {}
         }
       ],
       "categoryAxis": [
@@ -92,6 +93,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "maxMarginFactor": {
+              "expr": {
+                "Literal": {
+                  "Value": "50L"
                 }
               }
             },
@@ -106,13 +114,6 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            },
-            "maxMarginFactor": {
-              "expr": {
-                "Literal": {
-                  "Value": "50L"
                 }
               }
             }
@@ -129,6 +130,13 @@
                 }
               }
             },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000D"
+                }
+              }
+            },
             "showAxisTitle": {
               "expr": {
                 "Literal": {
@@ -142,11 +150,17 @@
                   "Value": "true"
                 }
               }
-            },
-            "labelDisplayUnits": {
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "1000D"
+                  "Value": "false"
                 }
               }
             }
@@ -213,6 +227,13 @@
       "title": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
             "titleWrap": {
               "expr": {
                 "Literal": {
@@ -224,13 +245,6 @@
               "expr": {
                 "Literal": {
                   "Value": "14D"
-                }
-              }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
                 }
               }
             }

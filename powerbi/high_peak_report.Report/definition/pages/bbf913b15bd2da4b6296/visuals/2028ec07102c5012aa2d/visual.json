@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "2028ec07102c5012aa2d",
   "position": {
-    "x": 186.30727762803232,
-    "y": 96.603773584905653,
+    "x": 186.21346023113529,
+    "y": 96.587355540448684,
     "z": 2000,
-    "height": 152.66846361185983,
-    "width": 1064.3665768194069,
+    "height": 152.2773623385452,
+    "width": 1064.201223657376,
     "tabOrder": 2000
   },
   "visual": {
@@ -74,23 +74,17 @@
             },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "dim_customers"
-                        }
-                      },
-                      "Property": "customer_id"
+                    "SourceRef": {
+                      "Entity": "_Mesures"
                     }
                   },
-                  "Function": 2
+                  "Property": "Nvx Clients"
                 }
               },
-              "queryRef": "Min(dim_customers.customer_id)",
-              "nativeQueryRef": "Nombre de customer_id",
-              "format": "0.00"
+              "queryRef": "_Mesures.Nvx Clients",
+              "nativeQueryRef": "Nvx Clients"
             }
           ]
         }
@@ -252,6 +246,122 @@
             "id": "field-9e93befc-abb0-d492-6d07-f5ac5d54d0e0",
             "order": 0
           }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb commandes",
+            "id": "field-174cb37c-6f3d-0827-1e4b-adae206d0e93",
+            "order": 0
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb commandes",
+            "id": "field-9c8191ca-f4e2-1b44-7b87-66944fc59ceb",
+            "order": 0
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb commandes",
+            "id": "field-d942bf42-628d-b8bd-61c1-95f2113f5e77",
+            "order": 0
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var Commandes Label N-1"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb commandes",
+            "id": "field-8ecf23a4-5231-45b4-6846-69bef7b705e7",
+            "order": 0
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nvx Clients",
+            "id": "field-6bdc8806-9822-3706-f9ca-58323b550015",
+            "order": 0
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Nb Clients"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nvx Clients",
+            "id": "field-17d8ed51-cac8-43f7-6165-c311ddd2edfd",
+            "order": 0
+          }
         }
       ],
       "referenceLabelTitle": [
@@ -318,6 +428,20 @@
           "selector": {
             "metadata": "_Mesures.CA HT",
             "id": "field-8601f2b1-eb62-bdf6-e694-18c05833e057"
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Nb commandes"
           }
         }
       ],
@@ -417,6 +541,51 @@
             ],
             "metadata": "_Mesures.Marge HT",
             "id": "field-9e93befc-abb0-d492-6d07-f5ac5d54d0e0"
+          }
+        },
+        {
+          "properties": {
+            "valueDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Nb commandes",
+            "id": "field-174cb37c-6f3d-0827-1e4b-adae206d0e93"
+          }
+        },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Var Color Commandes"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb commandes"
           }
         }
       ],
@@ -673,6 +842,20 @@
           "selector": {
             "metadata": "_Mesures.CA HT",
             "id": "field-8601f2b1-eb62-bdf6-e694-18c05833e057"
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Nb commandes"
           }
         }
       ],
@@ -985,17 +1168,10 @@
                   "Value": "1D"
                 }
               }
-            },
-            "labelPrecision": {
-              "expr": {
-                "Literal": {
-                  "Value": "0L"
-                }
-              }
             }
           },
           "selector": {
-            "metadata": "Min(dim_customers.customer_id)"
+            "metadata": "_Mesures.Nb commandes"
           }
         }
       ],
@@ -1085,7 +1261,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "f0d84b1fb754fb2179a9",
+        "name": "3dd71af7b79030027519",
         "field": {
           "Measure": {
             "Expression": {
@@ -1099,7 +1275,7 @@
         "type": "Advanced"
       },
       {
-        "name": "1257de4fb2d7c2b4e523",
+        "name": "a41e07fb9f5a2e1d21d1",
         "field": {
           "Measure": {
             "Expression": {
@@ -1113,7 +1289,7 @@
         "type": "Advanced"
       },
       {
-        "name": "a115c1a58af25832fa30",
+        "name": "45923d126e5adc35aaae",
         "field": {
           "Measure": {
             "Expression": {
@@ -1127,7 +1303,7 @@
         "type": "Advanced"
       },
       {
-        "name": "85e38c048b2d0fa11cf4",
+        "name": "8cd56a9d6697b8ab4d69",
         "field": {
           "Measure": {
             "Expression": {
@@ -1141,20 +1317,15 @@
         "type": "Advanced"
       },
       {
-        "name": "6975fb070e2be92a2c48",
+        "name": "df79a1de290c123e8b66",
         "field": {
-          "Aggregation": {
+          "Measure": {
             "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "dim_customers"
-                  }
-                },
-                "Property": "customer_id"
+              "SourceRef": {
+                "Entity": "_Mesures"
               }
             },
-            "Function": 2
+            "Property": "Nvx Clients"
           }
         },
         "type": "Advanced"

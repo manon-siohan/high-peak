@@ -19,10 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Où en est High Peak ?",
+                    "value": "High Peak - Overview",
                     "textStyle": {
                       "fontFamily": "Constantia",
-                      "fontSize": "32pt",
+                      "fontSize": "28pt",
                       "color": "#0d2b1a"
                     }
                   }

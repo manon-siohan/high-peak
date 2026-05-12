@@ -402,6 +402,108 @@ table _Mesures
 		displayFolder: Marges
 		lineageTag: 7a409f12-cbcd-4fe9-b3bf-28b784a499a5
 
+	measure 'Nb Commandes MoM' =
+			
+			CALCULATE(
+			    [Nb commandes]
+			    , DATEADD(dim_date[date_jour], -1, MONTH)
+			)
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: b00ad5c7-2cdf-4399-84fc-3123512235a9
+
+	measure 'Nb commandes N-1' =
+			
+			CALCULATE(
+			    [Nb commandes]
+			    , SAMEPERIODLASTYEAR(dim_date[date_jour]))
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: c0d80559-d58b-47ce-91e8-778346c389a3
+
+	measure 'Var Commandes MoM' =
+			
+			DIVIDE([Nb commandes] - [Nb Commandes MoM], [Nb Commandes MoM])
+		displayFolder: Commandes
+		lineageTag: 6649fb2a-99c8-4712-9061-f555edd0c47c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Var Commandes N-1 %' =
+			
+			DIVIDE ([Nb commandes]-[Nb commandes N-1], [Nb commandes N-1])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Commandes
+		lineageTag: bf47af45-e8d8-4697-bc9d-2da21dea4532
+
+	measure 'Var Commandes Label N-1' =
+			
+			VAR v = [Var Commandes N-1 %]
+			VAR signe =
+			    IF ( v >= 0, "↗ +", "↘ " )
+			RETURN
+			IF (
+			    ISBLANK ( v ),
+			    "--",
+			    signe & FORMAT ( v, "0.0%" ) & " vs N-1"
+			)
+		displayFolder: Commandes
+		lineageTag: 0241d3e8-7763-45e4-82df-e8751942da22
+
+	measure 'Var Color Commandes' =
+			
+			VAR v = [Var Commandes N-1 %]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.05, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.05, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: Commandes
+		lineageTag: 9ae59046-ec7e-4d59-a9d3-511d12d1643c
+
+	measure 'Nvx Clients' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(dim_customers[customer_id])
+			    , FILTER(
+			        dim_customers
+			        , dim_customers[date_inscription].[Date] >= MIN(dim_date[date_jour])
+			        && dim_customers[date_inscription].[Date] <= MAX(dim_date[date_jour])
+			    )
+			    )
+		formatString: 0
+		displayFolder: Clients
+		lineageTag: 3264a2cf-ed60-44d5-9335-e00ee27ae5c9
+
+	measure 'Nvx Clients M-1' =
+			
+			CALCULATE(
+			    [Nvx Clients]
+			    , DATEADD(dim_date[date_jour], -1, MONTH)
+			)
+		formatString: 0
+		displayFolder: Clients
+		lineageTag: 826fbceb-fadb-4f8c-a630-33cd33168bd4
+
+	measure 'Var Nvx Clients M-1' =
+			
+			VAR _current = [Nvx Clients]
+			VAR _ref = [Nvx Clients M-1]
+			VAR _delta = _current - _ref
+			VAR _signe = IF(_delta >= 0, "↗ +", "↘ ")
+			RETURN
+			    IF(
+			        ISBLANK(_ref),
+			        "--",
+			        _signe & _delta & " vs M-1"
+			    )
+		displayFolder: Clients
+		lineageTag: ed5a9bf9-b16e-4212-bfba-65d33ee8cd8a
+
 	partition _Mesures = m
 		mode: import
 		source =

@@ -48,32 +48,12 @@
                       "Hierarchy": "annee Hiérarchie"
                     }
                   },
-                  "Level": "trimestre_label"
-                }
-              },
-              "queryRef": "dim_date.annee Hiérarchie.trimestre_label",
-              "nativeQueryRef": "annee Hiérarchie trimestre_label",
-              "active": false
-            },
-            {
-              "field": {
-                "HierarchyLevel": {
-                  "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "dim_date"
-                        }
-                      },
-                      "Hierarchy": "annee Hiérarchie"
-                    }
-                  },
                   "Level": "mois_label"
                 }
               },
               "queryRef": "dim_date.annee Hiérarchie.mois_label",
               "nativeQueryRef": "annee Hiérarchie mois_label",
-              "active": false
+              "active": true
             }
           ]
         }
@@ -106,25 +86,6 @@
           },
           {
             "queryRefs": [
-              "dim_date.annee Hiérarchie.trimestre_label"
-            ],
-            "isCollapsed": true,
-            "identityKeys": [
-              {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_date"
-                    }
-                  },
-                  "Property": "trimestre_label"
-                }
-              }
-            ],
-            "isPinned": true
-          },
-          {
-            "queryRefs": [
               "dim_date.annee Hiérarchie.mois_label"
             ],
             "isCollapsed": true,
@@ -141,18 +102,7 @@
                   }
                 }
               ],
-              "children": [
-                {
-                  "identityValues": [
-                    {
-                      "Literal": {
-                        "Value": "'T1'"
-                      }
-                    }
-                  ],
-                  "isToggled": true
-                }
-              ]
+              "isToggled": true
             }
           ]
         }
@@ -205,7 +155,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "2024L"
+                                "Value": "2021L"
                               }
                             }
                           ]
@@ -238,7 +188,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "2024L"
+                                      "Value": "2021L"
                                     }
                                   }
                                 ]
@@ -262,7 +212,7 @@
                         },
                         "valueMap": [
                           {
-                            "0": "2024"
+                            "0": "2021"
                           }
                         ]
                       }
@@ -511,26 +461,7 @@
         }
       },
       {
-        "name": "997b9ce1d8d0259de101",
-        "field": {
-          "HierarchyLevel": {
-            "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "dim_date"
-                  }
-                },
-                "Hierarchy": "annee Hiérarchie"
-              }
-            },
-            "Level": "trimestre_label"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "8d695ef8394f21441052",
+        "name": "d24956a062ef4e5e21d7",
         "field": {
           "HierarchyLevel": {
             "Expression": {
