@@ -37,6 +37,20 @@ table dim_channel
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Canal affichage' =
+			
+			SWITCH (
+			    TRUE (),
+			    dim_channel[canal] = "magasin", "Magasin",
+			    dim_channel[canal] = "online", "Online",
+			    dim_channel[canal] = "marketplace", "Marketplace",
+			    dim_channel[canal]
+			)
+		lineageTag: 0937f774-2290-4940-847d-0ab14bdfd5a2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_channel = m
 		mode: import
 		source =

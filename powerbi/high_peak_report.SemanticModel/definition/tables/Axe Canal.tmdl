@@ -1,0 +1,24 @@
+table 'Axe Canal'
+	lineageTag: 5e5430a1-035a-49d8-9214-b108e5f02b6a
+
+	column Label
+		lineageTag: be3d82e4-f4f8-43c0-9222-20f1a0394155
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Label]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Axe Canal' = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "Label", STRING,
+				    {
+				        { "CA par canal" }
+				    }
+				)
+
+	annotation PBI_Id = d6039aee873b474a8a1b2af4554e50d8
+

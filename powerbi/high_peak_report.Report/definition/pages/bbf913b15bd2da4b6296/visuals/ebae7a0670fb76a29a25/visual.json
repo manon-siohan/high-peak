@@ -4,7 +4,7 @@
   "position": {
     "x": 934.25830258302608,
     "y": 18.892988929889302,
-    "z": 3000,
+    "z": 4000,
     "height": 74.627306273062729,
     "width": 162.47970479704796,
     "tabOrder": 3000
@@ -103,6 +103,16 @@
                 }
               ],
               "isToggled": true
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "2023L"
+                  }
+                }
+              ],
+              "isToggled": true
             }
           ]
         }
@@ -155,7 +165,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "2021L"
+                                "Value": "2023L"
                               }
                             }
                           ]
@@ -188,7 +198,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "2021L"
+                                      "Value": "2023L"
                                     }
                                   }
                                 ]
@@ -212,7 +222,7 @@
                         },
                         "valueMap": [
                           {
-                            "0": "2021"
+                            "0": "2023"
                           }
                         ]
                       }
@@ -459,25 +469,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "d24956a062ef4e5e21d7",
-        "field": {
-          "HierarchyLevel": {
-            "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "dim_date"
-                  }
-                },
-                "Hierarchy": "annee Hiérarchie"
-              }
-            },
-            "Level": "mois_label"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }

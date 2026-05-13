@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "42f2296a88aedaa9f277",
   "position": {
-    "x": 198.419452887538,
-    "y": 248.99696048632219,
-    "z": 5000,
-    "height": 225.6534954407295,
-    "width": 414.34650455927056,
+    "x": 204.42048517520215,
+    "y": 249.2722371967655,
+    "z": 6000,
+    "height": 235.47169811320754,
+    "width": 404.52830188679246,
     "tabOrder": 5000
   },
   "visual": {
@@ -28,11 +28,11 @@
                       "Hierarchy": "annee Hiérarchie"
                     }
                   },
-                  "Level": "mois_label"
+                  "Level": "mois_label_short"
                 }
               },
-              "queryRef": "dim_date.annee Hiérarchie.mois_label",
-              "nativeQueryRef": "annee Hiérarchie mois_label",
+              "queryRef": "dim_date.annee Hiérarchie.mois_label_short",
+              "nativeQueryRef": "annee Hiérarchie mois_label_short",
               "active": true
             }
           ]
@@ -369,5 +369,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a42ad19b41001bf600b5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "CA HT"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "77a835dbd2afd61c4c2c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "CA HT N-1"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

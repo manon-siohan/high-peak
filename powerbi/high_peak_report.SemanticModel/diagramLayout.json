@@ -11,7 +11,7 @@
         {
           "location": {
             "x": 1018.7159938777088,
-            "y": 1580.8328259084369
+            "y": 2371.2492388626551
           },
           "nodeIndex": "dim_channel",
           "nodeLineageTag": "4c53c418-0e69-4bcb-9862-0ff9714e167d",
@@ -24,7 +24,7 @@
         {
           "location": {
             "x": 1352.0585925372986,
-            "y": 2251.6993358772752
+            "y": 3042.1157488314939
           },
           "nodeIndex": "dim_customers",
           "nodeLineageTag": "0c5ce89f-44e1-420f-9fc3-12c107dfc556",
@@ -37,7 +37,7 @@
         {
           "location": {
             "x": 1071.8735159426778,
-            "y": 2622.2194580024811
+            "y": 3412.6358709566994
           },
           "nodeIndex": "dim_date",
           "nodeLineageTag": "66df2030-cceb-4f4d-a26d-9f467e345ae9",
@@ -50,7 +50,7 @@
         {
           "location": {
             "x": 1727.3304359603283,
-            "y": 2353.4259039355456
+            "y": 3143.8423168897643
           },
           "nodeIndex": "dim_loyalty_transaction_type",
           "nodeLineageTag": "c9b1a7c5-bc32-48af-a14d-60354d9752ad",
@@ -63,7 +63,7 @@
         {
           "location": {
             "x": 1358.0196821620657,
-            "y": 1818.1233927514168
+            "y": 2608.5398057056354
           },
           "nodeIndex": "dim_order_status",
           "nodeLineageTag": "5a2b1543-f906-499b-9898-1607dccc5d11",
@@ -76,7 +76,7 @@
         {
           "location": {
             "x": 744.98532107205915,
-            "y": 1640.6692875920148
+            "y": 2431.0857005462331
           },
           "nodeIndex": "dim_promo",
           "nodeLineageTag": "84d3d557-19be-4123-b542-7690b7abc566",
@@ -89,7 +89,7 @@
         {
           "location": {
             "x": 400.49814627094611,
-            "y": 2211.6463147780796
+            "y": 3002.0627277322983
           },
           "nodeIndex": "dim_return_reason",
           "nodeLineageTag": "f44f3b18-b553-4d21-a027-d0739d31ce90",
@@ -102,7 +102,7 @@
         {
           "location": {
             "x": 404.1271279205007,
-            "y": 2462.8147218154527
+            "y": 3253.2311347696714
           },
           "nodeIndex": "dim_return_status",
           "nodeLineageTag": "8b49ea19-66d6-499a-99a1-171ccc540df2",
@@ -115,7 +115,7 @@
         {
           "location": {
             "x": 772.54153757036738,
-            "y": 2291.1389026970674
+            "y": 3081.555315651286
           },
           "nodeIndex": "dim_stores",
           "nodeLineageTag": "02cf5664-a486-4670-898b-bf2a1e692e76",
@@ -128,7 +128,7 @@
         {
           "location": {
             "x": 403.71816852696736,
-            "y": 1942.4467729626053
+            "y": 2732.8631859168236
           },
           "nodeIndex": "dim_suppliers",
           "nodeLineageTag": "df5c292b-a8e9-4ca7-839c-f8c3275e835c",
@@ -141,7 +141,7 @@
         {
           "location": {
             "x": 1447.669417525286,
-            "y": 2655.81621323426
+            "y": 3446.2326261884782
           },
           "nodeIndex": "fct_loyalty_transactions",
           "nodeLineageTag": "2ad4a03d-5761-4ee5-a855-5fe7f9c14c88",
@@ -154,7 +154,7 @@
         {
           "location": {
             "x": 686.29581065982632,
-            "y": 2630.2644148805848
+            "y": 3420.6808278348035
           },
           "nodeIndex": "fct_returns",
           "nodeLineageTag": "8a8ff10c-5029-4a29-a39b-3f9ff2a5e7e7",
@@ -167,7 +167,7 @@
         {
           "location": {
             "x": 1046.8831090866856,
-            "y": 1873.4146196265388
+            "y": 2663.831032580757
           },
           "nodeIndex": "fct_sales",
           "nodeLineageTag": "34871be4-9c24-4718-a8f1-86788c280eb8",
@@ -180,7 +180,7 @@
         {
           "location": {
             "x": 1620.8480550539769,
-            "y": 1924.5307967190538
+            "y": 2714.9472096732725
           },
           "nodeIndex": "dim_product_variants",
           "nodeLineageTag": "27df9e72-d928-4713-8874-565467c4568b",
@@ -193,7 +193,7 @@
         {
           "location": {
             "x": 750.90361060953228,
-            "y": 1965.3727159916075
+            "y": 2755.7891289458257
           },
           "nodeIndex": "dim_products",
           "nodeLineageTag": "8fdc1498-5ae2-4829-a911-3b286540077e",
@@ -206,7 +206,7 @@
         {
           "location": {
             "x": 98.482353418288028,
-            "y": 1745.4390805496116
+            "y": 2535.85549350383
           },
           "nodeIndex": "_Mesures",
           "nodeLineageTag": "1ff1866c-d7ac-439f-a4be-272e2aa26811",
@@ -215,6 +215,18 @@
             "width": 234
           },
           "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1912.8480825420402,
+            "y": 1365.1322074402924
+          },
+          "nodeIndex": "Axe Canal",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Toutes les tables",

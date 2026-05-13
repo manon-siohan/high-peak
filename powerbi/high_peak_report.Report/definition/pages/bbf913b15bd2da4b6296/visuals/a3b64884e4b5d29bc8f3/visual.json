@@ -1,57 +1,62 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "70acf18e2749049c2003",
+  "name": "a3b64884e4b5d29bc8f3",
   "position": {
-    "x": 619.57446808510645,
-    "y": 484.37689969604867,
-    "z": 8000,
-    "height": 176.048632218845,
-    "width": 405.59270516717328,
-    "tabOrder": 8000
+    "x": 617.57412398921826,
+    "y": 367.43935309973045,
+    "z": 9000,
+    "height": 117.30458221024259,
+    "width": 301.88679245283015,
+    "tabOrder": 8001
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "tableEx",
     "query": {
       "queryState": {
-        "Category": {
+        "Values": {
           "projections": [
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_customers"
+                      "Entity": "dim_channel"
                     }
                   },
-                  "Property": "segment_rfm"
+                  "Property": "canal"
                 }
               },
-              "queryRef": "dim_customers.segment_rfm",
-              "nativeQueryRef": "segment_rfm",
-              "active": true
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
+              "queryRef": "dim_channel.canal",
+              "nativeQueryRef": "canal"
+            },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "dim_customers"
-                        }
-                      },
-                      "Property": "customer_id"
+                    "SourceRef": {
+                      "Entity": "_Mesures"
                     }
                   },
-                  "Function": 2
+                  "Property": "CA HT"
                 }
               },
-              "queryRef": "Count(dim_customers.customer_id)",
-              "nativeQueryRef": "Nombre de customer_id"
+              "queryRef": "_Mesures.CA HT",
+              "nativeQueryRef": "CA HT"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Part CA Canal"
+                }
+              },
+              "queryRef": "_Mesures.Part CA Canal",
+              "nativeQueryRef": "Part",
+              "displayName": "Part"
             }
           ]
         }
@@ -60,57 +65,41 @@
         "sort": [
           {
             "field": {
-              "Aggregation": {
+              "Measure": {
                 "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "dim_customers"
-                      }
-                    },
-                    "Property": "customer_id"
+                  "SourceRef": {
+                    "Entity": "_Mesures"
                   }
                 },
-                "Function": 2
+                "Property": "Part CA Canal"
               }
             },
             "direction": "Descending"
           }
-        ],
-        "isDefaultSort": true
+        ]
       }
     },
     "objects": {
-      "general": [
-        {
-          "properties": {}
-        }
-      ],
-      "categoryAxis": [
+      "columnFormatting": [
         {
           "properties": {
-            "show": {
+            "styleValues": {
               "expr": {
                 "Literal": {
                   "Value": "true"
                 }
               }
-            },
-            "maxMarginFactor": {
-              "expr": {
-                "Literal": {
-                  "Value": "50L"
-                }
-              }
-            },
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "gridlineShow": {
+            }
+          },
+          "selector": {
+            "metadata": "dim_channel.canal"
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontal": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -120,44 +109,43 @@
           }
         }
       ],
-      "valueAxis": [
+      "values": [
         {
           "properties": {
-            "show": {
+            "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1000D"
-                }
-              }
-            },
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+                  "Value": "10D"
                 }
               }
             }
           }
         }
       ],
-      "legend": [
+      "columnHeaders": [
         {
           "properties": {
-            "show": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -167,58 +155,47 @@
           }
         }
       ],
-      "dataPoint": [
+      "columnWidth": [
         {
           "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#2d8653'"
-                    }
-                  }
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "93.35040168666538D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_channel.canal"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "69.9648500254996D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Part CA Canal"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "95.48786597355024D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "_Mesures.CA HT"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 6,
-                      "Percent": 0.6
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT N-1"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 9,
-                      "Percent": -0.25
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       ]
@@ -230,7 +207,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -257,7 +234,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -277,7 +254,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -303,6 +280,19 @@
               "expr": {
                 "Literal": {
                   "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "17D"
                 }
               }
             }

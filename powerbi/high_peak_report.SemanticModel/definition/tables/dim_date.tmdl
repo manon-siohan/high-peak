@@ -189,6 +189,17 @@ table dim_date
 
 		annotation SummarizationSetBy = Automatic
 
+	column mois_label_short
+		dataType: string
+		lineageTag: daa92f4e-cf9f-4215-835a-cdff0e123550
+		summarizeBy: none
+		sourceColumn: mois_label_short
+		sortByColumn: mois
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'annee Hiérarchie'
 		lineageTag: cb8f327e-a2a9-4d4c-8415-33e9f27efd1d
 
@@ -212,15 +223,34 @@ table dim_date
 			lineageTag: cad9d91f-282e-4da0-8384-c5a5d06a432c
 			column: mois_label
 
+		level mois_label_short
+			lineageTag: 827efe10-937e-45bf-b9db-42ed8dce906c
+			column: mois_label_short
+
 	partition dim_date = m
 		mode: import
 		source =
 				let
 				    Source = Csv.Document(File.Contents("C:\Users\manon\high-peak\exports_powerbi_csv\dim_date.csv"),[Delimiter=",", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"date_id", Int64.Type}, {"date_jour", type datetime}, {"annee", Int64.Type}, {"trimestre", Int64.Type}, {"trimestre_label", type text}, {"mois", Int64.Type}, {"mois_label", type text}, {"semaine", Int64.Type}, {"jour_semaine", Int64.Type}, {"jour_semaine_label", type text}, {"annee_mois", type date}, {"annee_trimestre", type text}, {"is_weekend", type logical}, {"is_current_month", type logical}, {"is_current_year", type logical}})
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"date_id", Int64.Type}, {"date_jour", type datetime}, {"annee", Int64.Type}, {"trimestre", Int64.Type}, {"trimestre_label", type text}, {"mois", Int64.Type}, {"mois_label", type text}, {"semaine", Int64.Type}, {"jour_semaine", Int64.Type}, {"jour_semaine_label", type text}, {"annee_mois", type date}, {"annee_trimestre", type text}, {"is_weekend", type logical}, {"is_current_month", type logical}, {"is_current_year", type logical}}),
+				    #"Duplication de la colonne" = Table.DuplicateColumn(#"Type modifié", "mois_label", "mois_label - Copier"),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Duplication de la colonne",{{"mois_label - Copier", "mois_label_short"}}),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Colonnes renommées","January","Jan",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Valeur remplacée","February","Feb",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée2" = Table.ReplaceValue(#"Valeur remplacée1","March","Mar",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée3" = Table.ReplaceValue(#"Valeur remplacée2","April","Apr",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée4" = Table.ReplaceValue(#"Valeur remplacée3","June","Jun",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée5" = Table.ReplaceValue(#"Valeur remplacée4","July","Jul",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée6" = Table.ReplaceValue(#"Valeur remplacée5","August","Aug",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée7" = Table.ReplaceValue(#"Valeur remplacée6","September","Sep",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée8" = Table.ReplaceValue(#"Valeur remplacée7","October","Oct",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée9" = Table.ReplaceValue(#"Valeur remplacée8","November","Nov",Replacer.ReplaceText,{"mois_label_short"}),
+				    #"Valeur remplacée10" = Table.ReplaceValue(#"Valeur remplacée9","December","Dec",Replacer.ReplaceText,{"mois_label_short"})
 				in
-				    #"Type modifié"
+				    #"Valeur remplacée10"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 

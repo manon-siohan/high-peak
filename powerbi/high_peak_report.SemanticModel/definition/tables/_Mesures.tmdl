@@ -151,16 +151,16 @@ table _Mesures
 		displayFolder: CA & Revenus
 		lineageTag: 37fdde77-0a68-41e9-9f40-e289859926dd
 
-	measure 'Variation CA N-1' =
+	measure 'Var CA N-1' =
 			
 			[CA HT] - [CA HT N-1]
 		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
 		displayFolder: CA & Revenus
 		lineageTag: bc6e376a-28b5-4636-bf52-f8db34602434
 
-	measure 'Variation CA N-1 %' =
+	measure 'Var CA N-1 %' =
 			
-			DIVIDE([Variation CA N-1], [CA HT N-1])
+			DIVIDE([Var CA N-1], [CA HT N-1])
 		formatString: 0.0\ %;-0.0\ %;0.0\ %
 		displayFolder: CA & Revenus
 		lineageTag: 9773b2fe-ff8a-4580-bb2a-21867cbf750e
@@ -175,7 +175,7 @@ table _Mesures
 		displayFolder: Marges
 		lineageTag: 9c1cb8e5-909f-4f7a-b2b4-1be5678196a5
 
-	measure 'Variation Marge N-1 %' =
+	measure 'Var Marge N-1 %' =
 			
 			DIVIDE([Marge HT]-[Marge HT N-1], [Marge HT N-1])
 		formatString: 0.0\ %;-0.0\ %;0.0\ %
@@ -346,7 +346,7 @@ table _Mesures
 
 	measure 'Var CA Label N-1' =
 			
-			VAR v = [Variation CA N-1 %]
+			VAR v = [Var CA N-1 %]
 			VAR signe =
 			    IF ( v >= 0, "↗ +", "↘ " )
 			RETURN
@@ -360,7 +360,7 @@ table _Mesures
 
 	measure 'Couleur Var CA' =
 			
-			VAR v = [Variation CA N-1 %]
+			VAR v = [Var CA N-1 %]
 			RETURN
 			SWITCH (
 			    TRUE (),
@@ -375,7 +375,7 @@ table _Mesures
 
 	measure 'Var Margin Label N-1' =
 			
-			VAR v = [Variation Marge N-1 %]
+			VAR v = [Var Marge N-1 %]
 			VAR signe =
 			    IF ( v >= 0, "↗ +", "↘ " )
 			RETURN
@@ -389,7 +389,7 @@ table _Mesures
 
 	measure 'Couleur Var Margin' =
 			
-			VAR v = [Variation Marge N-1 %]
+			VAR v = [Var Marge N-1 %]
 			RETURN
 			SWITCH (
 			    TRUE (),
@@ -503,6 +503,155 @@ table _Mesures
 			    )
 		displayFolder: Clients
 		lineageTag: ed5a9bf9-b16e-4212-bfba-65d33ee8cd8a
+
+	measure 'Part CA Canal' =
+			
+			DIVIDE(
+			    [CA HT]
+			    , CALCULATE(
+			        [CA HT]
+			        , ALLSELECTED(dim_channel)
+			    )
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: CA & Revenus
+		lineageTag: ea15452d-bf35-4cbb-83ae-6d3bc0972743
+
+	measure 'CA HT YTD' =
+			
+			CALCULATE (
+			    [CA HT],
+			    DATESYTD ( dim_date[date_jour] )
+			)
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: c5354668-7822-4df1-80fa-08e1db920762
+
+	measure 'CA HT YTD N-1' =
+			
+			CALCULATE (
+			    [CA HT YTD],
+			    SAMEPERIODLASTYEAR ( dim_date[date_jour] )
+			)
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: CA & Revenus
+		lineageTag: ae3e3cf5-8035-4be2-b099-1b983346b904
+
+	measure 'Var CA YTD %' =
+			
+			DIVIDE (
+			    [CA HT YTD] - [CA HT YTD N-1],
+			    [CA HT YTD N-1]
+			)
+		displayFolder: CA & Revenus
+		lineageTag: 9a9afe86-aada-4925-b8e7-e43f565f98a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Couleur Var CA YTD' =
+			
+			VAR v = [Var CA YTD %]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.05, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.05, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: CA & Revenus
+		lineageTag: 62a8cb54-6ab2-43c7-81ec-183c111e08dc
+
+	measure 'Label Comparaison YTD' =
+			
+			VAR CurrentMaxDate =
+			    MAX ( dim_date[date_jour] )
+			VAR CurrentYear =
+			    YEAR ( CurrentMaxDate )
+			VAR PrevYear =
+			    CurrentYear - 1
+			VAR EndOfSelectedYear =
+			    DATE ( CurrentYear, 12, 31 )
+			VAR IsFullYear =
+			    CurrentMaxDate = EndOfSelectedYear
+			RETURN
+			IF (
+			    IsFullYear,
+			    "vs " & PrevYear,
+			    "vs YTD " & PrevYear
+			)
+		displayFolder: CA & Revenus
+		lineageTag: 0c204b03-c80a-4670-97a3-d051143639c4
+
+	measure 'Marge HT YTD N-1' =
+			
+			CALCULATE (
+			    [Marge HT],
+			    SAMEPERIODLASTYEAR ( DATESYTD ( dim_date[date_jour] ) )
+			)
+		displayFolder: Marges
+		lineageTag: c5375740-5c9c-437b-91e4-90d26b43ded7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Var Marge YTD %' =
+			
+			DIVIDE (
+			    [Marge YTD] - [Marge HT YTD N-1],
+			    [Marge HT YTD N-1]
+			)
+		displayFolder: Marges
+		lineageTag: 779c0a70-43df-4a8d-bef5-e636ff4d56b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Var CA YTD Label' =
+			
+			VAR v = [Var CA YTD %]
+			RETURN
+			IF (
+			    ISBLANK ( v ),
+			    "--",
+			    IF (
+			        v >= 0,
+			        "↗ +" & FORMAT ( v, "0.0%" ),
+			        "↘ " & FORMAT ( v, "0.0%" )
+			    )
+			)
+		displayFolder: CA & Revenus
+		lineageTag: 2e9fd8f3-b155-4796-ab6d-b974e0681128
+
+	measure 'Var Marge YTD Label' =
+			
+			VAR v = [Var Marge YTD %]
+			RETURN
+			IF (
+			    ISBLANK ( v ),
+			    "--",
+			    IF (
+			        v >= 0,
+			        "↗ +" & FORMAT ( v, "0.0%" ),
+			        "↘ " & FORMAT ( v, "0.0%" )
+			    )
+			)
+		displayFolder: Marges
+		lineageTag: 1f4dc75b-02bd-4402-ad0f-7c83eb58e072
+
+	measure 'Couleur Var Marge YTD' =
+			
+			VAR v = [Var Marge YTD %]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.05, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.05, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: Marges
+		lineageTag: e626730f-096f-41c9-a1e6-dfaddd1e9a4e
 
 	partition _Mesures = m
 		mode: import

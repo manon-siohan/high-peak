@@ -4,7 +4,7 @@
   "position": {
     "x": 186.21346023113529,
     "y": 96.587355540448684,
-    "z": 2000,
+    "z": 3000,
     "height": 152.2773623385452,
     "width": 1064.201223657376,
     "tabOrder": 2000
@@ -23,11 +23,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "CA HT"
+                  "Property": "CA HT YTD"
                 }
               },
-              "queryRef": "_Mesures.CA HT",
-              "nativeQueryRef": "CA HT",
+              "queryRef": "_Mesures.CA HT YTD",
+              "nativeQueryRef": "CA HT YTD",
               "format": "#,0.0 \"€\";-#,0.0 \"€\";#,0.0 \"€\""
             },
             {
@@ -38,11 +38,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Marge HT"
+                  "Property": "Marge YTD"
                 }
               },
-              "queryRef": "_Mesures.Marge HT",
-              "nativeQueryRef": "Marge HT"
+              "queryRef": "_Mesures.Marge YTD",
+              "nativeQueryRef": "Marge YTD"
             },
             {
               "field": {
@@ -80,11 +80,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nvx Clients"
+                  "Property": "Nb Clients"
                 }
               },
-              "queryRef": "_Mesures.Nvx Clients",
-              "nativeQueryRef": "Nvx Clients"
+              "queryRef": "_Mesures.Nb Clients",
+              "nativeQueryRef": "Nb Clients"
             }
           ]
         }
@@ -99,7 +99,7 @@
                     "Entity": "_Mesures"
                   }
                 },
-                "Property": "CA HT"
+                "Property": "CA HT YTD"
               }
             },
             "direction": "Descending"
@@ -110,21 +110,6 @@
     },
     "objects": {
       "referenceLabel": [
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.CA HT",
-            "id": "field-d1640e9a-31fd-8608-3f92-0a195f09cad6",
-            "order": 0
-          }
-        },
         {
           "properties": {
             "paddingUniform": {
@@ -144,107 +129,6 @@
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.CA HT",
-            "id": "field-e1c1a1b0-4710-b5c1-2790-eb7f2adcc97a",
-            "order": 0
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.CA HT",
-            "id": "field-8601f2b1-eb62-bdf6-e694-18c05833e057",
-            "order": 0
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Var CA Label N-1"
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.CA HT",
-            "id": "field-cbd2cf37-14f0-8f5a-0e0d-89f7f0f4164c",
-            "order": 0
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Marge HT",
-            "id": "field-9abaa26e-c8df-be9b-3f4d-fea0b4da3a5b",
-            "order": 0
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Var Margin Label N-1"
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Marge HT",
-            "id": "field-9e93befc-abb0-d492-6d07-f5ac5d54d0e0",
-            "order": 0
           }
         },
         {
@@ -330,8 +214,8 @@
                 }
               }
             ],
-            "metadata": "_Mesures.Nvx Clients",
-            "id": "field-6bdc8806-9822-3706-f9ca-58323b550015",
+            "metadata": "_Mesures.Nb Clients",
+            "id": "field-c2e4156d-a383-c75f-f09f-678993bcbdf6",
             "order": 0
           }
         },
@@ -345,7 +229,7 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nb Clients"
+                  "Property": "Var Nvx Clients M-1"
                 }
               }
             }
@@ -358,49 +242,99 @@
                 }
               }
             ],
-            "metadata": "_Mesures.Nvx Clients",
-            "id": "field-17d8ed51-cac8-43f7-6165-c311ddd2edfd",
+            "metadata": "_Mesures.Nb Clients",
+            "id": "field-9473c9f5-ea29-f48d-fc27-56a30ee5198e",
             "order": 0
           }
-        }
-      ],
-      "referenceLabelTitle": [
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-265581b5-61ab-9326-e0e2-9e1155df4d54",
+            "order": 0
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-51ee7c86-c9c2-fa75-50c1-b04f89fd368b",
+            "order": 0
+          }
+        },
         {
           "properties": {
-            "show": {
+            "value": {
               "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "titleContentType": {
-              "expr": {
-                "Literal": {
-                  "Value": "'custom'"
-                }
-              }
-            },
-            "titleText": {
-              "expr": {
-                "Literal": {
-                  "Value": "'vs N-1'"
-                }
-              }
-            },
-            "titleFontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var CA YTD Label"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "_Mesures.CA HT",
-            "id": "field-d1640e9a-31fd-8608-3f92-0a195f09cad6"
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-4c7f47fa-8d10-d96d-094b-8e5b8bf67658",
+            "order": 0
           }
         },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var Marge YTD Label"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Marge YTD",
+            "id": "field-290bd217-7e96-bb4f-b22b-137a2fc9fe83",
+            "order": 0
+          }
+        }
+      ],
+      "referenceLabelTitle": [
         {
           "properties": {
             "show": {
@@ -413,21 +347,6 @@
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT",
-            "id": "field-8601f2b1-eb62-bdf6-e694-18c05833e057"
           }
         },
         {
@@ -454,21 +373,6 @@
                   "Value": "true"
                 }
               }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT",
-            "id": "field-d1640e9a-31fd-8608-3f92-0a195f09cad6"
-          }
-        },
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
             },
             "valueFontSize": {
               "expr": {
@@ -480,67 +384,6 @@
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {
-            "valueFontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Mesures"
-                        }
-                      },
-                      "Property": "Couleur Var CA"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.CA HT"
-          }
-        },
-        {
-          "properties": {
-            "valueFontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Mesures"
-                        }
-                      },
-                      "Property": "Couleur Var Margin"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Marge HT",
-            "id": "field-9e93befc-abb0-d492-6d07-f5ac5d54d0e0"
           }
         },
         {
@@ -587,51 +430,102 @@
             ],
             "metadata": "_Mesures.Nb commandes"
           }
-        }
-      ],
-      "label": [
+        },
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "heading": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Heading4'"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            },
-            "position": {
-              "expr": {
-                "Literal": {
-                  "Value": "'aboveValue'"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var CA YTD"
+                    }
+                  }
                 }
               }
             }
           },
           "selector": {
-            "metadata": "_Mesures.CA HT"
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-51ee7c86-c9c2-fa75-50c1-b04f89fd368b"
           }
         },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var CA YTD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-4c7f47fa-8d10-d96d-094b-8e5b8bf67658"
+          }
+        },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var Marge YTD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Marge YTD",
+            "id": "field-290bd217-7e96-bb4f-b22b-137a2fc9fe83"
+          }
+        }
+      ],
+      "label": [
         {
           "properties": {
             "show": {
@@ -661,37 +555,7 @@
           }
         }
       ],
-      "image": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT"
-          }
-        }
-      ],
       "cardCalloutArea": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT"
-          }
-        },
         {
           "properties": {
             "show": {
@@ -717,93 +581,22 @@
                 }
               }
             },
-            "detailFontFamily": {
+            "detailFontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'wf_standard-font, helvetica, arial, sans-serif'"
+                  "Value": "9D"
                 }
               }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT",
-            "id": "field-d1640e9a-31fd-8608-3f92-0a195f09cad6"
-          }
-        },
-        {
-          "properties": {
-            "detailValue": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
+            },
+            "detailFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
                     }
-                  },
-                  "Property": "Variation CA N-1 %"
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.CA HT",
-            "id": "field-d1640e9a-31fd-8608-3f92-0a195f09cad6"
-          }
-        },
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        },
-        {
-          "properties": {
-            "detailValue": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Var CA Label N-1"
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.CA HT",
-            "id": "field-8601f2b1-eb62-bdf6-e694-18c05833e057"
-          }
-        },
-        {
-          "properties": {
-            "detailTransparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
+                  }
                 }
               }
             },
@@ -818,30 +611,10 @@
                   }
                 }
               }
-            },
-            "detailFontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 7,
-                      "Percent": -0.25
-                    }
-                  }
-                }
-              }
-            },
-            "detailFontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
             }
           },
           "selector": {
-            "metadata": "_Mesures.CA HT",
-            "id": "field-8601f2b1-eb62-bdf6-e694-18c05833e057"
+            "id": "default"
           }
         },
         {
@@ -856,6 +629,102 @@
           },
           "selector": {
             "metadata": "_Mesures.Nb commandes"
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-51ee7c86-c9c2-fa75-50c1-b04f89fd368b"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Label Comparaison YTD"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-51ee7c86-c9c2-fa75-50c1-b04f89fd368b"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Label Comparaison YTD"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.CA HT YTD",
+            "id": "field-4c7f47fa-8d10-d96d-094b-8e5b8bf67658"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Label Comparaison YTD"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Marge YTD",
+            "id": "field-290bd217-7e96-bb4f-b22b-137a2fc9fe83"
           }
         }
       ],
@@ -1094,41 +963,6 @@
         },
         {
           "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1000D"
-                }
-              }
-            },
-            "labelPrecision": {
-              "expr": {
-                "Literal": {
-                  "Value": "1L"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "26D"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT"
-          }
-        },
-        {
-          "properties": {
             "bold": {
               "expr": {
                 "Literal": {
@@ -1190,22 +1024,6 @@
             "id": "default"
           }
         }
-      ],
-      "spacing": [
-        {
-          "properties": {
-            "verticalSpacing": {
-              "expr": {
-                "Literal": {
-                  "Value": "0L"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT"
-          }
-        }
       ]
     },
     "visualContainerObjects": {
@@ -1261,35 +1079,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "3dd71af7b79030027519",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "CA HT"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "a41e07fb9f5a2e1d21d1",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Marge HT"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "45923d126e5adc35aaae",
+        "name": "7067a30b2e7b34e7636e",
         "field": {
           "Measure": {
             "Expression": {
@@ -1303,7 +1093,7 @@
         "type": "Advanced"
       },
       {
-        "name": "8cd56a9d6697b8ab4d69",
+        "name": "f194b94c6245856252a5",
         "field": {
           "Measure": {
             "Expression": {
@@ -1317,7 +1107,7 @@
         "type": "Advanced"
       },
       {
-        "name": "df79a1de290c123e8b66",
+        "name": "fa8f8fc44028a5ca674e",
         "field": {
           "Measure": {
             "Expression": {
@@ -1325,7 +1115,21 @@
                 "Entity": "_Mesures"
               }
             },
-            "Property": "Nvx Clients"
+            "Property": "Nb Clients"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5c977a1835b046d3c902",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "CA HT YTD"
           }
         },
         "type": "Advanced"
