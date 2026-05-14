@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "2028ec07102c5012aa2d",
   "position": {
-    "x": 186.21346023113529,
-    "y": 96.587355540448684,
+    "x": 186.37102734663708,
+    "y": 96.496674057649656,
     "z": 3000,
-    "height": 152.2773623385452,
-    "width": 1064.201223657376,
+    "height": 152.31337767923134,
+    "width": 1064.30155210643,
     "tabOrder": 2000
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "_Mesures.CA HT YTD",
-              "nativeQueryRef": "CA HT YTD",
+              "nativeQueryRef": "CA HT",
+              "displayName": "CA HT",
               "format": "#,0.0 \"€\";-#,0.0 \"€\";#,0.0 \"€\""
             },
             {
@@ -42,7 +43,8 @@
                 }
               },
               "queryRef": "_Mesures.Marge YTD",
-              "nativeQueryRef": "Marge YTD"
+              "nativeQueryRef": "Marge HT",
+              "displayName": "Marge HT"
             },
             {
               "field": {
@@ -52,11 +54,12 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Taux de Marge"
+                  "Property": "Taux de marge YTD"
                 }
               },
-              "queryRef": "_Mesures.Taux de Marge",
-              "nativeQueryRef": "Taux de Marge"
+              "queryRef": "_Mesures.Taux de marge YTD",
+              "nativeQueryRef": "Taux de marge",
+              "displayName": "Taux de marge"
             },
             {
               "field": {
@@ -66,11 +69,13 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nb commandes"
+                  "Property": "Nb Commandes YTD"
                 }
               },
-              "queryRef": "_Mesures.Nb commandes",
-              "nativeQueryRef": "Nb commandes"
+              "queryRef": "_Mesures.Nb Commandes YTD",
+              "nativeQueryRef": "Commandes",
+              "displayName": "Commandes",
+              "format": "#,0.0"
             },
             {
               "field": {
@@ -80,11 +85,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nb Clients"
+                  "Property": "Clients actifs"
                 }
               },
               "queryRef": "_Mesures.Nb Clients",
-              "nativeQueryRef": "Nb Clients"
+              "nativeQueryRef": "Clients actifs"
             }
           ]
         }
@@ -141,99 +146,13 @@
                 }
               }
             ],
-            "metadata": "_Mesures.Nb commandes",
-            "id": "field-174cb37c-6f3d-0827-1e4b-adae206d0e93",
-            "order": 0
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb commandes",
-            "id": "field-9c8191ca-f4e2-1b44-7b87-66944fc59ceb",
-            "order": 0
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb commandes",
-            "id": "field-d942bf42-628d-b8bd-61c1-95f2113f5e77",
-            "order": 0
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Var Commandes Label N-1"
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb commandes",
-            "id": "field-8ecf23a4-5231-45b4-6846-69bef7b705e7",
-            "order": 0
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
             "metadata": "_Mesures.Nb Clients",
             "id": "field-c2e4156d-a383-c75f-f09f-678993bcbdf6",
             "order": 0
           }
         },
         {
-          "properties": {
-            "value": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Var Nvx Clients M-1"
-                }
-              }
-            }
-          },
+          "properties": {},
           "selector": {
             "data": [
               {
@@ -332,6 +251,120 @@
             "id": "field-290bd217-7e96-bb4f-b22b-137a2fc9fe83",
             "order": 0
           }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var Commmandes YTD Label"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Commandes YTD",
+            "id": "field-158e4ba4-a59b-26f8-584c-4689dfa898d7",
+            "order": 0
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var Clients actifs YTD Label"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Clients",
+            "id": "field-f655c95c-d09c-2c0a-f27c-1d46c50d75c9",
+            "order": 0
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Commandes YTD",
+            "id": "field-134e9808-1d25-5fd8-8110-e50a9da54306",
+            "order": 1
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Commandes YTD",
+            "id": "field-82946a3f-699d-44f3-b0ab-8f8b5beaf100",
+            "order": 1
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var Taux Marge YTD Label"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Taux de marge YTD",
+            "id": "field-7d683af5-9260-8837-a8dd-a3ed5228f508",
+            "order": 0
+          }
         }
       ],
       "referenceLabelTitle": [
@@ -347,20 +380,6 @@
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Nb commandes"
           }
         }
       ],
@@ -384,51 +403,6 @@
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {
-            "valueDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Nb commandes",
-            "id": "field-174cb37c-6f3d-0827-1e4b-adae206d0e93"
-          }
-        },
-        {
-          "properties": {
-            "valueFontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Mesures"
-                        }
-                      },
-                      "Property": "Var Color Commandes"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb commandes"
           }
         },
         {
@@ -523,6 +497,99 @@
             "metadata": "_Mesures.Marge YTD",
             "id": "field-290bd217-7e96-bb4f-b22b-137a2fc9fe83"
           }
+        },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var Nb commandes YTD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Commandes YTD",
+            "id": "field-158e4ba4-a59b-26f8-584c-4689dfa898d7"
+          }
+        },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var Clients actifs YTD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Clients",
+            "id": "field-f655c95c-d09c-2c0a-f27c-1d46c50d75c9"
+          }
+        },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var Taux Marge YTD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Taux de marge YTD",
+            "id": "field-7d683af5-9260-8837-a8dd-a3ed5228f508"
+          }
         }
       ],
       "label": [
@@ -545,7 +612,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "10D"
                 }
               }
             }
@@ -615,20 +682,6 @@
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Nb commandes"
           }
         },
         {
@@ -725,6 +778,87 @@
             ],
             "metadata": "_Mesures.Marge YTD",
             "id": "field-290bd217-7e96-bb4f-b22b-137a2fc9fe83"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Label Comparaison YTD"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Commandes YTD",
+            "id": "field-158e4ba4-a59b-26f8-584c-4689dfa898d7"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Label Comparaison YTD"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Nb Clients",
+            "id": "field-f655c95c-d09c-2c0a-f27c-1d46c50d75c9"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Label Comparaison YTD"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Taux de marge YTD",
+            "id": "field-7d683af5-9260-8837-a8dd-a3ed5228f508"
           }
         }
       ],
@@ -1002,10 +1136,31 @@
                   "Value": "1D"
                 }
               }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
             }
           },
           "selector": {
-            "metadata": "_Mesures.Nb commandes"
+            "metadata": "_Mesures.Nb Commandes YTD"
+          }
+        },
+        {
+          "properties": {
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.CA HT YTD"
           }
         }
       ],
@@ -1022,6 +1177,22 @@
           },
           "selector": {
             "id": "default"
+          }
+        }
+      ],
+      "glowCustom": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Nb Commandes YTD"
           }
         }
       ]
@@ -1079,49 +1250,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "7067a30b2e7b34e7636e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Taux de Marge"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "f194b94c6245856252a5",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Nb commandes"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "fa8f8fc44028a5ca674e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Nb Clients"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "5c977a1835b046d3c902",
+        "name": "b4d5c4409b27273019d3",
         "field": {
           "Measure": {
             "Expression": {
@@ -1130,6 +1259,48 @@
               }
             },
             "Property": "CA HT YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fe37045f2ee67594dd23",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Marge YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f84560b77af81a604d21",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Clients actifs"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "bdda7d88ba4e44ecc6c6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Nb Commandes YTD"
           }
         },
         "type": "Advanced"

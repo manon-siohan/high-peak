@@ -1,19 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "9c393fb7d0040465a362",
+  "name": "2c1e00bf7ca21e1d9c44",
   "position": {
-    "x": 618.71396895787132,
-    "y": 248.81005173688098,
-    "z": 8000,
-    "height": 139.06873614190687,
-    "width": 297.05838876570579,
-    "tabOrder": 7000
+    "x": 204.34589800443456,
+    "y": 503.2963784183296,
+    "z": 8001,
+    "height": 158.93569844789354,
+    "width": 603.57723577235765,
+    "tabOrder": 7001
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Category": {
+        "Rows": {
           "projections": [
             {
               "field": {
@@ -32,7 +32,7 @@
             }
           ]
         },
-        "Tooltips": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -42,12 +42,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "CA HT"
+                  "Property": "CA YTD"
                 }
               },
-              "queryRef": "_Mesures.CA HT",
-              "nativeQueryRef": "CA HT",
-              "format": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\""
+              "queryRef": "_Mesures.CA YTD",
+              "nativeQueryRef": "CA YTD"
             },
             {
               "field": {
@@ -57,11 +56,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Marge HT"
+                  "Property": "Marge YTD"
                 }
               },
-              "queryRef": "_Mesures.Marge HT",
-              "nativeQueryRef": "Marge HT"
+              "queryRef": "_Mesures.Marge YTD",
+              "nativeQueryRef": "Marge YTD"
             },
             {
               "field": {
@@ -71,11 +70,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Taux de Marge"
+                  "Property": "Taux de marge YTD"
                 }
               },
-              "queryRef": "_Mesures.Taux de Marge",
-              "nativeQueryRef": "Taux de Marge"
+              "queryRef": "_Mesures.Taux de marge YTD",
+              "nativeQueryRef": "Taux de marge YTD"
             },
             {
               "field": {
@@ -85,16 +84,26 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nb commandes"
+                  "Property": "Nb Commandes YTD"
                 }
               },
-              "queryRef": "_Mesures.Nb commandes",
-              "nativeQueryRef": "Nb commandes"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
+              "queryRef": "_Mesures.Nb Commandes YTD",
+              "nativeQueryRef": "Nb Commandes YTD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Taux retour commande"
+                }
+              },
+              "queryRef": "_Mesures.Taux retour commande",
+              "nativeQueryRef": "Taux retour commande"
+            },
             {
               "field": {
                 "Measure": {
@@ -132,92 +141,17 @@
       }
     },
     "objects": {
-      "legend": [
+      "subTotals": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "categoryAxis": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "maxMarginFactor": {
-              "expr": {
-                "Literal": {
-                  "Value": "50L"
-                }
-              }
-            },
-            "concatenateLabels": {
+            "columnSubtotals": {
               "expr": {
                 "Literal": {
                   "Value": "false"
                 }
               }
             },
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "switchAxisPosition": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "valueAxis": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1000D"
-                }
-              }
-            },
-            "showAxisTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "gridlineShow": {
+            "rowSubtotals": {
               "expr": {
                 "Literal": {
                   "Value": "true"
@@ -227,131 +161,226 @@
           }
         }
       ],
-      "dataPoint": [
+      "grid": [
         {
           "properties": {
-            "fill": {
+            "outlineColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 6,
-                      "Percent": 0.6
+                      "ColorId": 0,
+                      "Percent": 0
                     }
                   }
                 }
               }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT N-1"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#2d8653'"
-                    }
-                  }
+            },
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
                 }
               }
             }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA HT"
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "FillRule": {
-                      "Input": {
-                        "Measure": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "_Mesures"
-                            }
-                          },
-                          "Property": "CA HT"
-                        }
-                      },
-                      "FillRule": {
-                        "linearGradient3": {
-                          "min": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'#e3a4a4'"
-                              }
-                            }
-                          },
-                          "mid": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'#ECEAE3'"
-                              }
-                            }
-                          },
-                          "max": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'#2D8653'"
-                              }
-                            }
-                          },
-                          "nullColoringStrategy": {
-                            "strategy": {
-                              "Literal": {
-                                "Value": "'asZero'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 1
-                }
-              }
-            ]
           }
         }
       ],
-      "labels": [
+      "values": [
         {
           "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             },
-            "labelPrecision": {
-              "expr": {
-                "Literal": {
-                  "Value": "1L"
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             },
-            "show": {
+            "bandedRowHeaders": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            },
+            "titleAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            },
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "72.45308828713681D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Taux retour commande"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "59.377661792852706D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Part CA Canal"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77.80930551336479D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_channel.Canal affichage"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "83D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.CA YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Marge YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Taux de marge YTD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "84.15818852864808D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.Nb Commandes YTD"
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             }
@@ -373,7 +402,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },

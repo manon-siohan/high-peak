@@ -7,7 +7,7 @@
     "z": 7000,
     "height": 235.47169811320754,
     "width": 302.74932614555257,
-    "tabOrder": 7000
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -29,6 +29,21 @@
               "queryRef": "dim_products.categorie",
               "nativeQueryRef": "categorie",
               "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_channel"
+                    }
+                  },
+                  "Property": "Canal affichage"
+                }
+              },
+              "queryRef": "dim_channel.Canal affichage",
+              "nativeQueryRef": "Canal affichage",
+              "active": false
             }
           ]
         },

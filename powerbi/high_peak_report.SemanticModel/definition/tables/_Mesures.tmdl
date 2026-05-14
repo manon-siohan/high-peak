@@ -50,7 +50,7 @@ table _Mesures
 		displayFolder: Commandes
 		lineageTag: 4a09f947-113d-425b-9ab4-fe76edafaeee
 
-	measure 'Nb Clients' =
+	measure 'Clients actifs' =
 			
 			DISTINCTCOUNT(fct_sales[customer_id])
 		formatString: 0
@@ -59,14 +59,14 @@ table _Mesures
 
 	measure 'CA moy par client' =
 			
-			DIVIDE([CA HT],[Nb Clients])
+			DIVIDE([CA HT],[Clients actifs])
 		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
 		displayFolder: CA & Revenus
 		lineageTag: 1e77ca87-29dc-40e5-94f8-dd32e7b85b9d
 
 	measure 'Commandes par Client' =
 			
-			DIVIDE([Nb commandes], [Nb Clients])
+			DIVIDE([Nb commandes], [Clients actifs])
 		formatString: 0.00
 		displayFolder: Commandes
 		lineageTag: 4d0fc852-3b4b-4a6f-a77d-800083702c61
@@ -265,10 +265,9 @@ table _Mesures
 	measure 'Taux retour commande' =
 			
 			DIVIDE(DISTINCTCOUNT(fct_returns[order_id]),[Nb commandes])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		displayFolder: Retours
 		lineageTag: fae7b5d9-102e-4387-8236-02e238573c10
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Points émis' =
 			
@@ -312,7 +311,7 @@ table _Mesures
 			    SUMX(dim_customers,
 			        CALCULATE([CA HT])
 			    ),
-			    [Nb Clients]
+			    [Clients actifs]
 			)
 		displayFolder: Clients
 		lineageTag: b3ac33f9-1706-4c94-b725-6f04b84af632
@@ -513,7 +512,7 @@ table _Mesures
 			        , ALLSELECTED(dim_channel)
 			    )
 			)
-		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
 		displayFolder: CA & Revenus
 		lineageTag: ea15452d-bf35-4cbb-83ae-6d3bc0972743
 
@@ -652,6 +651,191 @@ table _Mesures
 			)
 		displayFolder: Marges
 		lineageTag: e626730f-096f-41c9-a1e6-dfaddd1e9a4e
+
+	measure 'Taux de marge YTD' = ```
+			
+			 DIVIDE([Marge YTD],[CA HT YTD])
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Marges
+		lineageTag: 481a1db9-af29-4591-88b0-3d5151a00ac3
+
+	measure 'Taux de marge YTD N-1' =
+			
+			DIVIDE([Marge HT YTD N-1], [CA HT YTD N-1])
+		displayFolder: Marges
+		lineageTag: 681a33f0-ffc5-4aa7-a028-a67bbba596ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Var Taux de Marge YTD' =
+			
+			[Taux de marge YTD]-[Taux de marge YTD N-1]
+		displayFolder: Marges
+		lineageTag: 1e0d4176-043b-4e08-bef1-9ae7828006ea
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Var Taux Marge YTD Label' =
+			
+			VAR v = [Var Taux de Marge YTD]
+			RETURN
+			IF (
+			    ISBLANK ( v ),
+			    "--",
+			    IF (
+			        v >= 0,
+			        "↗ +" & FORMAT ( v * 100, "0.0" ) & " pts",
+			        "↘ " & FORMAT ( v * 100, "0.0" ) & " pts"
+			    )
+			)
+		displayFolder: Marges
+		lineageTag: 2c61a942-17cc-44f9-8448-5adfcf8fbf36
+
+	measure 'Couleur Var Taux Marge YTD' =
+			
+			VAR v = [Var Taux de Marge YTD]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.02, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.02, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: Marges
+		lineageTag: 3f92012a-e3fe-45bb-ab89-833b6d93b644
+
+	measure 'Nb Commandes YTD' =
+			
+			CALCULATE(
+			    [Nb commandes]
+			    , DATESYTD(dim_date[date_jour])
+			)
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: ecc4d985-d02e-44e9-ba12-ff8590f67549
+
+	measure 'Nb Commandes YTD N-1' =
+			
+			CALCULATE(
+			    [Nb commandes]
+			    , SAMEPERIODLASTYEAR(DATESYTD(dim_date[date_jour]))
+			)
+		formatString: 0
+		displayFolder: Commandes
+		lineageTag: 579801e3-c95f-4630-ad45-89123da0edc6
+
+	measure 'Var Commandes YTD %' =
+			
+			DIVIDE(
+			    [Nb Commandes YTD]-[Nb Commandes YTD N-1]
+			    , [Nb Commandes YTD N-1]
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Commandes
+		lineageTag: 06400a4e-2ac7-494e-a313-ea2496c3ce14
+
+	measure 'Var Commmandes YTD Label' = ```
+			
+			VAR v = [Var Commandes YTD %]
+			RETURN
+			IF(
+			    ISBLANK ( v ), " -- ", 
+			    IF(
+			        v >= 0 , 
+			        "↗ +" & FORMAT ( v, "0.0%" ),
+			        "↘ " & FORMAT ( v, "0.0%" )
+			    )
+			)
+			```
+		displayFolder: Commandes
+		lineageTag: 8143daac-9e59-42ee-a2a5-5c9ba40f2bdb
+
+	measure 'Couleur Var Nb commandes YTD' =
+			
+			VAR v = [Var Commandes YTD %]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.05, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.05, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: Commandes
+		lineageTag: d9eac4cc-5288-495f-baa7-e218f9014dfc
+
+	measure 'Clients actifs YTD' =
+			
+			CALCULATE(
+			    [Clients actifs]
+			    , DATESYTD(dim_date[date_jour])
+			)
+		formatString: 0
+		displayFolder: Clients
+		lineageTag: 205ba254-8445-4ec4-8213-ee537071146e
+
+	measure 'Clients Actifs YTD N-1' =
+			
+			CALCULATE(
+			    [Clients actifs]
+			    , SAMEPERIODLASTYEAR(DATESYTD(dim_date[date_jour]))
+			)
+		formatString: 0
+		displayFolder: Clients
+		lineageTag: 3ed79163-6400-481c-a8d3-fa6d800870ea
+
+	measure 'Var Clients actifs YTD %' =
+			
+			DIVIDE(
+			    [Clients actifs YTD] - [Clients Actifs YTD N-1],
+			    [Clients Actifs YTD N-1]
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Clients
+		lineageTag: 12163089-6a34-4677-8326-afa84d7f174c
+
+	measure 'Var Clients actifs YTD Label' =
+			
+			VAR v = [Var Clients actifs YTD %]
+			RETURN
+			IF (
+			    ISBLANK ( v ),
+			    "--",
+			    IF (
+			        v >= 0,
+			        "↗ +" & FORMAT ( v, "0.0%" ),
+			        "↘ " & FORMAT ( v, "0.0%" )
+			    )
+			)
+		displayFolder: Clients
+		lineageTag: f52fe883-d708-4b59-b208-0f562de4ffda
+
+	measure 'Couleur Var Clients actifs YTD' =
+			
+			VAR v = [Var Clients actifs YTD %]
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    ISBLANK ( v ), "#6B7280",
+			    v >= 0.05, "#2E7D32",
+			    v >= 0, "#7A9A3D",
+			    v > -0.05, "#D97706",
+			    "#B91C1C"
+			)
+		displayFolder: Clients
+		lineageTag: d4b43afd-00eb-4382-91bb-e6f33545273e
+
+	measure 'CA moyen par commande' =
+			
+			DIVIDE([CA HT], [Nb commandes])
+		displayFolder: CA & Revenus
+		lineageTag: 0d26bfe2-0714-45ec-8874-052101f70f40
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition _Mesures = m
 		mode: import
