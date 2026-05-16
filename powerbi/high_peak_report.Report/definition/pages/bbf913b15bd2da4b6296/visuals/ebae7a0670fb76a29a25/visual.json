@@ -4,7 +4,7 @@
   "position": {
     "x": 934.25830258302608,
     "y": 18.892988929889302,
-    "z": 4000,
+    "z": 3000,
     "height": 74.627306273062729,
     "width": 162.47970479704796,
     "tabOrder": 3000
@@ -125,6 +125,25 @@
       "general": [
         {
           "properties": {
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 7,
+                      "Percent": -0.25
+                    }
+                  }
+                }
+              }
+            },
+            "outlineWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
             "filter": {
               "filter": {
                 "Version": 2,
@@ -149,16 +168,6 @@
                               },
                               "Property": "annee"
                             }
-                          },
-                          {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Source": "d"
-                                }
-                              },
-                              "Property": "mois_label"
-                            }
                           }
                         ],
                         "Values": [
@@ -166,11 +175,6 @@
                             {
                               "Literal": {
                                 "Value": "2024L"
-                              }
-                            },
-                            {
-                              "Literal": {
-                                "Value": "'March'"
                               }
                             }
                           ]
@@ -194,21 +198,6 @@
                               },
                               "Level": "annee"
                             }
-                          },
-                          {
-                            "HierarchyLevel": {
-                              "Expression": {
-                                "Hierarchy": {
-                                  "Expression": {
-                                    "SourceRef": {
-                                      "Entity": "dim_date"
-                                    }
-                                  },
-                                  "Hierarchy": "annee Hiérarchie"
-                                }
-                              },
-                              "Level": "mois_label"
-                            }
                           }
                         ],
                         "decomposedIdentities": {
@@ -219,15 +208,6 @@
                                   {
                                     "Literal": {
                                       "Value": "2024L"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "1": [
-                                  {
-                                    "Literal": {
-                                      "Value": "'March'"
                                     }
                                   }
                                 ]
@@ -246,50 +226,18 @@
                                   "Property": "annee"
                                 }
                               }
-                            },
-                            {
-                              "value": {
-                                "Column": {
-                                  "Expression": {
-                                    "SourceRef": {
-                                      "Entity": "dim_date"
-                                    }
-                                  },
-                                  "Property": "mois_label"
-                                }
-                              }
                             }
                           ]
                         },
                         "valueMap": [
                           {
-                            "0": "2024",
-                            "1": "March"
+                            "0": "2024"
                           }
                         ]
                       }
                     }
                   }
                 ]
-              }
-            },
-            "outlineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 7,
-                      "Percent": -0.25
-                    }
-                  }
-                }
-              }
-            },
-            "outlineWeight": {
-              "expr": {
-                "Literal": {
-                  "Value": "6D"
-                }
               }
             }
           }
@@ -381,7 +329,7 @@
             "strictSingleSelect": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -511,6 +459,25 @@
             }
           ]
         }
+      },
+      {
+        "name": "1e6cecbf6a10559ea4a2",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_date"
+                  }
+                },
+                "Hierarchy": "annee Hiérarchie"
+              }
+            },
+            "Level": "mois_label"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

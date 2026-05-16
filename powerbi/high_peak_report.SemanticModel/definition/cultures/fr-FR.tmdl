@@ -1137,6 +1137,16 @@ cultureInfo fr-FR
 			            },
 			            "Weight": 0.476
 			          }
+			        },
+			        {
+			          "Pays": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "SemanticType": "Location"
@@ -15593,17 +15603,17 @@ cultureInfo fr-FR
 			        }
 			      ]
 			    },
-			    "entity__mesure.nb_retours": {
+			    "entity__mesure.commandes_retournées": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "_Mesures",
-			          "ConceptualProperty": "Nb retours"
+			          "ConceptualProperty": "Commandes retournées"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "nb retours": {
+			          "commandes retournées": {
 			            "State": "Generated"
 			          }
 			        }
@@ -17648,6 +17658,16 @@ cultureInfo fr-FR
 			            },
 			            "Weight": 0.514
 			          }
+			        },
+			        {
+			          "Var CA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -18130,6 +18150,16 @@ cultureInfo fr-FR
 			            },
 			            "Weight": 0.9
 			          }
+			        },
+			        {
+			          "Tx marge YTD": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -18500,6 +18530,16 @@ cultureInfo fr-FR
 			            },
 			            "Weight": 0.623
 			          }
+			        },
+			        {
+			          "Clients actifs": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -18682,9 +18722,398 @@ cultureInfo fr-FR
 			          }
 			        }
 			      ]
+			    },
+			    "entity__mesure.commandes_retournées_YTD": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Commandes retournées YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "commandes retournées YTD": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "commande retournée year to date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.623
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.taux_retour_commande_YTD": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Taux retour commande YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "taux retour commande YTD": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "taux retour commande year to date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.part_CA_canal_YTD": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Part CA Canal YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "part CA canal YTD": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "YTD": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "canal YTD": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "CA canal YTD": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "part ca canal year to date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.643
+			          }
+			        },
+			        {
+			          "ca canal year to date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.623
+			          }
+			        },
+			        {
+			          "canal year to date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "year to date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.573
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.taux_marge_YTD_label": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Taux Marge YTD Label"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "taux marge YTD label": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "taux marge ytd sticker": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "taux marge ytd tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "taux marge ytd decal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "taux marge ytd name tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "taux marge year to date label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.var_nb_clients_actifs_YTD": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Var nb clients actifs YTD"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "var nb clients actifs YTD": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "var nb client actif year to date": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.66
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.clients_actifs_YTD__detail": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Clients actifs YTD - Detail"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "clients actifs YTD - detail": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "clients actifs YTD detail": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "client actif year to date - detail": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.528
+			          }
+			        },
+			        {
+			          "client actif ytd - aspect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "client actif ytd - element": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "client actif ytd - fact": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "client actif year to date detail": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "client actif ytd aspect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "client actif ytd element": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "client actif ytd fact": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "client actif ytd - part": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "client actif ytd - feature": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.titre_courbe_CA_HT_vs_N1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Titre Courbe CA HT vs N-1"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "titre courbe CA HT vs N-1": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "dim_store_date_ouverture_hiérarchie_de_date_has_dim_store_date_ouverture_jour": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_stores"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_store.date_ouverture.hiérarchie_de_date": {
+			          "Target": {
+			            "Entity": "dim_store.date_ouverture.hiérarchie_de_date"
+			          }
+			        },
+			        "dim_store.date_ouverture.jour": {
+			          "Target": {
+			            "Entity": "dim_store.date_ouverture.jour"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_store.date_ouverture.hiérarchie_de_date"
+			            },
+			            "Object": {
+			              "Role": "dim_store.date_ouverture.jour"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "hiérarchie_de_dates_have_jour"
+			        }
+			      ]
+			    },
 			    "dim_store_date_ouverture_hiérarchie_de_date_has_dim_store_date_ouverture_mois": {
 			      "Binding": {
 			        "ConceptualEntity": "dim_stores"
@@ -19044,7 +19473,7 @@ cultureInfo fr-FR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "hiérarchie_de_dates_have_jour"
+			          "ID": "hiérarchie_de_dates_have_jour1"
 			        }
 			      ]
 			    },
@@ -19407,7 +19836,7 @@ cultureInfo fr-FR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "hiérarchie_de_dates_have_jour1"
+			          "ID": "hiérarchie_de_dates_have_jour2"
 			        }
 			      ]
 			    },
@@ -20298,7 +20727,7 @@ cultureInfo fr-FR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "hiérarchie_de_dates_have_jour2"
+			          "ID": "hiérarchie_de_dates_have_jour3"
 			        }
 			      ]
 			    },
@@ -20661,7 +21090,7 @@ cultureInfo fr-FR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "hiérarchie_de_dates_have_jour3"
+			          "ID": "hiérarchie_de_dates_have_jour4"
 			        }
 			      ]
 			    },
@@ -21603,6 +22032,303 @@ cultureInfo fr-FR
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_customers_have_fct_loyalty_transactions"
+			        }
+			      ]
+			    },
+			    "dim_date_has_entity__mesure_titre_courbe_CA_HT_vs_N1": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_date"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        },
+			        "entity__mesure.titre_courbe_CA_HT_vs_N1": {
+			          "Target": {
+			            "Entity": "entity__mesure.titre_courbe_CA_HT_vs_N1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.titre_courbe_CA_HT_vs_N1"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_dates_have_titre_courbe_CA_HT_vs_N1"
+			        }
+			      ]
+			    },
+			    "fct_sale_has_entity__mesure_clients_actifs_YTD__detail": {
+			      "Binding": {
+			        "ConceptualEntity": "fct_sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fct_sale": {
+			          "Target": {
+			            "Entity": "fct_sale"
+			          }
+			        },
+			        "entity__mesure.clients_actifs_YTD__detail": {
+			          "Target": {
+			            "Entity": "entity__mesure.clients_actifs_YTD__detail"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fct_sale"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.clients_actifs_YTD__detail"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fct_sales_have_clients_actifs_YTD__detail"
+			        }
+			      ]
+			    },
+			    "dim_date_has_entity__mesure_clients_actifs_YTD__detail": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_date"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        },
+			        "entity__mesure.clients_actifs_YTD__detail": {
+			          "Target": {
+			            "Entity": "entity__mesure.clients_actifs_YTD__detail"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.clients_actifs_YTD__detail"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_dates_have_clients_actifs_YTD__detail"
+			        }
+			      ]
+			    },
+			    "fct_sale_has_entity__mesure_var_nb_clients_actifs_YTD": {
+			      "Binding": {
+			        "ConceptualEntity": "fct_sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fct_sale": {
+			          "Target": {
+			            "Entity": "fct_sale"
+			          }
+			        },
+			        "entity__mesure.var_nb_clients_actifs_YTD": {
+			          "Target": {
+			            "Entity": "entity__mesure.var_nb_clients_actifs_YTD"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fct_sale"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.var_nb_clients_actifs_YTD"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fct_sales_have_var_nb_clients_actifs_YTD"
+			        }
+			      ]
+			    },
+			    "fct_sale_has_entity__mesure_taux_marge_YTD_label": {
+			      "Binding": {
+			        "ConceptualEntity": "fct_sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fct_sale": {
+			          "Target": {
+			            "Entity": "fct_sale"
+			          }
+			        },
+			        "entity__mesure.taux_marge_YTD_label": {
+			          "Target": {
+			            "Entity": "entity__mesure.taux_marge_YTD_label"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fct_sale"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.taux_marge_YTD_label"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fct_sales_have_taux_marge_YTD_label"
+			        }
+			      ]
+			    },
+			    "dim_date_has_entity__mesure_taux_marge_YTD_label": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_date"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_date": {
+			          "Target": {
+			            "Entity": "dim_date"
+			          }
+			        },
+			        "entity__mesure.taux_marge_YTD_label": {
+			          "Target": {
+			            "Entity": "entity__mesure.taux_marge_YTD_label"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_date"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.taux_marge_YTD_label"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_dates_have_taux_marge_YTD_label"
+			        }
+			      ]
+			    },
+			    "fct_sale_has_entity__mesure_part_CA_canal_YTD": {
+			      "Binding": {
+			        "ConceptualEntity": "fct_sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fct_sale": {
+			          "Target": {
+			            "Entity": "fct_sale"
+			          }
+			        },
+			        "entity__mesure.part_CA_canal_YTD": {
+			          "Target": {
+			            "Entity": "entity__mesure.part_CA_canal_YTD"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fct_sale"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.part_CA_canal_YTD"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fct_sales_have_part_CA_canal_YTD"
+			        }
+			      ]
+			    },
+			    "fct_sale_has_entity__mesure_taux_retour_commande_YTD": {
+			      "Binding": {
+			        "ConceptualEntity": "fct_sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fct_sale": {
+			          "Target": {
+			            "Entity": "fct_sale"
+			          }
+			        },
+			        "entity__mesure.taux_retour_commande_YTD": {
+			          "Target": {
+			            "Entity": "entity__mesure.taux_retour_commande_YTD"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fct_sale"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.taux_retour_commande_YTD"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fct_sales_have_taux_retour_commande_YTD"
+			        }
+			      ]
+			    },
+			    "fct_sale_has_entity__mesure_commandes_retournées_YTD": {
+			      "Binding": {
+			        "ConceptualEntity": "fct_sales"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fct_sale": {
+			          "Target": {
+			            "Entity": "fct_sale"
+			          }
+			        },
+			        "entity__mesure.commandes_retournées_YTD": {
+			          "Target": {
+			            "Entity": "entity__mesure.commandes_retournées_YTD"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fct_sale"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.commandes_retournées_YTD"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fct_sales_have_commandes_retournées_YTD"
 			        }
 			      ]
 			    },
@@ -24345,7 +25071,7 @@ cultureInfo fr-FR
 			        }
 			      ]
 			    },
-			    "fct_return_has_entity__mesure_nb_retours": {
+			    "fct_return_has_entity__mesure_commandes_retournées": {
 			      "Binding": {
 			        "ConceptualEntity": "fct_returns"
 			      },
@@ -24356,9 +25082,9 @@ cultureInfo fr-FR
 			            "Entity": "fct_return"
 			          }
 			        },
-			        "entity__mesure.nb_retours": {
+			        "entity__mesure.commandes_retournées": {
 			          "Target": {
-			            "Entity": "entity__mesure.nb_retours"
+			            "Entity": "entity__mesure.commandes_retournées"
 			          }
 			        }
 			      },
@@ -24369,12 +25095,12 @@ cultureInfo fr-FR
 			              "Role": "fct_return"
 			            },
 			            "Object": {
-			              "Role": "entity__mesure.nb_retours"
+			              "Role": "entity__mesure.commandes_retournées"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "fct_returns_have_nb_retours"
+			          "ID": "fct_returns_have_commandes_retournées"
 			        }
 			      ]
 			    },
@@ -29290,39 +30016,6 @@ cultureInfo fr-FR
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_dim_dates_are_weekend_dim_dates"
-			        }
-			      ]
-			    },
-			    "dim_store_date_ouverture_hiérarchie_de_date_has_dim_store_date_ouverture_jour": {
-			      "Binding": {
-			        "ConceptualEntity": "dim_stores"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_store.date_ouverture.hiérarchie_de_date": {
-			          "Target": {
-			            "Entity": "dim_store.date_ouverture.hiérarchie_de_date"
-			          }
-			        },
-			        "dim_store.date_ouverture.jour": {
-			          "Target": {
-			            "Entity": "dim_store.date_ouverture.jour"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_store.date_ouverture.hiérarchie_de_date"
-			            },
-			            "Object": {
-			              "Role": "dim_store.date_ouverture.jour"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "hiérarchie_de_dates_have_jour4"
 			        }
 			      ]
 			    },

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "2c1e00bf7ca21e1d9c44",
+  "name": "66c05fe95be133eba9d5",
   "position": {
-    "x": 204.34589800443456,
-    "y": 503.2963784183296,
-    "z": 8001,
-    "height": 158.93569844789354,
-    "width": 603.57723577235765,
-    "tabOrder": 7001
+    "x": 880.96350022613444,
+    "y": 249.74354679307862,
+    "z": 7002,
+    "height": 193.48263790013235,
+    "width": 343.05432251796515,
+    "tabOrder": 7002
   },
   "visual": {
     "visualType": "pivotTable",
@@ -20,15 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_channel"
+                      "Entity": "dim_customers"
                     }
                   },
-                  "Property": "Canal affichage"
+                  "Property": "pays"
                 }
               },
-              "queryRef": "dim_channel.Canal affichage",
-              "nativeQueryRef": "Canal affichage",
-              "active": true
+              "queryRef": "dim_customers.pays",
+              "nativeQueryRef": "Pays",
+              "active": true,
+              "displayName": "Pays"
             }
           ]
         },
@@ -42,11 +43,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "CA YTD"
+                  "Property": "CA HT YTD"
                 }
               },
-              "queryRef": "_Mesures.CA YTD",
-              "nativeQueryRef": "CA YTD"
+              "queryRef": "_Mesures.CA HT YTD",
+              "nativeQueryRef": "CA HT YTD"
             },
             {
               "field": {
@@ -56,11 +57,12 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Marge YTD"
+                  "Property": "Var CA YTD %"
                 }
               },
-              "queryRef": "_Mesures.Marge YTD",
-              "nativeQueryRef": "Marge YTD"
+              "queryRef": "_Mesures.Var CA YTD %",
+              "nativeQueryRef": "Var CA",
+              "displayName": "Var CA"
             },
             {
               "field": {
@@ -74,49 +76,8 @@
                 }
               },
               "queryRef": "_Mesures.Taux de marge YTD",
-              "nativeQueryRef": "Taux de marge YTD"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Nb Commandes YTD"
-                }
-              },
-              "queryRef": "_Mesures.Nb Commandes YTD",
-              "nativeQueryRef": "Nb Commandes YTD"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Taux retour commande"
-                }
-              },
-              "queryRef": "_Mesures.Taux retour commande",
-              "nativeQueryRef": "Taux retour commande"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Part CA Canal"
-                }
-              },
-              "queryRef": "_Mesures.Part CA Canal",
-              "nativeQueryRef": "Part CA Canal"
+              "nativeQueryRef": "Tx marge YTD",
+              "displayName": "Tx marge YTD"
             }
           ]
         }
@@ -131,30 +92,34 @@
                     "Entity": "_Mesures"
                   }
                 },
-                "Property": "Part CA Canal"
+                "Property": "CA HT YTD"
               }
             },
             "direction": "Descending"
           }
-        ],
-        "isDefaultSort": true
+        ]
       }
     },
     "objects": {
+      "total": [
+        {
+          "properties": {}
+        }
+      ],
       "subTotals": [
         {
           "properties": {
-            "columnSubtotals": {
+            "rowSubtotals": {
               "expr": {
                 "Literal": {
                   "Value": "false"
                 }
               }
             },
-            "rowSubtotals": {
+            "columnSubtotals": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
@@ -164,22 +129,28 @@
       "grid": [
         {
           "properties": {
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
             "outlineColor": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": 0
+                    "Literal": {
+                      "Value": "'#1A5C35'"
                     }
                   }
-                }
-              }
-            },
-            "textSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
                 }
               }
             }
@@ -189,6 +160,20 @@
       "values": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bandedRowHeaders": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
             "backColorPrimary": {
               "solid": {
                 "color": {
@@ -212,13 +197,6 @@
                   }
                 }
               }
-            },
-            "bandedRowHeaders": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
             }
           }
         }
@@ -226,6 +204,13 @@
       "columnHeaders": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
             "backColor": {
               "solid": {
                 "color": {
@@ -237,141 +222,20 @@
                   }
                 }
               }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
-            },
-            "alignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Center'"
-                }
-              }
-            },
-            "titleAlignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Left'"
-                }
-              }
-            },
-            "autoSizeColumnWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
             }
-          }
-        }
-      ],
-      "columnWidth": [
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "72.45308828713681D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Taux retour commande"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "59.377661792852706D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Part CA Canal"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "77.80930551336479D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "dim_channel.Canal affichage"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "83D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.CA YTD"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "76D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Marge YTD"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "113D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Taux de marge YTD"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "84.15818852864808D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Mesures.Nb Commandes YTD"
           }
         }
       ],
       "rowHeaders": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
             "backColor": {
               "solid": {
                 "color": {
@@ -392,17 +256,10 @@
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Part CA par canal'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -413,10 +270,29 @@
                 }
               }
             },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.5
+                    }
+                  }
+                }
+              }
+            },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "10D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -480,8 +356,145 @@
             }
           }
         }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Minimal'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ab888d9af4410e17b0c4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_customers"
+              }
+            },
+            "Property": "pays"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "dim_customers",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "d"
+                              }
+                            },
+                            "Property": "pays"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "2a6fce3ec69281d5d151",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "CA HT YTD"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "93728df8b71bb46f07d4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Var CA YTD %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

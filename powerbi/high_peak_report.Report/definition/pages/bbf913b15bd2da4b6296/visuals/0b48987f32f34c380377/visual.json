@@ -1,95 +1,39 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "9c393fb7d0040465a362",
+  "name": "0b48987f32f34c380377",
   "position": {
-    "x": 571.12333071484682,
-    "y": 248.35820895522389,
-    "z": 7000,
-    "height": 195.06677140612726,
-    "width": 298.63315003927733,
-    "tabOrder": 7000
+    "x": 202.97734627831716,
+    "y": 455.663430420712,
+    "z": 7001,
+    "height": 225.76051779935275,
+    "width": 665.88996763754051,
+    "tabOrder": 7001
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "lineChart",
     "query": {
       "queryState": {
         "Category": {
           "projections": [
             {
               "field": {
-                "Column": {
+                "HierarchyLevel": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_channel"
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_date"
+                        }
+                      },
+                      "Hierarchy": "annee Hiérarchie"
                     }
                   },
-                  "Property": "Canal affichage"
+                  "Level": "mois_label_short"
                 }
               },
-              "queryRef": "dim_channel.Canal affichage",
-              "nativeQueryRef": "Canal affichage",
+              "queryRef": "dim_date.annee Hiérarchie.mois_label_short",
+              "nativeQueryRef": "annee Hiérarchie mois_label_short",
               "active": true
-            }
-          ]
-        },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "CA HT"
-                }
-              },
-              "queryRef": "_Mesures.CA HT",
-              "nativeQueryRef": "CA HT",
-              "format": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\""
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Marge HT"
-                }
-              },
-              "queryRef": "_Mesures.Marge HT",
-              "nativeQueryRef": "Marge HT"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Taux de Marge"
-                }
-              },
-              "queryRef": "_Mesures.Taux de Marge",
-              "nativeQueryRef": "Taux de Marge"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Nb commandes"
-                }
-              },
-              "queryRef": "_Mesures.Nb commandes",
-              "nativeQueryRef": "Nb commandes"
             }
           ]
         },
@@ -103,35 +47,104 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Part CA Canal YTD"
+                  "Property": "CA HT"
                 }
               },
-              "queryRef": "_Mesures.Part CA Canal YTD",
-              "nativeQueryRef": "Part CA Canal YTD"
+              "queryRef": "_Mesures.CA HT",
+              "nativeQueryRef": "CA HT"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "CA HT N-1"
+                }
+              },
+              "queryRef": "_Mesures.CA HT N-1",
+              "nativeQueryRef": "CA HT N-1"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "_Mesures"
-                  }
-                },
-                "Property": "Part CA Canal YTD"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
+      "lineStyles": [
+        {
+          "properties": {
+            "lineChartType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'smooth'"
+                }
+              }
+            },
+            "interpolationSmooth": {
+              "expr": {
+                "Literal": {
+                  "Value": "'cardinal'"
+                }
+              }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "markerShape": {
+              "expr": {
+                "Literal": {
+                  "Value": "'triangle'"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.CA HT"
+          }
+        },
+        {
+          "properties": {
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "lineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dotted'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.CA HT N-1"
+          }
+        }
+      ],
       "legend": [
         {
           "properties": {
@@ -177,13 +190,6 @@
               }
             },
             "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "switchAxisPosition": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -311,29 +317,34 @@
               }
             ]
           }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Mesures.CA HT"
+          }
         }
       ],
       "labels": [
         {
           "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            },
-            "labelPrecision": {
-              "expr": {
-                "Literal": {
-                  "Value": "1L"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -354,7 +365,7 @@
             "enableDetailDataLabel": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -378,11 +389,31 @@
                   "Value": "'SingleLine'"
                 }
               }
+            },
+            "enableValueDataLabel": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           }
         },
         {
-          "properties": {},
+          "properties": {
+            "dynamicLabelDetail": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Taux Marge YTD Label"
+                }
+              }
+            }
+          },
           "selector": {
             "data": [
               {
@@ -394,19 +425,38 @@
             "highlightMatching": 1
           }
         }
+      ],
+      "y2Axis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "markers": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
       "title": [
         {
           "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Marketplace marginale dans la part du CA'"
-                }
-              }
-            },
             "show": {
               "expr": {
                 "Literal": {
@@ -444,6 +494,18 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Titre Courbe CA HT vs N-1"
                 }
               }
             }
@@ -507,6 +569,19 @@
             }
           }
         }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
@@ -514,21 +589,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "1a03e1648850cd0c1661",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_channel"
-              }
-            },
-            "Property": "Canal affichage"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "3b8b565d67ddd3001e85",
+        "name": "f8329e7c323ef6f39fec",
         "field": {
           "Measure": {
             "Expression": {
@@ -542,21 +603,26 @@
         "type": "Advanced"
       },
       {
-        "name": "531edd5fab08b1b67c7f",
+        "name": "b30822cd2a86d163bf33",
         "field": {
-          "Measure": {
+          "HierarchyLevel": {
             "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_date"
+                  }
+                },
+                "Hierarchy": "annee Hiérarchie"
               }
             },
-            "Property": "Marge HT"
+            "Level": "mois_label_short"
           }
         },
-        "type": "Advanced"
+        "type": "Categorical"
       },
       {
-        "name": "96fa3ddbdb691a4c132e",
+        "name": "710fcabb6d02a721de6e",
         "field": {
           "Measure": {
             "Expression": {
@@ -564,35 +630,7 @@
                 "Entity": "_Mesures"
               }
             },
-            "Property": "Taux de Marge"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "c50c9870f2141ffdb7af",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Nb commandes"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b907b5b0d2735c4a2e96",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Part CA Canal YTD"
+            "Property": "CA HT N-1"
           }
         },
         "type": "Advanced"

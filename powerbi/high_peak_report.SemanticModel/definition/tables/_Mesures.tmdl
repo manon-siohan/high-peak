@@ -120,9 +120,10 @@ table _Mesures
 		displayFolder: Retours
 		lineageTag: 9b33a04c-834f-46fa-b395-1da70be8232e
 
-	measure 'Nb retours' =
+	measure 'Commandes retournées' = ```
 			
-			DISTINCTCOUNT(fct_returns[return_id])
+			    DISTINCTCOUNT(fct_returns[order_id])
+			```
 		formatString: 0
 		displayFolder: Retours
 		lineageTag: 3c69b174-ee50-406c-a113-3b1e7dcc6948
@@ -542,10 +543,9 @@ table _Mesures
 			    [CA HT YTD] - [CA HT YTD N-1],
 			    [CA HT YTD N-1]
 			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		displayFolder: CA & Revenus
 		lineageTag: 9a9afe86-aada-4925-b8e7-e43f565f98a9
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Couleur Var CA YTD' =
 			
@@ -788,12 +788,9 @@ table _Mesures
 		displayFolder: Clients
 		lineageTag: 3ed79163-6400-481c-a8d3-fa6d800870ea
 
-	measure 'Var Clients actifs YTD %' =
-			
-			DIVIDE(
-			    [Clients actifs YTD] - [Clients Actifs YTD N-1],
-			    [Clients Actifs YTD N-1]
-			)
+	measure 'Var Clients actifs YTD %' = ```
+			DIVIDE( [Clients actifs YTD] - [Clients Actifs YTD N-1], [Clients Actifs YTD N-1] ) 
+			```
 		formatString: 0.00\ %;-0.00\ %;0.00\ %
 		displayFolder: Clients
 		lineageTag: 12163089-6a34-4677-8326-afa84d7f174c
@@ -836,6 +833,100 @@ table _Mesures
 		lineageTag: 0d26bfe2-0714-45ec-8874-052101f70f40
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Commandes retournées YTD' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fct_sales[order_id]),
+			    DATESYTD(dim_date[date_jour]),
+			    TREATAS(
+			        VALUES(fct_returns[order_id]),
+			        fct_sales[order_id]
+			    )
+			)
+		formatString: 0
+		displayFolder: Retours
+		lineageTag: b6b06b5f-f279-4c25-8acc-d576377819aa
+
+	measure 'Taux retour commande YTD' =
+			
+			DIVIDE(
+			    [Commandes retournées YTD],
+			    [Nb Commandes YTD]
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Retours
+		lineageTag: a403499e-9313-41fd-b415-8c1ab75caa71
+
+	measure 'Part CA Canal YTD' =
+			
+			DIVIDE(
+			    [CA HT YTD],
+			    CALCULATE(
+			        [CA HT YTD],
+			        ALLSELECTED(dim_channel[Canal affichage])
+			    )
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: CA & Revenus
+		lineageTag: 7fcedcc1-a673-4e9b-ad48-e59bc18a17e7
+
+	measure 'Taux Marge YTD Label' =
+			
+			"(" & FORMAT([Taux de marge YTD], "0.00%") & ")"
+		displayFolder: Marges
+		lineageTag: 7a3880b9-76c1-4db9-acf1-09733960a4eb
+
+	measure 'Var nb clients actifs YTD' =
+			
+			[Clients actifs YTD]-[Clients Actifs YTD N-1]
+		formatString: 0
+		displayFolder: Clients
+		lineageTag: d48fd9e3-5441-4d4e-b811-38120286da56
+
+	measure 'Clients actifs YTD - Detail' =
+			
+			VAR var_nb = [Var nb clients actifs YTD]
+			VAR var_pct = [Var Clients actifs YTD %]
+			VAR label_comp = [Label Comparaison YTD]
+			VAR arrow =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(var_nb), BLANK(),
+			        var_nb > 0, "↗ ",
+			        var_nb < 0, "↘ ",
+			        "→ "
+			    )
+			RETURN
+			IF(
+			    ISBLANK(var_nb) || ISBLANK(var_pct),
+			    "--",
+			        " clients / "
+			        & arrow
+			        & FORMAT(var_pct, "+0.0%;-0.0%;0.0%")
+			        & " "
+			        & label_comp
+			)
+		displayFolder: Clients
+		lineageTag: 6cd69fa6-1382-4b5b-b44e-7eec570bc4ad
+
+	measure 'Titre Courbe CA HT vs N-1' =
+			
+			VAR annee_selectionnee =
+			    SELECTEDVALUE(dim_date[annee])
+			VAR annee_n_1 =
+			    annee_selectionnee - 1
+			RETURN
+			IF(
+			    ISBLANK(annee_selectionnee),
+			    "Évolution mensuelle du CA HT",
+			    "Évolution mensuelle du CA HT — "
+			        & annee_selectionnee
+			        & " vs "
+			        & annee_n_1
+			)
+		displayFolder: CA & Revenus
+		lineageTag: 5d7d2584-a158-4392-9bd9-d848757ee540
 
 	partition _Mesures = m
 		mode: import

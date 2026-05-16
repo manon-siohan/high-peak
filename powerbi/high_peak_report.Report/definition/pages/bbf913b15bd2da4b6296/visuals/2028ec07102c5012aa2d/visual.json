@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "2028ec07102c5012aa2d",
   "position": {
-    "x": 186.37102734663708,
-    "y": 96.496674057649656,
-    "z": 3000,
-    "height": 152.31337767923134,
-    "width": 1064.30155210643,
+    "x": 186.01728201099766,
+    "y": 96.527886881382557,
+    "z": 2000,
+    "height": 151.83032207384133,
+    "width": 1051,
     "tabOrder": 2000
   },
   "visual": {
@@ -85,11 +85,12 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Clients actifs"
+                  "Property": "Clients actifs YTD"
                 }
               },
-              "queryRef": "_Mesures.Nb Clients",
-              "nativeQueryRef": "Clients actifs"
+              "queryRef": "_Mesures.Clients actifs YTD",
+              "nativeQueryRef": "Clients actifs",
+              "displayName": "Clients actifs"
             }
           ]
         }
@@ -134,36 +135,6 @@
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb Clients",
-            "id": "field-c2e4156d-a383-c75f-f09f-678993bcbdf6",
-            "order": 0
-          }
-        },
-        {
-          "properties": {},
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb Clients",
-            "id": "field-9473c9f5-ea29-f48d-fc27-56a30ee5198e",
-            "order": 0
           }
         },
         {
@@ -281,34 +252,6 @@
           }
         },
         {
-          "properties": {
-            "value": {
-              "expr": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Mesures"
-                    }
-                  },
-                  "Property": "Var Clients actifs YTD Label"
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb Clients",
-            "id": "field-f655c95c-d09c-2c0a-f27c-1d46c50d75c9",
-            "order": 0
-          }
-        },
-        {
           "properties": {},
           "selector": {
             "data": [
@@ -363,6 +306,94 @@
             ],
             "metadata": "_Mesures.Taux de marge YTD",
             "id": "field-7d683af5-9260-8837-a8dd-a3ed5228f508",
+            "order": 0
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-5690aa77-2b65-fe20-3782-171c6f9eccc3",
+            "order": 0
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-c2c3cfdf-4b39-d98f-125e-861ab60b95c4",
+            "order": 1
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-546e1351-d29f-228f-f297-5751b3c1c14d",
+            "order": 1
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-82660e8c-af4e-b7ef-989b-14c586c7ed90",
+            "order": 0
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var nb clients actifs YTD"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-8bd882c2-6182-7a0f-0029-6e2d8a15cb65",
             "order": 0
           }
         }
@@ -541,37 +572,6 @@
                           "Entity": "_Mesures"
                         }
                       },
-                      "Property": "Couleur Var Clients actifs YTD"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "dataViewWildcard": {
-                  "matchingOption": 0
-                }
-              }
-            ],
-            "metadata": "_Mesures.Nb Clients",
-            "id": "field-f655c95c-d09c-2c0a-f27c-1d46c50d75c9"
-          }
-        },
-        {
-          "properties": {
-            "valueFontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Mesures"
-                        }
-                      },
                       "Property": "Couleur Var Taux Marge YTD"
                     }
                   }
@@ -589,6 +589,68 @@
             ],
             "metadata": "_Mesures.Taux de marge YTD",
             "id": "field-7d683af5-9260-8837-a8dd-a3ed5228f508"
+          }
+        },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var Clients actifs YTD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-82660e8c-af4e-b7ef-989b-14c586c7ed90"
+          }
+        },
+        {
+          "properties": {
+            "valueFontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Mesures"
+                        }
+                      },
+                      "Property": "Couleur Var Clients actifs YTD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-8bd882c2-6182-7a0f-0029-6e2d8a15cb65"
           }
         }
       ],
@@ -612,7 +674,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "9D"
                 }
               }
             }
@@ -651,7 +713,7 @@
             "detailFontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "8D"
                 }
               }
             },
@@ -830,8 +892,8 @@
                 }
               }
             ],
-            "metadata": "_Mesures.Nb Clients",
-            "id": "field-f655c95c-d09c-2c0a-f27c-1d46c50d75c9"
+            "metadata": "_Mesures.Taux de marge YTD",
+            "id": "field-7d683af5-9260-8837-a8dd-a3ed5228f508"
           }
         },
         {
@@ -857,8 +919,62 @@
                 }
               }
             ],
-            "metadata": "_Mesures.Taux de marge YTD",
-            "id": "field-7d683af5-9260-8837-a8dd-a3ed5228f508"
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-5690aa77-2b65-fe20-3782-171c6f9eccc3"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Var Clients actifs YTD %"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-82660e8c-af4e-b7ef-989b-14c586c7ed90"
+          }
+        },
+        {
+          "properties": {
+            "detailValue": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Clients actifs YTD - Detail"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 0
+                }
+              }
+            ],
+            "metadata": "_Mesures.Clients actifs YTD",
+            "id": "field-8bd882c2-6182-7a0f-0029-6e2d8a15cb65"
           }
         }
       ],
@@ -951,7 +1067,7 @@
             "calloutSize": {
               "expr": {
                 "Literal": {
-                  "Value": "59D"
+                  "Value": "61D"
                 }
               }
             },
@@ -987,6 +1103,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'image_callout_referenceLabel'"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'top'"
                 }
               }
             }
@@ -1027,7 +1150,7 @@
             "valueArea": {
               "expr": {
                 "Literal": {
-                  "Value": "23D"
+                  "Value": "28D"
                 }
               }
             },
@@ -1076,6 +1199,13 @@
                   "Value": "true"
                 }
               }
+            },
+            "dividerLineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dashed'"
+                }
+              }
             }
           },
           "selector": {
@@ -1110,7 +1240,7 @@
                   "expr": {
                     "ThemeDataColor": {
                       "ColorId": 1,
-                      "Percent": 0.1
+                      "Percent": 0.2
                     }
                   }
                 }
@@ -1119,7 +1249,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "26D"
+                  "Value": "24D"
                 }
               }
             }
@@ -1195,6 +1325,96 @@
             "metadata": "_Mesures.Nb Commandes YTD"
           }
         }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "paddingUniform": {
+              "expr": {
+                "Literal": {
+                  "Value": "8L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "accentBar": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 7,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "shadowCustom": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -1246,65 +1466,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "b4d5c4409b27273019d3",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "CA HT YTD"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "fe37045f2ee67594dd23",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Marge YTD"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "f84560b77af81a604d21",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Clients actifs"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "bdda7d88ba4e44ecc6c6",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Nb Commandes YTD"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
