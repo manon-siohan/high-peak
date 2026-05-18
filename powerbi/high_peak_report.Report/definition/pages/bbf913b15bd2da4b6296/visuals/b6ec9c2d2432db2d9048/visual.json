@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "b6ec9c2d2432db2d9048",
   "position": {
-    "x": 203.11076197957581,
-    "y": 248.35820895522389,
-    "z": 6000,
-    "height": 195.06677140612726,
-    "width": 356.95208169677926,
-    "tabOrder": 6000
+    "x": 202.69541778975741,
+    "y": 248.40970350404311,
+    "z": 5000,
+    "height": 142.31805929919136,
+    "width": 357.088948787062,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -484,37 +484,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "171bb4a9483725e1b4b6",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_products"
-              }
-            },
-            "Property": "categorie"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "0b5d75b15f2df57f144b",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "CA HT YTD"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

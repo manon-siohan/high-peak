@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "0b48987f32f34c380377",
   "position": {
-    "x": 202.97734627831716,
-    "y": 455.663430420712,
-    "z": 7001,
-    "height": 225.76051779935275,
-    "width": 665.88996763754051,
-    "tabOrder": 7001
+    "x": 202.69541778975741,
+    "y": 404.52830188679246,
+    "z": 7000,
+    "height": 181.1320754716981,
+    "width": 552.021563342318,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "lineChart",
@@ -585,56 +585,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "f8329e7c323ef6f39fec",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "CA HT"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b30822cd2a86d163bf33",
-        "field": {
-          "HierarchyLevel": {
-            "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "dim_date"
-                  }
-                },
-                "Hierarchy": "annee Hiérarchie"
-              }
-            },
-            "Level": "mois_label_short"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "710fcabb6d02a721de6e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "CA HT N-1"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

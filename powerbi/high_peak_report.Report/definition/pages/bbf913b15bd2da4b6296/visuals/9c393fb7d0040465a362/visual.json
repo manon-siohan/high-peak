@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
   "name": "9c393fb7d0040465a362",
   "position": {
-    "x": 571.12333071484682,
-    "y": 248.35820895522389,
-    "z": 7000,
-    "height": 195.06677140612726,
-    "width": 298.63315003927733,
-    "tabOrder": 7000
+    "x": 570.99730458221018,
+    "y": 248.40970350404311,
+    "z": 6000,
+    "height": 142.31805929919136,
+    "width": 315.68733153638811,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -510,93 +510,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "1a03e1648850cd0c1661",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_channel"
-              }
-            },
-            "Property": "Canal affichage"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "3b8b565d67ddd3001e85",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "CA HT"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "531edd5fab08b1b67c7f",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Marge HT"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "96fa3ddbdb691a4c132e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Taux de Marge"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "c50c9870f2141ffdb7af",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Nb commandes"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b907b5b0d2735c4a2e96",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Mesures"
-              }
-            },
-            "Property": "Part CA Canal YTD"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

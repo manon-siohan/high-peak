@@ -459,25 +459,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "1e6cecbf6a10559ea4a2",
-        "field": {
-          "HierarchyLevel": {
-            "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "dim_date"
-                  }
-                },
-                "Hierarchy": "annee Hiérarchie"
-              }
-            },
-            "Level": "mois_label"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }

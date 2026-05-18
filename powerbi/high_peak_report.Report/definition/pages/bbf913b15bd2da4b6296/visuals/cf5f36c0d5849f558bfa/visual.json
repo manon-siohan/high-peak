@@ -6,7 +6,7 @@
     "y": 24.150943396226413,
     "z": 1000,
     "height": 72.452830188679243,
-    "width": 449.38005390835576,
+    "width": 616.711590296496,
     "tabOrder": 1000
   },
   "visual": {
@@ -19,10 +19,18 @@
               {
                 "textRuns": [
                   {
-                    "value": "High Peak - Overview",
+                    "value": "High Peak - Overview 2024 ",
                     "textStyle": {
                       "fontFamily": "Constantia",
                       "fontSize": "28pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "(YTD)",
+                    "textStyle": {
+                      "fontFamily": "Constantia",
+                      "fontSize": "12pt",
                       "color": "#0d2b1a"
                     }
                   }

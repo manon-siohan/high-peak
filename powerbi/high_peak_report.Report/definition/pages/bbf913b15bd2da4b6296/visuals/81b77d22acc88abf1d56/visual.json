@@ -1,0 +1,256 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "81b77d22acc88abf1d56",
+  "position": {
+    "x": 825.44474393530993,
+    "y": 464.90566037735846,
+    "z": 11000,
+    "height": 197.52021563342316,
+    "width": 395.90296495956869,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": " La rentabilité s'améliore : marge +4% malgré un CA quasi-stable (+0,2%)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": ".",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "La ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "France",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": " concentre 70% du ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "CA ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "et observe une croissance faible ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "(+2,2%)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": ". Le ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "Luxembourg (+8%)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": " à surveiller comme ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "levier de croissance.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": " L'",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "Allemagne",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": " au contraire est en recul net ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "(-7,9%)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Moins de commandes (-2,9 %) ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "et",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": " moins de clients actifs (-1,7 %), ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "mais un CA stable : la ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": "valeur par client progresse",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": ".",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  },
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ">> Priorité : relancer l’acquisition sans dégrader la marge.",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "8pt",
+                      "color": "#0d2b1a"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
